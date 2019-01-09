@@ -1,0 +1,2 @@
+# Car-Insurance-Mobile-Application
+Design and develop an Android mobile application for car insurance customers.  The application will be designed with a user-friendly GUI for the customer. Other features will include: submitting an insurance application, receiving registration, and reporting an accident. More features can be considered based on the project timeframe and requirements. Features to be considered can include: managing a claim, requesting a policy change, or different user modes for customers and employees. 
