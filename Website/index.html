@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wizard Insurance</title>
+    <link rel="stylesheet" href ="css/materialize.css">
+    <script src="js/materialize.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-functions.js"></script>
+
+    <script>
+        function login(){
+            let username = document.getElementById("user").value;
+            let password = document.getElementById("pass").value;
+
+            //Query database here to see if the username and password match anyone with Admin privledges
+
+            if(username == "admin" && password == "password"){
+            //if the user is successfully logged in remove the elements asking them to log-in
+            document.getElementById("nav-mobile").remove();
+            document.getElementById("notLoggedIn").remove();
+            }else{
+                window.alert("Incorrect username or password");
+            }
+
+        }
+    </script>
+</head>
+<body style="background: lightblue;">
+<nav class ="indigo" style="margin-bottom: 0px;">
+    <div style="padding-left: 1%" class = "nav-wrapper">
+        <a href="#" class ="brand-logo">Wizard Insurance</a>
+        <ul id = "nav-mobile" class = "right hide-on-med-and-down">
+            <li><!-- Links to other parts of the website here --></li>
+            <li style ="align-content: center">
+                <h5 style="margin-right: 10px" id = "username"><b>Username:     </b></h5>
+            </li>
+            <li>
+                <input id ="user"/>
+            </li>
+            <li>
+                <h5 style="margin-right: 10px" id = "password"><b>Password:    </b></h5>
+            </li>
+            <li>
+                <input type="password" id ="pass"/>
+            </li>
+            <li>
+                <button id = "login" onclick="login()">Login</button>
+            </li>
+        </ul>
+    </div>
+</nav>
+<nav id = "notLoggedIn" class = "lighten-1 indigo" style = "padding-left: 1%">
+    <p>Log in to view clients policies</p>
+</nav>
+
+
+</body>
+</html>
