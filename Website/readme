@@ -1,6 +1,6 @@
 This website uses materialize CSS in it's styling.
 This makes it very convienient to make things pretty.
-At the current moment the login feature needs to be hooked up to the DB but the default login is the following
+At the current moment the default login is the following
 username: admin@psu.edu password: password
 This should cause all of the login items to disappear and (eventually) a list to populate below the Navbar with whatever the user
 searches which will be on the right where the login prompt was prior to logging in. 
