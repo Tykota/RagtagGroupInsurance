@@ -6,38 +6,107 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Employee Homepage</title>
     <link rel="stylesheet" href ="css/materialize.css">
+    <link rel="stylesheet" href="css/localStyle.css">
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
-    <script src="js/materialize.js"></script>
-    <script src="js/firebaseIntializer.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-messaging.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-functions.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/firebaseIntializer.js"></script>
+    <script src="js/employeeHome.js"></script>
 </head>
 
-<body>
+<body id="body" style="background: lightblue;">
 
-<nav class = grey>
-    <div class="nav-wrapper">
-        <form>
-            <div class="input-field">
-                <input id="search" type="search" required>
-                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-            </div>
-        </form>
-    </div>
-</nav>
-    <h3 class="center-align">Employee Home</h3>
-    <div class="row">
-        <div class="col s12 center-align" id="welcomeMessage">
-            <h5>This is where the employee can search the database</h5>
-        </div>
-        <div class="col s12 center-align" id="signOut">
+<nav class ="indigo" style="margin-bottom: 0px;">
+    <div style="padding-left: 1%" class = "nav-wrapper">
+        <a href="#" class ="brand-logo">Wizard Insurance</a>
+        <div class="right-align" style="margin-right: 10px" id="signOut">
             <a id="so" class="wave-effect wave=light btn" onclick="logout()">Sign Out</a>
         </div>
     </div>
-
+</nav>
+    <h3 class="center-align" style="margin-right:15%">Client Management</h3>
+        <ul style="width:800px; margin-top:10px; margin-left:10px" class="side-nav fixed">
+            <div class="row">
+                <li>
+                        <div id="search" class="col s5 left-align" onclick="loadSearch()">
+                            <h5 class="unselectable">Search Clients</h5>
+                        </div>
+                </li>
+                <div id="divide1" class="col s11"></div>
+                <div id="contentPane" class=""></div>
+                <li>
+                        <div id="review" class="col s5 left-align" onclick="loadReview()">
+                            <h5 class="unselectable">Review Applications</h5>
+                        </div>
+                </li>
+                <div class="col s11"></div>
+                <li>
+                        <div class="row">
+                            <div id="claims" class="col s5 left-align" onclick="loadClaims()">
+                                <h5 class="unselectable">Manage Claims</h5>
+                            </div>
+                        </div>
+                </li>
+            </div>
+        </ul>
+    </div>
+    <div id="searchForm">
+        <div class="row">
+            <div class="col s5 right-align" style="margin-top: 15px;">
+                <span class="flow-text">Search by: </span>
+            </div>
+            <div class="input-field col s4 right-align">
+                <select>
+                    <option value="" disabled selected>Choose criteria</option>
+                    <option value="name">Client Name</option>
+                    <option value="policy">Policy Number</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s5 right-align" style="margin-top: 15px;">
+                <span class="flow-text">Searching for:</span>
+            </div>
+            <div class ="input-field col s4">
+                <input placeholder="Client Name/Policy Number" id="searchCriteria" type="text" class="validate">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align">
+                <a id="searchClient" class="wave-effect wave=light btn" onclick="searchByClient()">Search Database</a>
+            </div>
+        </div>
+    </div>
+    <div id="reviewForm">
+        <div class="row">
+            <div class="col s12 left-align">
+                <span class="flow-text">Open Applications</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="divider"></div>
+            <div class="col s12 left-align">
+                <span class="flow-text">New Applications</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="divider"></div>
+            <div class="col s12 left-align">
+                <span class="flow-text">Closed Applications</span>
+            </div>
+        </div>
+    </div>
+    <div id="claimForm">
+        <div class="row">
+            <div class="col s12 left-align">
+                <span class="flow-text">Open Claims</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="divider"></div>
+        </div>
+    </div>
 </body>
 </html>
