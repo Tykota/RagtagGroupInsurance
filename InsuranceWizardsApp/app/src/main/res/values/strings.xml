@@ -5,4 +5,93 @@
     <string name="username">Username</string>
     <string name="wizard_insurance">Wizard Insurance</string>
     <string name="title_activity_home_page">Home</string>
+    <string name="name_field">Name:</string>
+    <string name="date_of_birth_field">Date of Birth:</string>
+    <string name="name_hint">Name</string>
+    <string name="gender_field">Gender:</string>
+    <string name="marital_status_field">Marital Status:</string>
+    <string name="ssn_field">SSN:</string>
+    <string name="ssn_hint">Social Security Number</string>
+    <string name="drivers_license_field">Driver\'s License #:</string>
+    <string name="driverlicense_hint">Driver\'s License Number</string>
+    <string name="licensed_state_field">Licensed State</string>
+    <string name="driver_type_field">Driver Type:</string>
+    <string name="under18_field">List the names of household members under the age of 18:</string>
+    <string name="names_nonLicensed_field">List the names of non-licensed residents:</string>
+    <string name="continuebtn">Continue</string>
+    <string name="enter_date_hint">Enter Date</string>
+    <string name="male_rbtn">Male</string>
+    <string name="female_rbtn">Female</string>
+    <string name="married_rbtn">Married</string>
+    <string name="divorced_rbtn">Divorced</string>
+    <string name="widowed_rbtn">Widowed</string>
+    <string name="single_rbtn">Single</string>
+    <string name="state">State</string>
+    <string name="driver_type">Driver Type</string>
+    <string name="apply_btn">Apply</string>
+
+
+    <string-array name="state_codes">
+        <item>AL</item>
+        <item>AK</item>
+        <item>AZ</item>
+        <item>AR</item>
+        <item>CA</item>
+        <item>CO</item>
+        <item>CT</item>
+        <item>DE</item>
+        <item>DC</item>
+        <item>FL</item>
+        <item>GA</item>
+        <item>HI</item>
+        <item>ID</item>
+        <item>IL</item>
+        <item>IN</item>
+        <item>IA</item>
+        <item>KS</item>
+        <item>KY</item>
+        <item>LA</item>
+        <item>ME</item>
+        <item>MD</item>
+        <item>MA</item>
+        <item>MI</item>
+        <item>MN</item>
+        <item>MS</item>
+        <item>MO</item>
+        <item>MT</item>
+        <item>NE</item>
+        <item>NV</item>
+        <item>NH</item>
+        <item>NJ</item>
+        <item>NM</item>
+        <item>NY</item>
+        <item>NC</item>
+        <item>ND</item>
+        <item>OH</item>
+        <item>OK</item>
+        <item>OR</item>
+        <item>PA</item>
+        <item>RI</item>
+        <item>SC</item>
+        <item>SD</item>
+        <item>TN</item>
+        <item>TX</item>
+        <item>UT</item>
+        <item>VT</item>
+        <item>VA</item>
+        <item>WA</item>
+        <item>WV</item>
+        <item>WI</item>
+        <item>WY</item>
+    </string-array>
+
+    <string-array name="driver_types">
+        <item>M - Motorcycle</item>
+        <item>C - Car</item>
+        <item>B - Buses/RV</item>
+        <item>A - B and C</item>
+        <item>C CDL - Delivery Driver</item>
+        <item>B CDL - Commercial Vehicles</item>
+        <item>A CDL - All Categories</item>
+    </string-array>
 </resources>
