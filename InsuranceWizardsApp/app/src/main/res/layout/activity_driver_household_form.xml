@@ -16,12 +16,14 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:titleTextColor="@android:color/white" />
+        app:titleTextColor="@android:color/white"
+        app:title="Household and Driver Form"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none">
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -237,7 +239,7 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="60dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.6"
                     android:gravity="center_vertical"
@@ -270,7 +272,7 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="60dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.6"
                     android:gravity="center_vertical"
@@ -333,8 +335,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1.4"
-                android:background="@color/colorAccent"
-                android:imeOptions="actionDone"                android:inputType="textNoSuggestions"
+                android:background="#C0BCBC"
+                android:imeOptions="actionDone"
+                android:inputType="textNoSuggestions"
                 android:paddingLeft="10dp"
                 android:textColor="@color/colorPrimary" />
 
@@ -356,7 +359,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1.4"
-                android:background="@color/colorAccent"
+                android:background="#C0BCBC"
                 android:imeOptions="actionDone"                android:inputType="textNoSuggestions"
                 android:paddingLeft="10dp"
                 android:textColor="@color/colorPrimary" />
