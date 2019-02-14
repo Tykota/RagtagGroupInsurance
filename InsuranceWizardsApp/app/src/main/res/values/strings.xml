@@ -14,7 +14,7 @@
     <string name="ssn_hint">Social Security Number</string>
     <string name="drivers_license_field">Driver\'s License #:</string>
     <string name="driverlicense_hint">Driver\'s License Number</string>
-    <string name="licensed_state_field">Licensed State</string>
+    <string name="licensed_state_field">Licensed State:</string>
     <string name="driver_type_field">Driver Type:</string>
     <string name="under18_field">List the names of household members under the age of 18 (separated by commas):</string>
     <string name="names_nonLicensed_field">List the names of non-licensed residents (separated by commas):</string>

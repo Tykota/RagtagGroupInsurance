@@ -1,5 +1,6 @@
 package com.capstone.insuranceapp;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
@@ -22,18 +22,29 @@ import java.util.Calendar;
 public class DriverHouseholdForm extends AppCompatActivity {
 
     private Spinner stateSpinner, driverTypeSpinner;
-    private boolean stateSelectedStatus = false, driverTypeSelectedStatus = false;
     private String stateSelected, driverTypeSelected, genderSelected, maritalSelected, name;
     private String dateOfBirth, ssn, driversLicenseNum, namesUnder18, namesNonLicensed;
     private DatePickerDialog datePicker;
     private EditText dateOfBirthET, nameET, ssnET, driversLicenseET, namesUnder18ET, namesNonLicensedET;
     private Button continueBtn;
-    private RadioButton maleRB, femaleRB, marriedRB, singleRB;
+    private RadioGroup genderRG, maritalRG;
+    private AlertDialog.Builder errorAlertBuilder;
+    private AlertDialog errorAlert;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_household_form);
+
+        // set default stateSelected and driverType selected.
+        stateSelected = "AL";
+        driverTypeSelected = "M - Motorcycle";
+
+        // create alert dialog
+        errorAlertBuilder = new AlertDialog.Builder(this);
+        errorAlertBuilder.setTitle("Invalid Input");
+        errorAlertBuilder.setPositiveButton("Okay", null);
 
         // add listener to editTexts
         nameET = findViewById(R.id.name);
@@ -126,18 +137,40 @@ public class DriverHouseholdForm extends AppCompatActivity {
             }
         });
 
-        // define radio buttons
-        maleRB = findViewById(R.id.male);
-        femaleRB = findViewById(R.id.female);
-        marriedRB = findViewById(R.id.married);
-        singleRB = findViewById(R.id.single);
+        // set up radio groups and radio buttons
+        genderRG = findViewById(R.id.radioGroupGender);
+        genderRG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId){
+                    case R.id.male: genderSelected = "male";
+                        break;
+                    case R.id.female: genderSelected = "female";
+                        break;
+                    default: break;
+                }
+            }
+        });
+
+        maritalRG = findViewById(R.id.radioGroupMaritalStatus);
+        maritalRG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId){
+                    case R.id.married: maritalSelected = "married";
+                        break;
+                    case R.id.single: maritalSelected = "single";
+                        break;
+                    default: break;
+                }
+            }
+        });
 
         // add listener to spinners
         stateSpinner = findViewById(R.id.stateSpinner);
         stateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                stateSelectedStatus = true;
                 stateSelected = parent.getItemAtPosition(position).toString();
             }
 
@@ -151,7 +184,6 @@ public class DriverHouseholdForm extends AppCompatActivity {
         driverTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                driverTypeSelectedStatus = true;
                 driverTypeSelected = parent.getItemAtPosition(position).toString();
             }
 
@@ -187,9 +219,86 @@ public class DriverHouseholdForm extends AppCompatActivity {
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), HomePage.class);
-                startActivity(intent);
+                if(validateInput()){
+                    // this will either send data to firebase or to next section of the form
+
+                    Intent intent = new Intent(getApplicationContext(), HomePage.class);
+                    startActivity(intent);
+                }
             }
         });
+    }
+
+    public boolean validateInput(){
+        // validate name
+        if(name == null || name.equals("")){
+            errorAlertBuilder.setMessage("You need to enter a name.");
+            errorAlert = errorAlertBuilder.create();
+            errorAlert.show();
+            resetErrorDialog();
+            return false;
+        }
+
+        // validate date of birth
+        else if(dateOfBirth == null || dateOfBirth.equals("")){
+            errorAlertBuilder.setMessage("You need to enter a date of birth.");
+            errorAlert = errorAlertBuilder.create();
+            errorAlert.show();
+            resetErrorDialog();
+            return false;
+        }
+
+        // validate gender selected
+        else if(genderSelected == null || genderSelected.equals("")){
+            errorAlertBuilder.setMessage("You need to choose a gender.");
+            errorAlert = errorAlertBuilder.create();
+            errorAlert.show();
+            resetErrorDialog();
+            return false;
+        }
+
+        // validate marital status selected
+        else if(maritalSelected == null || maritalSelected.equals("")){
+            errorAlertBuilder.setMessage("You need to choose a marital status.");
+            errorAlert = errorAlertBuilder.create();
+            errorAlert.show();
+            resetErrorDialog();
+            return false;
+        }
+
+        // validate ssn
+        else if(ssn == null || ssn.equals("")){
+            errorAlertBuilder.setMessage("You need to enter a social security number.");
+            errorAlert = errorAlertBuilder.create();
+            errorAlert.show();
+            resetErrorDialog();
+            return false;
+        }
+        else if(ssn.length() != 9){
+            errorAlertBuilder.setMessage("You need to enter a nine digit social security number.");
+            errorAlert = errorAlertBuilder.create();
+            errorAlert.show();
+            resetErrorDialog();
+            return false;
+        }
+
+        // validate drivers license number
+        else if(driversLicenseNum == null || driversLicenseNum.equals("")){
+            errorAlertBuilder.setMessage("You need to enter a driver's license number.");
+            errorAlert = errorAlertBuilder.create();
+            errorAlert.show();
+            resetErrorDialog();
+            return false;
+        }
+
+        return true;
+    }
+
+    public void resetErrorDialog(){
+        errorAlert = null;
+        errorAlertBuilder = null;
+        errorAlertBuilder = new AlertDialog.Builder(this);
+        errorAlertBuilder.setTitle("Invalid Input");
+        errorAlertBuilder.setPositiveButton("Okay", null);
     }
 }
