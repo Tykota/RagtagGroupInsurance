@@ -16,8 +16,8 @@
     <string name="driverlicense_hint">Driver\'s License Number</string>
     <string name="licensed_state_field">Licensed State</string>
     <string name="driver_type_field">Driver Type:</string>
-    <string name="under18_field">List the names of household members under the age of 18:</string>
-    <string name="names_nonLicensed_field">List the names of non-licensed residents:</string>
+    <string name="under18_field">List the names of household members under the age of 18 (separated by commas):</string>
+    <string name="names_nonLicensed_field">List the names of non-licensed residents (separated by commas):</string>
     <string name="continuebtn">Continue</string>
     <string name="enter_date_hint">Enter Date</string>
     <string name="male_rbtn">Male</string>
