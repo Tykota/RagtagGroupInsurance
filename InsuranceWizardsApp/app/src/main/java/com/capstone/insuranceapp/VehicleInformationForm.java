@@ -15,7 +15,6 @@ public class VehicleInformationForm extends AppCompatActivity {
     // Activity variables
     private TextView makeTV, modelTV, yearTV, vinTV;
     private String make, model, year, vin;
-    private Button addVehicleBtn, continueBtn;
     private boolean carAdded = false;
 
     // Popup variables
@@ -37,7 +36,7 @@ public class VehicleInformationForm extends AppCompatActivity {
         vinTV = findViewById(R.id.car_vin);
 
         // set up add vehicle button
-        addVehicleBtn = findViewById(R.id.addVehicleBTN);
+        Button addVehicleBtn = findViewById(R.id.addVehicleBTN);
         addVehicleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +97,7 @@ public class VehicleInformationForm extends AppCompatActivity {
         });
 
         // set up continue button
-        continueBtn = findViewById(R.id.submit);
+        Button continueBtn = findViewById(R.id.submit);
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
