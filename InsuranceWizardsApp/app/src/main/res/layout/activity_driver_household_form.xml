@@ -260,7 +260,7 @@
                     android:background="@color/colorAccent"
                     android:hint="@string/driverlicense_hint"
                     android:imeOptions="actionDone"
-                    android:inputType="number"
+                    android:inputType="textNoSuggestions|textVisiblePassword"
                     android:paddingStart="10dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimary" />

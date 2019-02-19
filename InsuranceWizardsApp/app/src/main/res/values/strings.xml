@@ -29,6 +29,11 @@
     <string name="state">State</string>
     <string name="driver_type">Driver Type</string>
     <string name="apply_btn">Apply</string>
+    <string name="prior_insurance_company_field">Name of prior insurance company:</string>
+    <string name="insurance_company_name_hint">Insurance Company Name</string>
+    <string name="previous_claims_field">Have you or any licensed drivers in your household, or any operators of your vehicles had any accidents, violations, or filed any injury claims during the past five years?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 
     <string-array name="state_codes">
