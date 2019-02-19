@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var instances = M.FormSelect.init(elems, '');
 });
 
-function loadSearch(){
+function loadSearch(value){
     var cp = document.getElementById("contentPane");
     var searchForm = document.getElementById("searchForm");
     if(cp.firstChild != searchForm){
@@ -59,5 +59,27 @@ function loadClaims(){
 }
 
 function searchByClient(){
-    console.log("search by client not available");
+    let searchValue = document.getElementById("searchCriteria").value;
+
+    let searchForm = Document.getElementById("searchForm");
+    let admin = require("firebase-admin");
+    //DB reference
+    let db = admin.database();
+    //collection reference
+    let ref = db.collection("clients");
+
+    // Attach an asynchronous callback to read the data at our posts reference
+    ref.on("value", function(snapshot) {
+        //Create HTML elements here
+
+        for(i = 0; i < snapshot.val().length; i++) {
+            if(snapshot.val()[i].contains(searchValue)) {
+                let element = Document.createElement("PARAGRAPH");
+                element.text = snapshot.val()[i];
+                element.parent = searchForm;
+            }
+        }
+    }, function (errorObject) {
+        console.log(errorObject.code);
+    })
 }
