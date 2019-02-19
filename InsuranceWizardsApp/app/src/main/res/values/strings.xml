@@ -46,6 +46,12 @@
     <string name="vin_hint">Enter the vehicle\'s VIN</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
+    <string name="liability_coverage">Liability Coverage</string>
+    <string name="liability_def">Liability insurance covers you in the event you are in a covered car accident and it is determined the accident is a result of your actions</string>
+    <string name="collision_coverage">Collision Coverage</string>
+    <string name="Collision_def">If there is a covered accident, collision coverage will pay for the repairs to your car. If your car is totaled (where the cost to repair it exceeds the value of the vehicle) in an accident, collision coverage will pay the value of your car. .</string>
+    <string name="comprehensive_coverage">Comprehensive Coverage</string>
+    <string name="Comprehensive_def">Comprehensive insurance can provide an extra level of coverage in the instance of an accident involving another vehicle. It may help pay for damage to your car due to incidents besides collisions, including vandalism, certain weather events and accidents with animals.</string>
 
 
     <string-array name="state_codes">
