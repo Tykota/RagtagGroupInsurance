@@ -50,7 +50,6 @@
             android:singleLine="true"
             android:textColor="@color/colorPrimary" />
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
