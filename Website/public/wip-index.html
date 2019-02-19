@@ -7,11 +7,13 @@
     <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-firestore.js"></script>
-    <script src="js/preload-scripts/materialize.js"></script>
-    <script src="js/db/firebaseIntializer.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-messaging.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-functions.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/firebaseIntializer.js"></script>
+    <style>
+        #title {
+            border: 10px white;
+        }
+    </style>
     
 </head>
 <body style="background: lightblue;">
@@ -38,9 +40,19 @@
         </ul>
     </div>
 </nav>
-<nav id = "notLoggedIn" class = "lighten-1 indigo" style = "padding-left: 1%">
-    <p>Log in to view clients policies</p>
-</nav>
+<div class="row" id="credCanvas">
+    <div class="col s12 center-align " id="title">
+        <h3 id="portal">Employee Portal</h3>
+    </div>
+    <div class ="input-field col s2 offset-s5 center-align">
+        <input placeholder="Username" id="user" type="text" class="validate">
+        <label for="user">Username</label>
+    </div>
+    <div class ="input-field col s2 offset-s5 center-align">
+            <input placeholder="Password" id="password" type="text" class="validate">
+            <label for="user">Password</label>
+    </div>
+</div>
 
 
 </body>

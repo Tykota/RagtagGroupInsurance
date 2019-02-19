@@ -12,6 +12,8 @@ var config = {
 };
 firebase.initializeApp(config);
 
+// initialize firestore
+var db = firebase.firestore();
 
 function login(){
     let username = document.getElementById("email").value;
@@ -33,3 +35,7 @@ function logout(){
     firebase.auth().signOut();
     window.location = '/index.html';
 }
+
+// Add data function
+
+// Read data function
