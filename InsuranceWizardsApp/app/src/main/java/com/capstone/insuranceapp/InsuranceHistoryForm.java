@@ -72,7 +72,7 @@ public class InsuranceHistoryForm extends AppCompatActivity {
                 if(validateInput()){
                     // this will either send data to firebase or to next section of the form
 
-                    Intent intent = new Intent(getApplicationContext(), HomePage.class);
+                    Intent intent = new Intent(getApplicationContext(), VehicleInformationForm.class);
                     startActivity(intent);
                 }
             }
