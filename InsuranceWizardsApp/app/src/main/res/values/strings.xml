@@ -34,6 +34,18 @@
     <string name="previous_claims_field">Have you or any licensed drivers in your household, or any operators of your vehicles had any accidents, violations, or filed any injury claims during the past five years?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="add_vehicle_btn">Add Vehicle</string>
+    <string name="model_year_label">Model Year</string>
+    <string name="make_label">Make</string>
+    <string name="model_label">Model</string>
+    <string name="vin_label">VIN #</string>
+    <string name="year_label">Year</string>
+    <string name="make_hint">Enter the vehicle\'s make</string>
+    <string name="model_hint">Enter the vehicle\'s model</string>
+    <string name="year_hint">Enter the vehicle\'s model year</string>
+    <string name="vin_hint">Enter the vehicle\'s VIN</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
 
 
     <string-array name="state_codes">
