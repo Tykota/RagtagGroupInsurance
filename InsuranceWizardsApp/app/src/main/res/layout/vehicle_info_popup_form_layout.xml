@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="20dp">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:gravity="end"
+            android:text="@string/make_label" />
+
+        <EditText
+            android:id="@+id/make_input"
+            android:hint="@string/make_hint"
+            android:imeOptions="actionDone"
+            android:inputType="textNoSuggestions|textVisiblePassword"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:gravity="end"
+            android:text="@string/model_label" />
+
+        <EditText
+            android:id="@+id/model_input"
+            android:hint="@string/model_hint"
+            android:imeOptions="actionDone"
+            android:inputType="textNoSuggestions|textVisiblePassword"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:gravity="end"
+            android:text="@string/model_year_label" />
+
+        <EditText
+            android:id="@+id/year_input"
+            android:hint="@string/year_hint"
+            android:imeOptions="actionDone"
+            android:inputType="number"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:gravity="end"
+            android:text="@string/vin_label" />
+
+        <EditText
+            android:id="@+id/vin_input"
+            android:hint="@string/vin_hint"
+            android:imeOptions="actionDone"
+            android:inputType="textNoSuggestions|textVisiblePassword"/>
+
+    </TableRow>
+
+
+    <TableRow android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            android:textSize="20sp" />
+
+    </TableRow>
+
+</TableLayout>
