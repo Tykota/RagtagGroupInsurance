@@ -72,6 +72,9 @@ function searchByClient(){
     ref.on("value", function(snapshot) {
         //Create HTML elements here
 
+        //go through all of the values of the returned array
+        //if it contains the searchValue then create an element based on it
+        //this may need to be prettied up
         for(i = 0; i < snapshot.val().length; i++) {
             if(snapshot.val()[i].contains(searchValue)) {
                 let element = Document.createElement("PARAGRAPH");
