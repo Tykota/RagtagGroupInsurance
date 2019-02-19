@@ -14,10 +14,10 @@
     <string name="ssn_hint">Social Security Number</string>
     <string name="drivers_license_field">Driver\'s License #:</string>
     <string name="driverlicense_hint">Driver\'s License Number</string>
-    <string name="licensed_state_field">Licensed State</string>
+    <string name="licensed_state_field">Licensed State:</string>
     <string name="driver_type_field">Driver Type:</string>
-    <string name="under18_field">List the names of household members under the age of 18:</string>
-    <string name="names_nonLicensed_field">List the names of non-licensed residents:</string>
+    <string name="under18_field">List the names of household members under the age of 18 (separated by commas):</string>
+    <string name="names_nonLicensed_field">List the names of non-licensed residents (separated by commas):</string>
     <string name="continuebtn">Continue</string>
     <string name="enter_date_hint">Enter Date</string>
     <string name="male_rbtn">Male</string>
@@ -29,6 +29,29 @@
     <string name="state">State</string>
     <string name="driver_type">Driver Type</string>
     <string name="apply_btn">Apply</string>
+    <string name="prior_insurance_company_field">Name of prior insurance company:</string>
+    <string name="insurance_company_name_hint">Insurance Company Name</string>
+    <string name="previous_claims_field">Have you or any licensed drivers in your household, or any operators of your vehicles had any accidents, violations, or filed any injury claims during the past five years?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="add_vehicle_btn">Add Vehicle</string>
+    <string name="model_year_label">Model Year</string>
+    <string name="make_label">Make</string>
+    <string name="model_label">Model</string>
+    <string name="vin_label">VIN #</string>
+    <string name="year_label">Year</string>
+    <string name="make_hint">Enter the vehicle\'s make</string>
+    <string name="model_hint">Enter the vehicle\'s model</string>
+    <string name="year_hint">Enter the vehicle\'s model year</string>
+    <string name="vin_hint">Enter the vehicle\'s VIN</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="liability_coverage">Liability Coverage</string>
+    <string name="liability_def">Liability insurance covers you in the event you are in a covered car accident and it is determined the accident is a result of your actions</string>
+    <string name="collision_coverage">Collision Coverage</string>
+    <string name="Collision_def">If there is a covered accident, collision coverage will pay for the repairs to your car. If your car is totaled (where the cost to repair it exceeds the value of the vehicle) in an accident, collision coverage will pay the value of your car. .</string>
+    <string name="comprehensive_coverage">Comprehensive Coverage</string>
+    <string name="Comprehensive_def">Comprehensive insurance can provide an extra level of coverage in the instance of an accident involving another vehicle. It may help pay for damage to your car due to incidents besides collisions, including vandalism, certain weather events and accidents with animals.</string>
 
 
     <string-array name="state_codes">

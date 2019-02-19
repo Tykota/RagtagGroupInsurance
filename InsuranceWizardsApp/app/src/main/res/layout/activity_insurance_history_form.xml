@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context=".InsuranceHistoryForm">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Insurance History Form"
+        app:titleTextColor="@android:color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:text="@string/prior_insurance_company_field"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/prior_insurance_comp_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/colorAccent"
+            android:hint="@string/insurance_company_name_hint"
+            android:imeOptions="actionDone"
+            android:inputType="textNoSuggestions|textVisiblePassword"
+            android:paddingStart="10dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimary" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:text="@string/previous_claims_field"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupPrevClaims"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal"
+            android:paddingStart="10dp">
+
+            <RadioButton
+                android:id="@+id/yesRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="10dp"
+                android:text="@string/yes" />
+
+            <RadioButton
+                android:id="@+id/noRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="10dp"
+                android:text="@string/no" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:text="@string/continuebtn"
+        android:textColor="@color/colorAccent" />
+
+</RelativeLayout>
