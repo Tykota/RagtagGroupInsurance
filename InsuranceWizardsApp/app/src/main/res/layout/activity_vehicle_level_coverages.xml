@@ -125,6 +125,63 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="0.6"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="Personal Injury Coverage"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="0.6"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="Personal medical bills along with those of your passengers will be paid, no matter who is at fault for an accident."
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="0.6"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="Uninsured /Underinsured Motorist Protection"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="450dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="0.6"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="Uninsured motorist insurance can protect you and your car against uninsured drivers and hit-and-run accidents. Underinsured motorist insurance can protect you in the event of an accident with a driver whose insurance is not enough to cover the costs"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+        </LinearLayout>
+
     </LinearLayout>
     </ScrollView>
 
