@@ -52,6 +52,8 @@
     <string name="Collision_def">If there is a covered accident, collision coverage will pay for the repairs to your car. If your car is totaled (where the cost to repair it exceeds the value of the vehicle) in an accident, collision coverage will pay the value of your car. .</string>
     <string name="comprehensive_coverage">Comprehensive Coverage</string>
     <string name="Comprehensive_def">Comprehensive insurance can provide an extra level of coverage in the instance of an accident involving another vehicle. It may help pay for damage to your car due to incidents besides collisions, including vandalism, certain weather events and accidents with animals.</string>
+    <string name="view_policies_btn">View Policies</string>
+    <string name="manage_policies_btn">Manage Policies</string>
 
 
     <string-array name="state_codes">
