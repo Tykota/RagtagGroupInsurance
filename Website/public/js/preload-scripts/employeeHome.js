@@ -67,6 +67,7 @@ function load(form){
     getForm.style.display = "block";
 }
 
+// Moved to firebaseFunctions.js
 /*
 function searchByClient(){
     let searchValue = document.getElementById("searchCriteria").value;
@@ -99,6 +100,11 @@ function searchByClient(){
     })
 }
 */
+
+function displayClient(data){
+    // Display client data with json from firestore
+    
+}
 
 // Clears content pane for loading new content
 function clearCP() {

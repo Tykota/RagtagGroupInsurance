@@ -35,6 +35,7 @@ function searchByClient(){
     //collection reference
     let ref = db.collection("clients").get().then((snapshot) => {
         snapshot.docs.forEach(doc => {
+            displayClient(doc.data());
             console.log(doc.data());
         })
         //console.log(snapshot.docs);
