@@ -12,7 +12,7 @@
     background-color: #e0e0e0;
 }
 #contentPane{
-    visibility: hidden;
+    display: none;
     position:fixed;
     height:50%;
     background:#e0e0e0;
@@ -21,13 +21,13 @@
     margin-left: 350px;
 }
 #searchForm {
-    visibility: hidden;
+    display: none;
 }
 #reviewForm{
-    visibility: hidden;
+    display: none;
 }
 #claimForm{
-    visibility: hidden;
+    display: none;
 }
 .divider{
     background-color: black;

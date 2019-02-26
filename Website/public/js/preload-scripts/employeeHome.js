@@ -4,22 +4,25 @@ document.addEventListener('DOMContentLoaded', function() {
     var instances = M.FormSelect.init(elems, '');
 });
 
-function loadSearch(value){
-    var cp = document.getElementById("contentPane");
-    var searchForm = document.getElementById("searchForm");
+// Refactored load form code
+/*
+function loadSearch(){
+    console.log("Loading search... ")
+    let cp = document.getElementById("contentPane");
+    let searchForm = document.getElementById("searchForm");
     if(cp.firstChild != searchForm){
-        while(cp.firstChild){
+        while(cp.firstElementChild){
             //cp.firstChild.visibility = "hidden";
-            var current = document.getElementById("body").appendChild(cp.firstChild);
-            current.style.visibility = "hidden";
+            let current = document.getElementById("body").appendChild(cp.firstChild);
+            current.style.display = "none";
             cp.removeChild(cp.firstChild);
         }
     }
     
     //cp.innerHTML='';
     cp.appendChild(searchForm);
-    cp.style.visibility = "visible";
-    searchForm.style.visibility = "visible";
+    cp.style.display = "block";
+    searchForm.style.display = "block";
 }
 
 function loadReview(){
@@ -44,12 +47,7 @@ function loadClaims(){
     var cp = document.getElementById("contentPane");
     var claimForm = document.getElementById("claimForm");
     if(cp.firstChild != claimForm){
-        while(cp.firstChild){
-            //cp.firstChild.visibility = "hidden";
-            var current = document.getElementById("body").appendChild(cp.firstChild);
-            current.style.visibility = "hidden";
-            cp.removeChild(cp.firstChild);
-        }
+        clearCP();
     }
     
     //cp.innerHTML='';
@@ -57,11 +55,25 @@ function loadClaims(){
     claimForm.style.visibility = "visible";
     cp.appendChild(claimForm);
 }
+*/
+function load(form){
+    let cp = document.getElementById("contentPane");
+    let getForm = document.getElementById(form);
+    if(cp.firstChild != getForm){
+        clearCP();
+    }
+    cp.appendChild(getForm);
+    cp.style.display = "block";
+    getForm.style.display = "block";
+}
 
+/*
 function searchByClient(){
     let searchValue = document.getElementById("searchCriteria").value;
+    let searchWith = document.getElementById("valueSelect").value;
 
-    let searchForm = Document.getElementById("searchForm");
+    console.log("Search by: " + searchWith + ", for: " + searchValue);
+    let searchForm = document.getElementById("searchForm");
     let admin = require("firebase-admin");
     //DB reference
     let db = admin.database();
@@ -85,4 +97,16 @@ function searchByClient(){
     }, function (errorObject) {
         console.log(errorObject.code);
     })
+}
+*/
+
+// Clears content pane for loading new content
+function clearCP() {
+    let cp = document.getElementById("contentPane");
+    while(cp.firstElementChild){
+        let current = cp.firstChild;
+        current.style.display = "none";
+        cp.removeChild(cp.firstElementChild);
+        document.getElementById("body").appendChild(current);
+    }
 }

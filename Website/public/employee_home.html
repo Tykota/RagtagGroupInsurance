@@ -10,10 +10,11 @@
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-firestore.js"></script>
     <script src="js/preload-scripts/materialize.js"></script>
     <script src="js/db/firebaseIntializer.js"></script>
-    <script src="js/db/db-init.js"></script>
+    <script src="js/db/firebaseFunctions.js"></script>
     <script src="js/preload-scripts/employeeHome.js"></script>
 </head>
 
@@ -31,21 +32,21 @@
         <ul style="width:800px; margin-top:10px; margin-left:10px" class="side-nav fixed">
             <div class="row">
                 <li>
-                        <div id="search" class="col s5 left-align" onclick="loadSearch()">
+                        <div id="search" class="col s5 left-align" onclick="load('searchForm')">
                             <h5 class="unselectable">Search Clients</h5>
                         </div>
                 </li>
                 <div id="divide1" class="col s11"></div>
-                <div id="contentPane" class=""></div>
+                <div id="contentPane"></div>
                 <li>
-                        <div id="review" class="col s5 left-align" onclick="loadReview()">
+                        <div id="review" class="col s5 left-align" onclick="load('reviewForm')">
                             <h5 class="unselectable">Review Applications</h5>
                         </div>
                 </li>
                 <div class="col s11"></div>
                 <li>
                         <div class="row">
-                            <div id="claims" class="col s5 left-align" onclick="loadClaims()">
+                            <div id="claims" class="col s5 left-align" onclick="load('claimForm')">
                                 <h5 class="unselectable">Manage Claims</h5>
                             </div>
                         </div>
@@ -59,7 +60,7 @@
                 <span class="flow-text">Search by: </span>
             </div>
             <div class="input-field col s4 right-align">
-                <select>
+                <select id="valueSelect">
                     <option value="" disabled selected>Choose criteria</option>
                     <option value="name">Client Name</option>
                     <option value="policy">Policy Number</option>
