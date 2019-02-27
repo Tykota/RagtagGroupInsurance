@@ -125,7 +125,7 @@
         android:layout_marginTop="30dp"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
-        android:text="@string/continuebtn"
+        android:text="@string/submit"
         android:textColor="@color/colorAccent" />
 
 </RelativeLayout>
