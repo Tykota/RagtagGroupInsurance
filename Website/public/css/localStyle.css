@@ -1,6 +1,9 @@
 #so {
     background-color: #616161;
 }
+#result {
+    height: 180px;
+}
 #so:hover {
     color: black;
     background-color: #ff5722;
@@ -14,7 +17,7 @@
 #contentPane{
     display: none;
     position:fixed;
-    height:50%;
+    height: auto;
     background:#e0e0e0;
     width:50%;
     left:0px;

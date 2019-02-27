@@ -4,58 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var instances = M.FormSelect.init(elems, '');
 });
 
-// Refactored load form code
-/*
-function loadSearch(){
-    console.log("Loading search... ")
-    let cp = document.getElementById("contentPane");
-    let searchForm = document.getElementById("searchForm");
-    if(cp.firstChild != searchForm){
-        while(cp.firstElementChild){
-            //cp.firstChild.visibility = "hidden";
-            let current = document.getElementById("body").appendChild(cp.firstChild);
-            current.style.display = "none";
-            cp.removeChild(cp.firstChild);
-        }
-    }
-    
-    //cp.innerHTML='';
-    cp.appendChild(searchForm);
-    cp.style.display = "block";
-    searchForm.style.display = "block";
-}
-
-function loadReview(){
-    var cp = document.getElementById("contentPane");
-    var reviewForm = document.getElementById("reviewForm");
-    if(cp.firstChild != reviewForm){
-        while(cp.firstChild){
-            //cp.firstChild.visibility = "hidden";
-            var current = document.getElementById("body").appendChild(cp.firstChild);
-            current.style.visibility = "hidden";
-            cp.removeChild(cp.firstChild);
-        }
-    }
-    
-    //cp.innerHTML='';
-    cp.style.visibility = "visible";
-    reviewForm.style.visibility = "visible";
-    cp.appendChild(reviewForm);
-}
-
-function loadClaims(){
-    var cp = document.getElementById("contentPane");
-    var claimForm = document.getElementById("claimForm");
-    if(cp.firstChild != claimForm){
-        clearCP();
-    }
-    
-    //cp.innerHTML='';
-    cp.style.visibility = "visible";
-    claimForm.style.visibility = "visible";
-    cp.appendChild(claimForm);
-}
-*/
 function load(form){
     let cp = document.getElementById("contentPane");
     let getForm = document.getElementById(form);
@@ -67,43 +15,102 @@ function load(form){
     getForm.style.display = "block";
 }
 
-// Moved to firebaseFunctions.js
-/*
-function searchByClient(){
-    let searchValue = document.getElementById("searchCriteria").value;
-    let searchWith = document.getElementById("valueSelect").value;
-
-    console.log("Search by: " + searchWith + ", for: " + searchValue);
-    let searchForm = document.getElementById("searchForm");
-    let admin = require("firebase-admin");
-    //DB reference
-    let db = admin.database();
-    //collection reference
-    let ref = db.collection("clients");
-
-    // Attach an asynchronous callback to read the data at our posts reference
-    ref.on("value", function(snapshot) {
-        //Create HTML elements here
-
-        //go through all of the values of the returned array
-        //if it contains the searchValue then create an element based on it
-        //this may need to be prettied up
-        for(i = 0; i < snapshot.val().length; i++) {
-            if(snapshot.val()[i].contains(searchValue)) {
-                let element = Document.createElement("PARAGRAPH");
-                element.text = snapshot.val()[i];
-                element.parent = searchForm;
-            }
-        }
-    }, function (errorObject) {
-        console.log(errorObject.code);
-    })
-}
-*/
-
 function displayClient(data){
     // Display client data with json from firestore
-    
+    console.log(data);
+
+}
+
+function displaySearchResults(data){
+    let home = data["home-info"];
+    let polnum = data["policy-number"];
+
+    let title = "Name: " + home["name"];
+    let addr = "Address: " 
+            + home["address"] + " " 
+            + home["city"] + ", " 
+            + home["state"] + " " 
+            + home["zip"];
+    let poltxt = "Policy Number: " + polnum;
+
+    // create card element
+    let holder = document.createElement('div');
+    holder.setAttribute("class", "col s12");
+    let header = document.createElement('span');
+    let headerTxt = document.createTextNode(title);
+    header.appendChild(headerTxt);
+    let card = document.createElement("div");
+    card.setAttribute("class", "card small blue-grey darken-1");
+    card.setAttribute("id", "result");
+    let stack = document.createElement("div");
+    stack.setAttribute("class", "card-stacked");
+    let content = document.createElement("div");
+    content.setAttribute("class", "card-content white-text");
+    let action = document.createElement("div");
+    action.setAttribute("class", "card-action");
+    let p = document.createElement("p");
+    let ptxt = document.createTextNode(addr);
+    let p2 = document.createElement("p");
+    let p2txt = document.createTextNode(poltxt);
+
+    let viewBtn = document.createElement('btn');
+    let btnTxt = document.createTextNode("View Client Details")
+    viewBtn.setAttribute("class", "wave-effect waves-light btn");
+    viewBtn.setAttribute("onclick", "displayClient(data)");
+    viewBtn.appendChild(btnTxt);
+
+    action.appendChild(viewBtn);
+    p2.appendChild(p2txt);
+    p.appendChild(ptxt);
+    content.appendChild(header);
+    content.appendChild(p2);
+    content.appendChild(p);
+    content.appendChild(action);
+    stack.appendChild(content);
+    card.appendChild(stack);
+    //holder.appendChild(header);
+    holder.appendChild(card);
+
+    document.getElementById("contentPane").appendChild(holder);
+    console.log(home);
+    console.log(polnum);
+}
+
+function createResultCard(title, address){
+    let div = document.createElement('div');
+    div.setAttribute("class", "col s12");
+    let header = document.createElement('h6');
+    let divH = document.createElement('div');
+    divH.setAttribute("class", "card-horizontal");
+    let divS = document.createElement('div');
+    divS.setAttribute('class', "card-stacked");
+    let divC = document.createElement('div');
+    divC.setAttribute("class", "card-content");
+
+    let txtTitle = document.createTextNode(title);
+    let txtContent = document.createTextNode(address);
+    let p = document.createElement('p');
+    p.appendChild(txtContent);
+
+    divC.appendChild(p);
+    divS.appendChild(divC);
+    divH.appendChild(divS);
+    div.appendChild(divH);
+
+    document.getElementById("contentPane").appendChild(div);
+}
+
+function showAlert(alertText){
+    let p = document.createElement('p');
+    let txt = document.createTextNode(alertText);
+    //p.setAttribute("class", "alert");
+    //p.style.textAlign = "center";
+    p.appendChild(txt);
+    document.getElementById("contentPane").appendChild(p);
+}
+
+function clearAlerts(){
+
 }
 
 // Clears content pane for loading new content

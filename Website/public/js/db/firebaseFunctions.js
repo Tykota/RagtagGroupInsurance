@@ -24,58 +24,31 @@ function logout(){
 
 // Read data functions
 function searchByClient(){
+    clearAlerts();
     let searchValue = document.getElementById("searchCriteria").value;
     let searchWith = document.getElementById("valueSelect").value;
 
-    console.log("Search by: " + searchWith + ", for: " + searchValue);
-    let searchForm = document.getElementById("searchForm");
-    //let admin = require("firebase-admin");
-    //DB reference
-    //let db = firebase.firestore();
-    //collection reference
-    let ref = db.collection("clients").get().then((snapshot) => {
+    if(searchValue == ''){
+        showAlert('Enter a query in the text box to search.');
+    }
+    else if(searchWith == "choose"){
+        showAlert('Choose a search criteria from the dropdown box.')
+    }
+    else {
+        if(searchWith == "name"){
+            search(searchValue, "home-info.name");
+        }
+        else if(searchWith == "policy"){
+            search(searchValue, "policy-number");
+        }
+    }
+}
+
+function search(query, criteria){
+    clearCP();
+    let ref = db.collection("clients").where(criteria, "==", query).get().then((snapshot) => {
         snapshot.docs.forEach(doc => {
-            displayClient(doc.data());
-            console.log(doc.data());
-        })
-        //console.log(snapshot.docs);
-    });
-
-    //let query = ref.where("name", "array-contains", "lol");
-
-    //console.log(query);
-
-/*
-
-    // Attach an asynchronous callback to read the data at our posts reference
-    ref.get().then(function(doc) {
-        if (doc.exists) {
-        console.log("Document data:", doc.data());
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-    });
-}
-
-        //Create HTML elements here
-
-        //go through all of the values of the returned array
-        //if it contains the searchValue then create an element based on it
-        //this may need to be prettied up
-        for(i = 0; i < snapshot.val().length; i++) {
-            if(snapshot.val()[i].contains(searchValue)) {
-                let element = Document.createElement("PARAGRAPH");
-                element.text = snapshot.val()[i];
-                element.parent = searchForm;
-            }
-        }
-    }, function (errorObject) {
-        console.log(errorObject.code);
+            displaySearchResults(doc.data());
+        });
     })
-}
-
-*/
 }
