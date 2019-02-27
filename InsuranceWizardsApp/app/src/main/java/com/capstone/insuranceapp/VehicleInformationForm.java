@@ -104,7 +104,7 @@ public class VehicleInformationForm extends AppCompatActivity {
                 if (carAdded) {
                     // this will either send data to firebase or to next section of the form
 
-                    Intent intent = new Intent(getApplicationContext(), HomePage.class);
+                    Intent intent = new Intent(getApplicationContext(), ApplicationStatus.class);
                     startActivity(intent);
                 } else {
                     AlertDialog.Builder noCarsBuilder = new android.app.AlertDialog.Builder(VehicleInformationForm.this);
