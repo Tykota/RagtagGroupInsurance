@@ -101,9 +101,51 @@ function searchByClient(){
 }
 */
 
+
+
+
+
+
+function createItem(content){
+    let item = document.createElement("LI");
+    item.className = "collection-item";
+
+    let theContent = document.createElement("H5");
+    theContent.innerText = content;
+
+    //This is the element that the items are created under
+    //If this needs to be changed later on this is where we change it
+    let listOfProperties = document.getElementById("propertyList");
+
+    listOfProperties.appendChild(item);
+    item.appendChild(theContent);
+}
+
+
 function displayClient(data){
-    // Display client data with json from firestore
-    
+
+        //name
+        createItem("Name : " + data.home-info.name);
+        //address
+        createItem("Address : " +data.home-info.address + " " + data.home-info.city + " " + data.home-info.state + " , " + data.home-info.zip);
+        //phone number
+        createItem("Phone : " + data.home-info.phone);
+        //dl num
+        createItem("DL Number : " + data.home-info.dl-number);
+        //dob
+        createItem("Date of birth : " + data.home-info.dob);
+        //driver-type
+        createItem("Liscese type : " + data.home-info.driver-type)
+        //ssn
+        createItem("Social Security Number : " + data.home-info.ssn)
+
+        //list of cars
+        createItem("Vehicle Information");
+        for(i = 0; i < data.car-info.length; i++){
+            createItem("Make : " + data.car-info.make);
+            createItem("Model : " + data.car-info.model);
+            createItem("VIN : " + data.car-info.vin);
+        }
 }
 
 // Clears content pane for loading new content
