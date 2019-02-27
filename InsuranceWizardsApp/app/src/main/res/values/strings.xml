@@ -54,6 +54,14 @@
     <string name="Comprehensive_def">Comprehensive insurance can provide an extra level of coverage in the instance of an accident involving another vehicle. It may help pay for damage to your car due to incidents besides collisions, including vandalism, certain weather events and accidents with animals.</string>
     <string name="view_policies_btn">View Policies</string>
     <string name="manage_policies_btn">Manage Policies</string>
+    <string name="street_address_field">Street Address</string>
+    <string name="street_address_hint">Street Address</string>
+    <string name="state_field">State</string>
+    <string name="zip_code_field">Zip Code</string>
+    <string name="zip_code_hint">Zip Code</string>
+    <string name="email_field">Email</string>
+    <string name="email_hint">Email</string>
+    <string name="phone_num_field">Phone Number</string>
 
 
     <string-array name="state_codes">

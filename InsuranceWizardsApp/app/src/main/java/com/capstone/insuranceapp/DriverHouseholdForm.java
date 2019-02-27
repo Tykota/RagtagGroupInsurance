@@ -222,7 +222,7 @@ public class DriverHouseholdForm extends AppCompatActivity {
                 if(validateInput()){
                     // this will either send data to firebase or to next section of the form
 
-                    Intent intent = new Intent(getApplicationContext(), InsuranceHistoryForm.class);
+                    Intent intent = new Intent(getApplicationContext(), UserInfoForm.class);
                     startActivity(intent);
                 }
             }

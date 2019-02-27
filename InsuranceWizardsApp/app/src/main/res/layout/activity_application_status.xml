@@ -29,26 +29,26 @@
 
 
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
-                android:text="Policy Status:"
-                android:textAlignment="center"
-                android:textSize="50dp"
-                />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="Policy Status:"
+            android:textAlignment="center"
+            android:textSize="50dp"
+            />
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_marginTop="80dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Awaiting Approval"
-                android:textAlignment="center"
-                android:textSize="25dp"
-                />
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_marginTop="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Awaiting Approval"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            />
 
 
     </LinearLayout>
