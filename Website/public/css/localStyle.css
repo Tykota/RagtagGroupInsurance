@@ -4,6 +4,9 @@
 #result {
     height: 180px;
 }
+#propertyList {
+    display: none;
+}
 #so:hover {
     color: black;
     background-color: #ff5722;

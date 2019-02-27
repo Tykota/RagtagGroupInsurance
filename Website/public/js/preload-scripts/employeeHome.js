@@ -15,16 +15,9 @@ function load(form){
     getForm.style.display = "block";
 }
 
-function displayClient(data){
-    // Display client data with json from firestore
-    console.log(data);
-
-}
-
 function displaySearchResults(data){
     let home = data["home-info"];
     let polnum = data["policy-number"];
-
     let title = "Name: " + home["name"];
     let addr = "Address: " 
             + home["address"] + " " 
@@ -56,7 +49,7 @@ function displaySearchResults(data){
     let viewBtn = document.createElement('btn');
     let btnTxt = document.createTextNode("View Client Details")
     viewBtn.setAttribute("class", "wave-effect waves-light btn");
-    viewBtn.setAttribute("onclick", "displayClient(data)");
+    viewBtn.addEventListener("click", displayClient.bind(null, data));
     viewBtn.appendChild(btnTxt);
 
     action.appendChild(viewBtn);
@@ -72,8 +65,6 @@ function displaySearchResults(data){
     holder.appendChild(card);
 
     document.getElementById("contentPane").appendChild(holder);
-    console.log(home);
-    console.log(polnum);
 }
 
 function createResultCard(title, address){
@@ -110,45 +101,7 @@ function showAlert(alertText){
 }
 
 function clearAlerts(){
-
-// Moved to firebaseFunctions.js
-/*
-function searchByClient(){
-    let searchValue = document.getElementById("searchCriteria").value;
-    let searchWith = document.getElementById("valueSelect").value;
-
-    console.log("Search by: " + searchWith + ", for: " + searchValue);
-    let searchForm = document.getElementById("searchForm");
-    let admin = require("firebase-admin");
-    //DB reference
-    let db = admin.database();
-    //collection reference
-    let ref = db.collection("clients");
-
-    // Attach an asynchronous callback to read the data at our posts reference
-    ref.on("value", function(snapshot) {
-        //Create HTML elements here
-
-        //go through all of the values of the returned array
-        //if it contains the searchValue then create an element based on it
-        //this may need to be prettied up
-        for(i = 0; i < snapshot.val().length; i++) {
-            if(snapshot.val()[i].contains(searchValue)) {
-                let element = Document.createElement("PARAGRAPH");
-                element.text = snapshot.val()[i];
-                element.parent = searchForm;
-            }
-        }
-    }, function (errorObject) {
-        console.log(errorObject.code);
-    })
 }
-*/
-
-
-
-
-
 
 function createItem(content){
     let item = document.createElement("LI");
@@ -167,29 +120,37 @@ function createItem(content){
 
 
 function displayClient(data){
-
+    console.log(data);
         //name
-        createItem("Name : " + data.home-info.name);
+        createItem("Name: " + data["home-info"].name);
         //address
-        createItem("Address : " +data.home-info.address + " " + data.home-info.city + " " + data.home-info.state + " , " + data.home-info.zip);
+        createItem("Address: " +data["home-info"].address + " " + data["home-info"].city + " " + data["home-info"].state + " , " + data["home-info"].zip);
         //phone number
-        createItem("Phone : " + data.home-info.phone);
+        createItem("Phone: " + data["home-info"]["home-phone"]);
         //dl num
-        createItem("DL Number : " + data.home-info.dl-number);
+        createItem("Driver's License #: " + data["home-info"]["dl-number"]);
         //dob
-        createItem("Date of birth : " + data.home-info.dob);
+        createItem("Date of birth: " + data["home-info"].dob);
         //driver-type
-        createItem("Liscese type : " + data.home-info.driver-type)
+        createItem("License type: " + data["home-info"]["driver-type"])
         //ssn
-        createItem("Social Security Number : " + data.home-info.ssn)
-
+        createItem("Social Security Number: " + data["home-info"].ssn)
+        
         //list of cars
         createItem("Vehicle Information");
-        for(i = 0; i < data.car-info.length; i++){
-            createItem("Make : " + data.car-info.make);
-            createItem("Model : " + data.car-info.model);
-            createItem("VIN : " + data.car-info.vin);
+        for(i = 0; i < data["car-info"].length; i++){
+            createItem("Make : " + data["car-info"][i].make);
+            createItem("Model : " + data["car-info"][i].model);
+            createItem("VIN : " + data["car-info"][i].vin);
         }
+        clearCP();
+        let propList = document.getElementById("propertyList");
+        
+        let div = document.createElement('div');
+        div.setAttribute("class", "row");
+        div.appendChild(propList);
+        propList.style.display = "block";
+        document.getElementById("contentPane").appendChild(div);
 }
 
 // Clears content pane for loading new content
