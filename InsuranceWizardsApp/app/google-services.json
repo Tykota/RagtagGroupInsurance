@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "348481372939-6tm424abfsnaand125g6r2k2t9one8ca.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.capstone.insuranceapp",
+            "certificate_hash": "8f2b14047db0fadaa248dfd6edb67408ed79988c"
+          }
+        },
+        {
           "client_id": "348481372939-8gi89733i57f5vks95tldluhgtm12nlu.apps.googleusercontent.com",
           "client_type": 3
         }

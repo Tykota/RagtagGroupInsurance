@@ -21,9 +21,9 @@ public class managePolicy extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_policy);
+       setContentView(R.layout.activity_manage_policy);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance("clients");
         DatabaseReference myRef = database.getReference("clients");
 
 
@@ -45,6 +45,7 @@ public class managePolicy extends AppCompatActivity {
                 Log.w("SWAG", "Failed to read value.", error.toException());
             }
         });
+
 
 
     }
