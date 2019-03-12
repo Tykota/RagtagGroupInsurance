@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context=".MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        app:title="Manage Policy"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/white" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="CAR VIN"
+            android:textAlignment="center"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="CAR VIN"
+            android:textAlignment="center"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="CAR VIN"
+            android:textAlignment="center"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+
+        <Button
+            android:id="@+id/edit"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="182dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/edit_car"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/delete"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="182dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/remove_car"
+            android:textColor="@android:color/white" />
+
+
+
+
+
+
+
+
+        <!--
+            BUTTONS STAY AT BOTTOM-->
+
+
+    </LinearLayout>
+</RelativeLayout>
