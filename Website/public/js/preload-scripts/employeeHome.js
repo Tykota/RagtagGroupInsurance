@@ -2,6 +2,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems, '');
+    var el = document.querySelectorAll('ul.tabs')
+    var instance = M.Tabs.init(el, '');
 });
 
 function load(form){
@@ -118,8 +120,118 @@ function createItem(content){
     item.appendChild(theContent);
 }
 
+function createTabs(data){
+    // Create Tab elements
+    var cp = document.getElementById("contentPane");
+    let contain = document.createElement('div');
+    contain.setAttribute("class", "container col s12");
+    let divTabs = document.createElement('div');
+    divTabs.setAttribute("class", "row");
+    let col = document.createElement('div');
+    col.setAttribute("class", "col s12");
+    let tabs = document.createElement('ul');
+    tabs.setAttribute("id", "clientTab");
+    tabs.setAttribute("class", "tabs blue-grey darken-1");
+    
+    // For each tab
+    let item1 = document.createElement('li');
+    item1.setAttribute("class", "tab col s4");
+    let clientDiv = document.createElement('div');
+    clientDiv.setAttribute("id", "clientDiv");
+    clientDiv.setAttribute("class", "col s12");
+    let clientTab = document.createElement('a');
+    clientTab.setAttribute("class", "active white-text");
+    clientTab.setAttribute("href", "#clientDiv");
+    clientTab.innerText = "Home Information";
+
+    let item2 = document.createElement('li');
+    item2.setAttribute("class", "tab col s4");
+    let vehicleDiv = document.createElement('div');
+    vehicleDiv.setAttribute("id", "vehicleDiv");
+    vehicleDiv.setAttribute("class", "col s12");
+    let vehicleTab = document.createElement('a');
+    vehicleTab.setAttribute("class", "white-text");
+    vehicleTab.setAttribute("href", "#vehcileDiv");
+    vehicleTab.innerText = "Vehicles";
+
+    let item3 = document.createElement('li');
+    item3.setAttribute("class", "tab col s4");
+    var insuranceDiv = document.createElement('div');
+    insuranceDiv.setAttribute("id", "insuranceDiv");
+    insuranceDiv.setAttribute("class", "col s12");
+    let insuranceTab = document.createElement('a');
+    insuranceTab.setAttribute("class", "white-text");
+    insuranceTab.setAttribute("href", "#insuranceDiv");
+    insuranceTab.innerText = "Insurance Details";
+
+
+
+   
+    // Client Tab info
+    let l1 = document.createElement('p');
+    l1.innerText = ("Name: " + data["home-info"].name)
+    let l2 = document.createElement('p');
+    l2.innerText = ("Address: " +data["home-info"].address + " " + data["home-info"].city + " " + data["home-info"].state + " , " + data["home-info"].zip);
+    let l3 = document.createElement('p');
+    l3.innerText = ("Phone: " + data["home-info"]["home-phone"]);
+    let l4 = document.createElement('p');
+    l4.innerText = ("Driver's License #: " + data["home-info"]["dl-number"]);
+    let l5 = document.createElement('p');
+    l5.innerText = ("Date of birth: " + data["home-info"].dob);
+    let l6 = document.createElement('p');
+    l6.innerText = ("License type: " + data["home-info"]["driver-type"]);
+    let l7 = document.createElement('p');
+    l7.innerText = ("Social Security Number: " + data["home-info"].ssn);
+
+    // Vehicle Tab Info
+    for(i = 0; i < data["car-info"].length; i++){
+        let div = document.createElement('div');
+        let header = document.createElement('h6');
+        header.innerText = "Vehicle " + (i+1);
+        let l1 = document.createElement('p');
+        l1.innerText = ("Make: " + data["car-info"][i].make);
+        let l2 = document.createElement('p');
+        l2.innerText = ("Model: " + data["car-info"][i].model);
+        let l3 = document.createElement('p');
+        l3.innerText = ("VIN: " + data["car-info"][i].vin);
+        div.appendChild(header);
+        div.appendChild(l1);
+        div.appendChild(l2);
+        div.appendChild(l3);
+        vehicleDiv.appendChild(div);
+    }
+
+    // Insurance Tab info
+
+    // Display
+    clearCP();
+    clientDiv.appendChild(l1);
+    clientDiv.appendChild(l2);
+    clientDiv.appendChild(l3);
+    clientDiv.appendChild(l4);
+    clientDiv.appendChild(l5);
+    clientDiv.appendChild(l6);
+    clientDiv.appendChild(l7);
+    
+    item1.appendChild(clientTab);
+    item2.appendChild(vehicleTab);
+    item3.appendChild(insuranceTab);
+    tabs.appendChild(item1);
+    tabs.appendChild(item2);
+    tabs.appendChild(item3);
+    col.appendChild(tabs);
+    divTabs.appendChild(col);
+    divTabs.appendChild(clientDiv);
+    divTabs.appendChild(vehicleDiv);
+    divTabs.appendChild(insuranceDiv);
+    contain.appendChild(divTabs);
+    cp.appendChild(contain);
+
+}
 
 function displayClient(data){
+    createTabs(data);
+    /*
     console.log(data);
         //name
         createItem("Name: " + data["home-info"].name);
@@ -151,6 +263,7 @@ function displayClient(data){
         div.appendChild(propList);
         propList.style.display = "block";
         document.getElementById("contentPane").appendChild(div);
+        */
 }
 
 // Clears content pane for loading new content
