@@ -7,27 +7,33 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class HomePage extends AppCompatActivity {
-    private Button manageBtn;
+public class AddCar extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_add_car);
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
-        manageBtn = (Button) findViewById(R.id.manage_policy_btn);
-        manageBtn.setOnClickListener(new View.OnClickListener() {
+
+
+        Button addCar = (Button) findViewById(R.id.submitAddCar);
+        addCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), managePolicy.class);
-                startActivity(intent);
+                //add car to database here
+                Toast.makeText(AddCar.this, "The car has been added!", Toast.LENGTH_LONG).show();
+
             }
         });
 
-
     }
+
+
+
+
 
 
 
