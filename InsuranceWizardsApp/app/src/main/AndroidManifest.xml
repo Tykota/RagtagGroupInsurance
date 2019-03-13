@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".AddCar"/>
         <activity android:name=".ApplicationStatus"></activity>
         <activity android:name=".UserInfoForm" />
         <activity android:name=".VehicleInformationForm" />
