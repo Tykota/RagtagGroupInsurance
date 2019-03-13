@@ -41,6 +41,15 @@
 #claimForm{
     display: none;
 }
+.custom {
+    opacity: 0;
+}
+.carousel .carousel-item{
+    width:100%;
+  }
+#clientTabs {
+    display: none;
+}
 .divider{
     background-color: black;
 }
