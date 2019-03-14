@@ -1,0 +1,109 @@
+// Heres what we need for writing to the firebase db
+
+// As long as the google-services.json is in the directory I think 
+// it will automatically connect to the db with db.collection("clients") as the reference object
+
+// We should generate a unique application number to identify each application
+
+// We can create a constructor called client like:
+public class Client {
+    public String applicationNum;
+    public String name;
+    public String gender;
+    public String ssn;
+    public String address;
+    public String city;
+    public String state;
+    public String zip;
+    public String dlnumber;
+    public String dob;
+    public String drivertype;
+    public String phone;
+    public Drivers[] drivers;
+    public Minors[] minors;
+
+    public Client() {
+        // Default
+    }
+    public Client(String applicationNum, String name, String gender, String ssn, String address, String city, String state, String zip,
+                    String dlnumber, String dob, String drivertype, String phone, Drivers[] drivers, Minors[] minors) {
+                        this.applicationNum = applicationNum;
+                        this.name = name;
+                        this.gender = gender;
+                        this.ssn = ssn;
+                        this.address = address;
+                        this.city = city;
+                        this.state = state;
+                        this.zip = zip;
+                        this.dlnumber = dlnumber;
+                        this.dob = dob;
+                        this.drivertype = drivertype;
+                        this.phone = phone;
+                        this.drivers = drivers;
+                        this.minors = minors;
+                    }
+}
+
+// So we can use collected data to construct the minors and drivers data types to pass to the client constructor
+
+public class Minors {
+    public String name;
+    public String dob;
+
+    public Minors() {
+        // Default
+    }
+    public Minors(String name, String dob) {
+        this.name = name;
+        this.dob = dob;
+    }
+}
+
+public class Drivers {
+    public String name;
+    public String dob;
+    public String dlnumber;
+
+    public Drivers() {
+        // Default
+    }
+    public Drivers(String name, String dob, String dlnumber){
+        this.name = name 
+        ...
+    }
+}
+
+// Heres how a function for writing the client data would look
+
+private void writeNewClient(Client newClient){
+    db.collection('clients').doc(applicationNum).set({
+        home-info: newClient
+    });
+}
+
+// Then we can do the same thing for car-info, driver-info and insurance-info, using the applicationNum as the 'key'
+// so the data is stored in the same document.
+// For sending that information you can use a constructor or just grab the data directly and send it 
+// since there is not as much to send with those categories
+
+// Heres a section of code from the firebase documentation that includes a callback function
+// And using a hashmap to send the data
+Map<String, Object> city = new HashMap<>();
+city.put("name", "Los Angeles");
+city.put("state", "CA");
+city.put("country", "USA");
+
+db.collection("cities").document("LA")
+        .set(city)
+        .addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "DocumentSnapshot successfully written!");
+            }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error writing document", e);
+            }
+        });
