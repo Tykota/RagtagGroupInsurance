@@ -23,11 +23,14 @@ public class VehicleInformationForm extends AppCompatActivity {
     private Button saveBtn, cancelBtn;
     private AlertDialog.Builder popupBuilder;
     private AlertDialog popupDialog;
+    private Client client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_information_form);
+
+        client = (Client)getIntent().getSerializableExtra("client");
 
         // set up text views
         makeTV = findViewById(R.id.car_make);
