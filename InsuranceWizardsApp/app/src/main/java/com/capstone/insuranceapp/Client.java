@@ -16,6 +16,9 @@ public class Client implements Serializable {
     public String drivertype;
     public String phone;
     public String marital;
+    public String email;
+    public boolean prevAccident;
+    public String prevInssurance;
 //   public Drivers[] drivers;
  //   public Minors[] minors;
 
@@ -47,6 +50,30 @@ public class Client implements Serializable {
 
     public void setMarital(String marital) {
         this.marital = marital;
+    }
+
+    public boolean isPrevAccident() {
+        return prevAccident;
+    }
+
+    public void setPrevAccident(boolean prevAccident) {
+        this.prevAccident = prevAccident;
+    }
+
+    public String getPrevInssurance() {
+        return prevInssurance;
+    }
+
+    public void setPrevInssurance(String prevInssurance) {
+        this.prevInssurance = prevInssurance;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {

@@ -133,9 +133,16 @@ public class UserInfoForm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(validateInput()){
-                    // this will either send data to firebase or to next section of the form
+                    // Update client
+                    client.setAddress(address);
+                    client.setState(stateSelected);
+                    client.setZip(zipCode);
+                    client.setEmail(email);
+                    client.setPhone(phoneNum.substring(0, 3) + "-" + phoneNum.substring(3, 6) + "-" + phoneNum.substring(6));
 
+                    // Start next activity
                     Intent intent = new Intent(getApplicationContext(), InsuranceHistoryForm.class);
+                    intent.putExtra("client", client);
                     startActivity(intent);
                 }
             }

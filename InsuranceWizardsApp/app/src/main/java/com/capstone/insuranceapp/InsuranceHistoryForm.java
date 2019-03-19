@@ -15,15 +15,19 @@ public class InsuranceHistoryForm extends AppCompatActivity {
 
     private Button continueBtn;
     private EditText priorInsuranceCompET;
-    private String priorInsuranceComp, prevClaimsResponse;
+    private String priorInsuranceComp;
+    private boolean prevClaimsResponse;
     private RadioGroup prevClaimsRG;
     private AlertDialog.Builder errorAlertBuilder;
     private AlertDialog errorAlert;
+    private Client client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insurance_history_form);
+
+        client = (Client)getIntent().getSerializableExtra("client");
 
         // create alert dialog
         errorAlertBuilder = new AlertDialog.Builder(this);
@@ -55,9 +59,9 @@ public class InsuranceHistoryForm extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch(checkedId){
-                    case R.id.yesRB: prevClaimsResponse = "Yes";
+                    case R.id.yesRB: prevClaimsResponse = true;
                         break;
-                    case R.id.noRB: prevClaimsResponse = "No";
+                    case R.id.noRB: prevClaimsResponse = false;
                         break;
                     default: break;
                 }
@@ -70,9 +74,13 @@ public class InsuranceHistoryForm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(validateInput()){
-                    // this will either send data to firebase or to next section of the form
+                    // update client
+                    client.setPrevAccident(prevClaimsResponse);
+                    client.setPrevInssurance(priorInsuranceComp);
 
+                    // start next activity
                     Intent intent = new Intent(getApplicationContext(), VehicleInformationForm.class);
+                    intent.putExtra("client", client);
                     startActivity(intent);
                 }
             }
@@ -89,8 +97,7 @@ public class InsuranceHistoryForm extends AppCompatActivity {
             return false;
         }
 
-        // validate gender selected
-        else if(prevClaimsResponse == null || prevClaimsResponse.equals("")){
+        else if(!prevClaimsRG.isSelected()){
             errorAlertBuilder.setMessage("You need to select yes or no .");
             errorAlert = errorAlertBuilder.create();
             errorAlert.show();
