@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,12 +23,15 @@ public class UserInfoForm extends AppCompatActivity {
     private Button continueBtn;
     private AlertDialog.Builder errorAlertBuilder;
     private AlertDialog errorAlert;
+    private Client client;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info_form);
+
+        client = (Client)getIntent().getSerializableExtra("client");
 
         // set default stateSelected and driverType selected.
         stateSelected = "AL";

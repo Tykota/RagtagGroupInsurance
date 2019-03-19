@@ -30,6 +30,7 @@ public class DriverHouseholdForm extends AppCompatActivity {
     private RadioGroup genderRG, maritalRG;
     private AlertDialog.Builder errorAlertBuilder;
     private AlertDialog errorAlert;
+    private Client client;
 
 
     @Override
@@ -40,6 +41,8 @@ public class DriverHouseholdForm extends AppCompatActivity {
         // set default stateSelected and driverType selected.
         stateSelected = "AL";
         driverTypeSelected = "M - Motorcycle";
+
+        client = new Client(); // initialize client object
 
         // create alert dialog
         errorAlertBuilder = new AlertDialog.Builder(this);
@@ -220,9 +223,19 @@ public class DriverHouseholdForm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(validateInput()){
-                    // this will either send data to firebase or to next section of the form
+                    // Update client object
+                    client.setName(name);
+                    client.setDlnumber(driversLicenseNum);
+                    client.setSsn(ssn.substring(0, 3) + "-" + ssn.substring(3, 5) + "-" + ssn.substring(5));
+                    client.setGender(genderSelected);
+                    client.setDob(dateOfBirth);
+                    client.setDrivertype(driverTypeSelected);
+                    client.setState(stateSelected);
+                    client.setMarital(maritalSelected);
 
+                    // Start new activity
                     Intent intent = new Intent(getApplicationContext(), UserInfoForm.class);
+                    intent.putExtra("client", client);
                     startActivity(intent);
                 }
             }

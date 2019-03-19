@@ -1,6 +1,8 @@
 package com.capstone.insuranceapp;
 
-public class Client {
+import java.io.Serializable;
+
+public class Client implements Serializable {
     public String applicationNum;
     public String name;
     public String gender;
@@ -13,14 +15,15 @@ public class Client {
     public String dob;
     public String drivertype;
     public String phone;
- //   public Drivers[] drivers;
+    public String marital;
+//   public Drivers[] drivers;
  //   public Minors[] minors;
 
     public Client() {
         // Default
     }
     public Client(String applicationNum, String name, String gender, String ssn, String address, String city, String state, String zip,
-                  String dlnumber, String dob, String drivertype, String phone) { // , Drivers[] drivers, Minors[] minors
+                  String dlnumber, String dob, String drivertype, String phone, String marital) { // , Drivers[] drivers, Minors[] minors
         this.applicationNum = applicationNum;
         this.name = name;
         this.gender = gender;
@@ -33,10 +36,18 @@ public class Client {
         this.dob = dob;
         this.drivertype = drivertype;
         this.phone = phone;
+        this.marital = marital;
 //        this.drivers = drivers;
 //        this.minors = minors;
     }
 
+    public String getMarital() {
+        return marital;
+    }
+
+    public void setMarital(String marital) {
+        this.marital = marital;
+    }
 
     public String getName() {
         return name;
