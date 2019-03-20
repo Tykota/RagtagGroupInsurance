@@ -97,13 +97,7 @@ public class InsuranceHistoryForm extends AppCompatActivity {
             return false;
         }
 
-        else if(!prevClaimsRG.isSelected()){
-            errorAlertBuilder.setMessage("You need to select yes or no .");
-            errorAlert = errorAlertBuilder.create();
-            errorAlert.show();
-            resetErrorDialog();
-            return false;
-        }
+
 
         return true;
     }

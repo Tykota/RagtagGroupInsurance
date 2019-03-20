@@ -1,6 +1,17 @@
 package com.capstone.insuranceapp;
 
+import android.support.annotation.NonNull;
+
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Random;
 
 public class Client implements Serializable {
     public String applicationNum;
@@ -23,6 +34,7 @@ public class Client implements Serializable {
 //   public Minors[] minors;
 
     public Client() {
+        generateAppNum();
         // Default
     }
     public Client(String applicationNum, String name, String gender, String ssn, String address, String city, String state, String zip,
@@ -43,6 +55,12 @@ public class Client implements Serializable {
 //        this.drivers = drivers;
 //        this.minors = minors;
     }
+
+    public String getApplicationNum() {
+        return applicationNum;
+    }
+
+
 
     public String getMarital() {
         return marital;
@@ -168,11 +186,13 @@ public class Client implements Serializable {
     // wasnt sure where to put it, can move whereever
     public void generateAppNum(){
         Boolean newApp = false;
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        String genString = "";
 
         while(newApp){
-            String genString = getNewAppNum();
-            DocumentReference docRef = db.collection("clients").where("applicationNum", "==", genString);
-            if(docRef.exists()){
+            genString = getNewAppNum();
+            Query result = database.collection("clients").whereEqualTo("applicationNum", genString);
+            if(result != null){
                 // document exists, generate new string
             }
             else {
@@ -180,6 +200,8 @@ public class Client implements Serializable {
                 newApp = true;
             }
         }
+
+        this.applicationNum = genString;
 
     }
     protected String getNewAppNum(){

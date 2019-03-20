@@ -2,6 +2,7 @@ package com.capstone.insuranceapp;
 
 import android.content.Intent;
 import android.app.AlertDialog;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,12 +11,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+
 public class VehicleInformationForm extends AppCompatActivity {
 
     // Activity variables
     private TextView makeTV, modelTV, yearTV, vinTV;
     private String make, model, year, vin;
     private boolean carAdded = false;
+    private List<Vehicle> vehicles;
+
 
     // Popup variables
     private View popupDialogView;
@@ -31,6 +45,125 @@ public class VehicleInformationForm extends AppCompatActivity {
         setContentView(R.layout.activity_vehicle_information_form);
 
         client = (Client)getIntent().getSerializableExtra("client");
+        vehicles = new List<Vehicle>() {
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
+
+            @Override
+            public Iterator<Vehicle> iterator() {
+                return null;
+            }
+
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @Override
+            public <T> T[] toArray(T[] a) {
+                return null;
+            }
+
+            @Override
+            public boolean add(Vehicle vehicle) {
+                return false;
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(Collection<? extends Vehicle> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(int index, @NonNull Collection<? extends Vehicle> c) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+
+            @Override
+            public Vehicle get(int index) {
+                return null;
+            }
+
+            @Override
+            public Vehicle set(int index, Vehicle element) {
+                return null;
+            }
+
+            @Override
+            public void add(int index, Vehicle element) {
+
+            }
+
+            @Override
+            public Vehicle remove(int index) {
+                return null;
+            }
+
+            @Override
+            public int indexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public int lastIndexOf(Object o) {
+                return 0;
+            }
+
+            @NonNull
+            @Override
+            public ListIterator<Vehicle> listIterator() {
+                return null;
+            }
+
+            @NonNull
+            @Override
+            public ListIterator<Vehicle> listIterator(int index) {
+                return null;
+            }
+
+            @NonNull
+            @Override
+            public List<Vehicle> subList(int fromIndex, int toIndex) {
+                return null;
+            }
+        };
 
         // set up text views
         makeTV = findViewById(R.id.car_make);
@@ -105,7 +238,13 @@ public class VehicleInformationForm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (carAdded) {
-                    // this will either send data to firebase or to next section of the form
+                    // Send client to firestore
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    DocumentReference docRef = db.collection("clients").document();
+                    docRef.set(client);
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("vehicles", vehicles);
+                    docRef.set(map, SetOptions.merge());
 
                     Intent intent = new Intent(getApplicationContext(), ApplicationStatus.class);
                     startActivity(intent);
@@ -137,6 +276,7 @@ public class VehicleInformationForm extends AppCompatActivity {
     }
 
     private void updateTextFields() {
+        addVehicle(make, model, year, vin);
         make = make + "\n";
         makeTV.append(make);
         model = model + "\n";
@@ -145,5 +285,9 @@ public class VehicleInformationForm extends AppCompatActivity {
         yearTV.append(year);
         vin = vin + "\n";
         vinTV.append(vin);
+    }
+
+    public void addVehicle(String make, String model, String year, String vin){
+        vehicles.add(new Vehicle(make, model, year, vin));
     }
 }
