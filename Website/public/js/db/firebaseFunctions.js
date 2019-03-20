@@ -45,12 +45,15 @@ function searchByClient(){
 }
 
 //Update a certain field in the firebase
+//not finished
 function updateField(fieldName, value){
     var key = db.collection("clients");
+    let ref = db.collection("clients").where(criteria, "==", query).get().then((snapshot))
 
     var update = {};
     update['/clients/' + key] = clientData;
-    //update[]
+
+    return firebase.database().ref().update(update);
 }
 
 function search(query, criteria){
