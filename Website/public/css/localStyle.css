@@ -18,20 +18,24 @@
     background-color: #ff5722;
 }
 #search, #review, #claims {
-    background-color: white;
+
 }
 #search:hover, #review:hover, #claims:hover {
-    background-color: #e0e0e0;
+
 }
+#searchCriteria{
+    color:black;
+}
+
 #contentPane{
     display: none;
     position:fixed;
     height: auto;
-    background:#e0e0e0;
-    width:50%;
+    /*background:#e0e0e0;*/
+    width:100%;
     left:0px;
-    margin-left: 350px;
-    max-height: 80%;
+    /*margin-left: 350px;*/
+    max-height: 90%;
     overflow: auto;
     overflow-y: scroll;
 }
