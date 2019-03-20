@@ -18,34 +18,8 @@ $(document).ready(function(){
     $('#insuranceDiv').click(function(){
         $('ul.tabs').tabs("select", "insuranceDiv")
     });
+    $('.modal').modal();
   });
-/*
-$(window).on('load', function(){ 
-    $('.nav-tabs > li > a').click(function(event){
-        console.log("changing active tab");
-        event.preventDefault();//stop browser to take action for clicked anchor
-                    
-        //get displaying tab content jQuery selector
-        var active_tab_selector = $('.nav-tabs > li.active > a').attr('href');					
-                    
-        //find actived navigation and remove 'active' css
-        var actived_nav = $('.nav-tabs > li.active');
-        actived_nav.removeClass('active');
-                    
-        //add 'active' css into clicked navigation
-        $(this).parents('li').addClass('active');
-                    
-        //hide displaying tab content
-        $(active_tab_selector).removeClass('active');
-        $(active_tab_selector).addClass('hide');
-                    
-        //show target tab content
-        var target_tab_selector = $(this).attr('href');
-        $(target_tab_selector).removeClass('hide');
-        $(target_tab_selector).addClass('active');
-    });           
- });
- */
 
 function load(form){
     let cp = document.getElementById("contentPane");
@@ -167,44 +141,6 @@ function createTabs(data){
     let vehicleT = document.getElementById("vehicleTab");
     let insuranceT = document.getElementById("insuranceTab");
     var cp = document.getElementById("contentPane");
-    
-    //tabsEle.classList.add("blue-grey darken-1");
-    
-    // For each tab
-    /*
-    let item1 = document.createElement('li');
-    item1.setAttribute("class", "tab col s4");
-    let clientDiv = document.createElement('div');
-    clientDiv.setAttribute("id", "clientDiv");
-    clientDiv.setAttribute("class", "col s12");
-    let clientTab = document.createElement('a');
-    clientTab.setAttribute("id", "clientLink");
-    clientTab.setAttribute("class", "active white-text");
-    clientTab.setAttribute("href", "#clientDiv");
-    clientTab.innerText = "Home Information";
-
-    let item2 = document.createElement('li');
-    item2.setAttribute("class", "tab col s4");
-    let vehicleDiv = document.createElement('div');
-    vehicleDiv.setAttribute("id", "vehicleDiv");
-    vehicleDiv.setAttribute("class", "col s12");
-    let vehicleTab = document.createElement('a');
-    vehicleTab.setAttribute("class", "white-text");
-    vehicleTab.setAttribute("href", "#vehicleDiv");
-    vehicleTab.innerText = "Vehicles";
-
-    let item3 = document.createElement('li');
-    item3.setAttribute("class", "tab col s4");
-    var insuranceDiv = document.createElement('div');
-    insuranceDiv.setAttribute("id", "insuranceDiv");
-    insuranceDiv.setAttribute("class", "col s12");
-    let insuranceTab = document.createElement('a');
-    insuranceTab.setAttribute("class", "white-text");
-    insuranceTab.setAttribute("href", "#insuranceDiv");
-    insuranceTab.innerText = "Insurance Details";
-    */
-
-
    
     // Client Tab info
     let l1 = document.createElement('p');
@@ -226,7 +162,7 @@ function createTabs(data){
     vehicleT.innerHTML = '';
     for(i = 0; i < data["car-info"].length; i++){
         let div = document.createElement('div');
-        let header = document.createElement('h5');
+        let header = document.createElement('h6');
         header.innerText = "Vehicle " + (i+1) + ": ";
         let l1 = document.createElement('p');
         l1.innerText = ("Make: " + data["car-info"][i].make);
@@ -241,7 +177,13 @@ function createTabs(data){
     }
 
     // Insurance Tab info
-
+    insuranceT.innerHTML = '';
+    let ins1 = document.createElement('p');
+    ins1.innerText = ("Previous insurance company: " + data["insurance-info"]["prior-insurance"]);
+    let ins2 = document.createElement('p');
+    ins2.innerText = ("Vehicle incidents in the last five years: " + data["insurance-info"]["past-five-year-incidents"]);
+    insuranceT.appendChild(ins1);
+    insuranceT.appendChild(ins2);
     // Display
     clearCP();
     clientT.innerHTML = '';

@@ -31,6 +31,8 @@
     width:50%;
     left:0px;
     margin-left: 350px;
+    overflow: auto;
+    overflow-y: scroll;
 }
 #searchForm {
     display: none;
