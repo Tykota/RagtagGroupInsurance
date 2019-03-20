@@ -20,7 +20,7 @@ public class Client implements Serializable {
     public boolean prevAccident;
     public String prevInssurance;
 //   public Drivers[] drivers;
- //   public Minors[] minors;
+//   public Minors[] minors;
 
     public Client() {
         // Default
@@ -162,5 +162,35 @@ public class Client implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    // Heres the generate application number function
+    // wasnt sure where to put it, can move whereever
+    public void generateAppNum(){
+        Boolean newApp = false;
+
+        while(newApp){
+            String genString = getNewAppNum();
+            DocumentReference docRef = db.collection("clients").where("applicationNum", "==", genString);
+            if(docRef.exists()){
+                // document exists, generate new string
+            }
+            else {
+                // We have unique ApplicationNumber
+                newApp = true;
+            }
+        }
+
+    }
+    protected String getNewAppNum(){
+        String CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder randString = new StringBuilder();
+        Random rand = new Random();
+        while(randString.length() < 10){
+            int index = (int) (rand.nextFloat() * CHARS.length());
+            randString.append(CHARS.charAt(index));
+        }
+        String retString = randString.toString();
+        return retString;
     }
 }
