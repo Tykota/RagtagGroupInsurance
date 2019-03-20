@@ -31,6 +31,7 @@
     width:50%;
     left:0px;
     margin-left: 350px;
+    max-height: 80%;
     overflow: auto;
     overflow-y: scroll;
 }

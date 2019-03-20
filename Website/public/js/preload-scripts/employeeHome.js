@@ -27,6 +27,9 @@ function load(form){
     if(cp.firstChild != getForm){
         clearCP();
     }
+    if(getForm.id == "reviewForm"){
+        showApplications();
+    }
     cp.appendChild(getForm);
     cp.style.display = "block";
     getForm.style.display = "block";
@@ -254,6 +257,79 @@ function displayClient(data){
         propList.style.display = "block";
         document.getElementById("contentPane").appendChild(div);
         */
+}
+
+function showApplications(){
+    document.getElementById("openApps").innerHTML = '';
+    document.getElementById("closedApps").innerHTML = '';
+    document.getElementById("newApps").innerHTML = '';
+    searchApplications("submitted");
+    searchApplications("open");
+    searchApplications("closed");
+}
+
+function buildApplicationCard(data, type){
+    let name = "Name: " + data["name"];
+    let dob = "DOB: " + data["dob"];
+    let driverT = "Driver Type: " + data["drivertype"];
+    let appNumber = "Application Number: " + data["newAppNum"];
+
+
+     // create card element
+     let holder = document.createElement('div');
+     holder.setAttribute("class", "col s12");
+     let header = document.createElement('span');
+     let headerTxt = document.createTextNode(name);
+     header.appendChild(headerTxt);
+     let card = document.createElement("div");
+     card.setAttribute("class", "card small blue-grey darken-1");
+     card.setAttribute("id", "result");
+     let stack = document.createElement("div");
+     stack.setAttribute("class", "card-stacked");
+     let content = document.createElement("div");
+     content.setAttribute("class", "card-content white-text");
+     let action = document.createElement("div");
+     action.setAttribute("class", "card-action");
+     let p = document.createElement("p");
+     let ptxt = document.createTextNode(appNumber);
+     let p2 = document.createElement("p");
+     let p2txt = document.createTextNode(dob);
+     let p3 = document.createElement("p");
+     let p3txt = document.createTextNode(driverT);
+
+    let viewBtn = document.createElement('btn');
+    let btnTxt = document.createTextNode("View Application Details")
+    viewBtn.setAttribute("class", "wave-effect waves-light btn");
+    viewBtn.addEventListener("click", displayApplication.bind(null, data));
+    viewBtn.appendChild(btnTxt);
+
+    action.appendChild(viewBtn);
+    p.appendChild(ptxt);
+    p2.appendChild(p2txt);
+    p3.appendChild(p3txt);
+    
+    content.appendChild(header);
+
+    content.appendChild(p3);
+    content.appendChild(p2);
+    content.appendChild(p);
+    content.appendChild(action);
+    stack.appendChild(content);
+    card.appendChild(stack);
+    holder.appendChild(card);
+    if(type == "open"){
+        document.getElementById("openApps").appendChild(holder);
+    }
+    if(type == "submitted"){
+        document.getElementById("newApps").appendChild(holder);
+    }
+    if(type == "closed"){
+        document.getElementById("closedApps").appendChild(holder);
+    }
+}
+
+function displayApplication(data){
+
 }
 
 // Clears content pane for loading new content

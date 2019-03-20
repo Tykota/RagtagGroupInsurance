@@ -50,7 +50,7 @@ function updateField(fieldName, value){
 
     var update = {};
     update['/clients/' + key] = clientData;
-    update[]
+    //update[]
 }
 
 function search(query, criteria){
@@ -59,5 +59,14 @@ function search(query, criteria){
         snapshot.docs.forEach(doc => {
             displaySearchResults(doc.data());
         });
+    })
+}
+
+function searchApplications(type){
+    clearCP();
+    let ref = db.collection("clients").where("appStatus", "==", type).get().then((snapshot) => {
+        snapshot.docs.forEach(doc => {
+            buildApplicationCard(doc.data(), type);
+        })
     })
 }
