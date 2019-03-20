@@ -329,6 +329,86 @@ function buildApplicationCard(data, type){
 }
 
 function displayApplication(data){
+    clearCP();
+    let cp = document.getElementById("contentPane");
+    let header = document.createElement('h5');
+    header.classList.add("center-align");
+    let headerTxt = document.createTextNode("Application Details: ");
+    header.appendChild(headerTxt);
+    let l1 = document.createElement('p');
+    l1.innerText = ("Name: " + data["name"])
+    let l2 = document.createElement('p');
+    l2.innerText = ("Address: " + data["address"] + " " + data["city"] + " " + data["state"] + " , " + data["zip"]);
+    let l3 = document.createElement('p');
+    l3.innerText = ("Phone: " + data["phone"]);
+    let l4 = document.createElement('p');
+    l4.innerText = ("Driver's License #: " + data["dlnumber"]);
+    let l5 = document.createElement('p');
+    l5.innerText = ("Date of birth: " + data["dob"]);
+    let l6 = document.createElement('p');
+    l6.innerText = ("License type: " + data["drivertype"]);
+    let l7 = document.createElement('p');
+    l7.innerText = ("Social Security Number: " + data["ssn"]);
+    let l8 = document.createElement('p');
+    l8.innerText = ("Application Number: " + data["newAppNum"]);
+    let l9 = document.createElement('p');
+    l9.innerText = ("Application Status: " + data["appStatus"]);
+
+    cp.appendChild(header);
+    cp.appendChild(l8);
+    cp.appendChild(l9);
+    cp.appendChild(l1);
+    cp.appendChild(l2);
+    cp.appendChild(l3);
+    cp.appendChild(l4);
+    cp.appendChild(l5);
+    cp.appendChild(l6);
+    cp.appendChild(l7);
+
+    let status = data["appStatus"];
+    if(status == "submitted"){
+        let openBtn = document.createElement('btn');
+        let btnTxt = document.createTextNode("Open Application");
+        openBtn.setAttribute("id", "openApplicationBtn");
+        openBtn.setAttribute("class", "center-align wave-effect waves-light btn");
+        openBtn.addEventListener("click", openApplication.bind(null, data));
+        openBtn.appendChild(btnTxt);
+        cp.appendChild(openBtn);
+    }
+    else if(status == "open"){
+        let acceptBtn = document.createElement('btn');
+        let btnTxt = document.createTextNode("Accept New Client");
+        acceptBtn.setAttribute("id", "openApplicationBtn");
+        acceptBtn.setAttribute("class", "center-align wave-effect waves-light btn");
+        acceptBtn.addEventListener("click", formatNewClient.bind(null, data));
+        acceptBtn.appendChild(btnTxt);
+        cp.appendChild(acceptBtn);
+
+        let rejectBtn = document.createElement('btn');
+        let rejectTxt = document.createTextNode("Reject Application");
+        rejectBtn.setAttribute("id", "openApplicationBtn");
+        rejectBtn.setAttribute("class", "center-align wave-effect waves-light btn");
+        rejectBtn.addEventListener("click", rejectApplication.bind(null, data));
+        rejectBtn.appendChild(rejectTxt);
+        cp.appendChild(rejectBtn);
+    }
+
+
+    
+    
+}
+
+function openApplication(data) {
+    //var appRef = db.collection("clients").where("newAppNum", "==", data["newAppNum"]).doc();
+    grabApplication(data.newAppNum, "open");
+}
+
+function rejectApplication(data){
+    grabApplication(data.newAppNum, "closed");
+}
+
+function formatNewClient(data){
+    console.log("Format new client data here")
 
 }
 
