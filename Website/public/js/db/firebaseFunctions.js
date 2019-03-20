@@ -70,3 +70,26 @@ function searchApplications(type){
         })
     })
 }
+
+function grabApplication(appNumber, status){
+    let ref = db.collection("clients").where("newAppNum", "==", appNumber).get().then((snapshot) => {
+        snapshot.docs.forEach(doc => {
+            console.log(doc.id);
+            updateApplication(doc.id, status);
+        });
+    })
+}
+
+function updateApplication(id, status){
+    var appRef = db.collection("clients").doc(id);
+    return appRef.update({
+        appStatus: status 
+    })
+    .then(function() {
+        console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+}

@@ -35,6 +35,11 @@
     overflow: auto;
     overflow-y: scroll;
 }
+#openApplicationBtn{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
 #searchForm {
     display: none;
 }
