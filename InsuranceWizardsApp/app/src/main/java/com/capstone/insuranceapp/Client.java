@@ -60,7 +60,9 @@ public class Client implements Serializable {
         return applicationNum;
     }
 
-
+    public void setApplicationNum(String applicationNum) {
+        this.applicationNum = applicationNum;
+    }
 
     public String getMarital() {
         return marital;

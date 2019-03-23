@@ -15,6 +15,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,7 +30,7 @@ public class VehicleInformationForm extends AppCompatActivity {
     private TextView makeTV, modelTV, yearTV, vinTV;
     private String make, model, year, vin;
     private boolean carAdded = false;
-    private List<Vehicle> vehicles;
+    private List<Object> vehicles;
 
 
     // Popup variables
@@ -45,126 +47,7 @@ public class VehicleInformationForm extends AppCompatActivity {
         setContentView(R.layout.activity_vehicle_information_form);
 
         client = (Client)getIntent().getSerializableExtra("client");
-        vehicles = new List<Vehicle>() {
-            @Override
-            public int size() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean contains(Object o) {
-                return false;
-            }
-
-            @Override
-            public Iterator<Vehicle> iterator() {
-                return null;
-            }
-
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @Override
-            public <T> T[] toArray(T[] a) {
-                return null;
-            }
-
-            @Override
-            public boolean add(Vehicle vehicle) {
-                return false;
-            }
-
-            @Override
-            public boolean remove(Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(Collection<? extends Vehicle> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(int index, @NonNull Collection<? extends Vehicle> c) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public void clear() {
-
-            }
-
-            @Override
-            public Vehicle get(int index) {
-                return null;
-            }
-
-            @Override
-            public Vehicle set(int index, Vehicle element) {
-                return null;
-            }
-
-            @Override
-            public void add(int index, Vehicle element) {
-
-            }
-
-            @Override
-            public Vehicle remove(int index) {
-                return null;
-            }
-
-            @Override
-            public int indexOf(Object o) {
-                return 0;
-            }
-
-            @Override
-            public int lastIndexOf(Object o) {
-                return 0;
-            }
-
-            @NonNull
-            @Override
-            public ListIterator<Vehicle> listIterator() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public ListIterator<Vehicle> listIterator(int index) {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public List<Vehicle> subList(int fromIndex, int toIndex) {
-                return null;
-            }
-        };
-
+        vehicles = new ArrayList<>();
         // set up text views
         makeTV = findViewById(R.id.car_make);
         modelTV = findViewById(R.id.car_model);
@@ -241,9 +124,10 @@ public class VehicleInformationForm extends AppCompatActivity {
                     // Send client to firestore
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     DocumentReference docRef = db.collection("clients").document();
+                    client.setApplicationNum(docRef.getId());
                     docRef.set(client);
                     Map<String, Object> map = new HashMap<>();
-                    map.put("vehicles", vehicles);
+                    map.put("vehicles", Arrays.asList(vehicles.toArray()));
                     docRef.set(map, SetOptions.merge());
 
                     Intent intent = new Intent(getApplicationContext(), ApplicationStatus.class);
@@ -288,6 +172,11 @@ public class VehicleInformationForm extends AppCompatActivity {
     }
 
     public void addVehicle(String make, String model, String year, String vin){
-        vehicles.add(new Vehicle(make, model, year, vin));
+        HashMap<String, String> car = new HashMap<>();
+        car.put("make", make);
+        car.put("model", model);
+        car.put("year", year);
+        car.put("vin", vin);
+        vehicles.add(car);
     }
 }
