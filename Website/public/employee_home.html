@@ -17,6 +17,8 @@
     <script src="js/db/firebaseIntializer.js"></script>
     <script src="js/db/firebaseFunctions.js"></script>
     <script src="js/preload-scripts/employeeHome.js"></script>
+    <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB47r-fWRUNN2WbyobuIObMPu2zbyn1AN0&callback=initMap"
+    type="text/javascript"></script>-->
 
 </head>
 
@@ -40,7 +42,7 @@
     </div>
 </nav>
 
-    <h3 class="center-align" style="margin-right:15%">Client Management</h3>
+    <h3 class="center-align">Client Management</h3>
     <div id="contentPane"></div>
   <!--    <ul style="width:800px; margin-top:10px; margin-left:10px" class="side-nav fixed">
             <div class="row">
@@ -125,10 +127,12 @@
         <div class="row">
             <div class="col s12 left-align">
                 <span class="flow-text">Open Claims</span>
+            
         </div>
         <div class="row">
             <div class="divider"></div>
         </div>
+        <div id="claimsList" class="col s12 left-align"></div>
     </div>
     <div id="clientTabs" class="row">
         <div class="col s12">
