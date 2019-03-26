@@ -422,3 +422,8 @@ function clearCP() {
         document.getElementById("body").appendChild(current);
     }
 }
+
+//Check claims for the user
+function checkClaims(){
+    
+}
