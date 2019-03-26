@@ -27,7 +27,7 @@ import java.util.Map;
 public class VehicleInformationForm extends AppCompatActivity {
 
     // Activity variables
-    private TextView makeTV, modelTV, yearTV, vinTV;
+    private TextView makeTV, modelTV, yearTV, vinTV, driverTV;
     private String make, model, year, vin;
     private boolean carAdded = false;
     private List<Object> vehicles;
@@ -35,7 +35,7 @@ public class VehicleInformationForm extends AppCompatActivity {
 
     // Popup variables
     private View popupDialogView;
-    private EditText makeET, modelET, yearET, vinET;
+    private EditText makeET, modelET, yearET, vinET, driverET;
     private Button saveBtn, cancelBtn;
     private AlertDialog.Builder popupBuilder;
     private AlertDialog popupDialog;
@@ -53,6 +53,7 @@ public class VehicleInformationForm extends AppCompatActivity {
         modelTV = findViewById(R.id.car_model);
         yearTV = findViewById(R.id.car_year);
         vinTV = findViewById(R.id.car_vin);
+        driverTV = findViewById(R.id.car_driver);
 
         // set up add vehicle button
         Button addVehicleBtn = findViewById(R.id.addVehicleBTN);
@@ -78,6 +79,7 @@ public class VehicleInformationForm extends AppCompatActivity {
                         model = modelET.getText().toString();
                         year = yearET.getText().toString();
                         vin = vinET.getText().toString();
+                        driver = driverET.getText().toString();
 
                         // validate input
                         AlertDialog.Builder errorAlertBuilder = new android.app.AlertDialog.Builder(VehicleInformationForm.this);
@@ -93,6 +95,8 @@ public class VehicleInformationForm extends AppCompatActivity {
                         } else if (year == null || year.equals("")) {
                             errorAlert.show();
                         } else if (vin == null || vin.equals("")) {
+                            errorAlert.show();
+                        } else if (driver == null || driver.equals("")) {
                             errorAlert.show();
                         } else {
                             // update text fields
@@ -124,6 +128,7 @@ public class VehicleInformationForm extends AppCompatActivity {
                     // Send client to firestore
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     DocumentReference docRef = db.collection("clients").document();
+                    client.setAppStatus("submitted");
                     client.setApplicationNum(docRef.getId());
                     docRef.set(client);
                     Map<String, Object> map = new HashMap<>();
@@ -153,6 +158,7 @@ public class VehicleInformationForm extends AppCompatActivity {
         modelET = popupDialogView.findViewById(R.id.model_input);
         yearET = popupDialogView.findViewById(R.id.year_input);
         vinET = popupDialogView.findViewById(R.id.vin_input);
+        driverET = popupDialogView.findViewById(R.id.driver_input);
 
         // set up buttons
         saveBtn = popupDialogView.findViewById(R.id.saveBtn);
@@ -160,7 +166,7 @@ public class VehicleInformationForm extends AppCompatActivity {
     }
 
     private void updateTextFields() {
-        addVehicle(make, model, year, vin);
+        addVehicle(make, model, year, vin, driver);
         make = make + "\n";
         makeTV.append(make);
         model = model + "\n";
@@ -169,14 +175,17 @@ public class VehicleInformationForm extends AppCompatActivity {
         yearTV.append(year);
         vin = vin + "\n";
         vinTV.append(vin);
+        driver = driver + "\n";
+        driverTV.append(driver);
     }
 
-    public void addVehicle(String make, String model, String year, String vin){
+    public void addVehicle(String make, String model, String year, String vin, String driver){
         HashMap<String, String> car = new HashMap<>();
         car.put("make", make);
         car.put("model", model);
         car.put("year", year);
         car.put("vin", vin);
+        car.put("driver", driver);
         vehicles.add(car);
     }
 }

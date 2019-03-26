@@ -29,16 +29,15 @@ public class Client implements Serializable {
     public String marital;
     public String email;
     public boolean prevAccident;
-    public String prevInssurance;
-//   public Drivers[] drivers;
-//   public Minors[] minors;
+    public String prevInsurance;
+    public String appStatus;
 
     public Client() {
         generateAppNum();
         // Default
     }
     public Client(String applicationNum, String name, String gender, String ssn, String address, String city, String state, String zip,
-                  String dlnumber, String dob, String drivertype, String phone, String marital) { // , Drivers[] drivers, Minors[] minors
+                  String dlnumber, String dob, String drivertype, String phone, String marital, String appStatus) { // , Drivers[] drivers, Minors[] minors
         this.applicationNum = applicationNum;
         this.name = name;
         this.gender = gender;
@@ -52,6 +51,7 @@ public class Client implements Serializable {
         this.drivertype = drivertype;
         this.phone = phone;
         this.marital = marital;
+        this.appStatus = appStatus;
 //        this.drivers = drivers;
 //        this.minors = minors;
     }
@@ -62,6 +62,10 @@ public class Client implements Serializable {
 
     public void setApplicationNum(String applicationNum) {
         this.applicationNum = applicationNum;
+    }
+
+    public void setAppStatus(String appStatus) {
+        this.appStatus = appStatus;
     }
 
     public String getMarital() {
@@ -80,12 +84,12 @@ public class Client implements Serializable {
         this.prevAccident = prevAccident;
     }
 
-    public String getPrevInssurance() {
-        return prevInssurance;
+    public String getPrevInsurance() {
+        return prevInsurance;
     }
 
-    public void setPrevInssurance(String prevInssurance) {
-        this.prevInssurance = prevInssurance;
+    public void setPrevInsurance(String prevInsurance) {
+        this.prevInsurance = prevInsurance;
     }
 
     public String getEmail() {
@@ -184,8 +188,11 @@ public class Client implements Serializable {
         this.phone = phone;
     }
 
+    // We will just use document ID as application number
+
     // Heres the generate application number function
     // wasnt sure where to put it, can move whereever
+    /*
     public void generateAppNum(){
         Boolean newApp = false;
         FirebaseFirestore database = FirebaseFirestore.getInstance();
@@ -217,4 +224,5 @@ public class Client implements Serializable {
         String retString = randString.toString();
         return retString;
     }
+    */
 }
