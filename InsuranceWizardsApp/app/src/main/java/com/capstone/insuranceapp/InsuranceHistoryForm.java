@@ -76,7 +76,7 @@ public class InsuranceHistoryForm extends AppCompatActivity {
                 if(validateInput()){
                     // update client
                     client.setPrevAccident(prevClaimsResponse);
-                    client.setPrevInssurance(priorInsuranceComp);
+                    client.setPrevInsurance(priorInsuranceComp);
 
                     // start next activity
                     Intent intent = new Intent(getApplicationContext(), VehicleInformationForm.class);
