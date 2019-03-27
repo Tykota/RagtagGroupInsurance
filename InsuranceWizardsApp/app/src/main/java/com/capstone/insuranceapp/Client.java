@@ -33,7 +33,7 @@ public class Client implements Serializable {
     public String appStatus;
 
     public Client() {
-        generateAppNum();
+       // generateAppNum();
         // Default
     }
     public Client(String applicationNum, String name, String gender, String ssn, String address, String city, String state, String zip,

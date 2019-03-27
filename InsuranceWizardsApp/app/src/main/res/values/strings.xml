@@ -66,6 +66,8 @@
     <string name="email_hint">Email</string>
     <string name="phone_num_field">Phone Number</string>
     <string name="submit">Submit</string>
+    <string name="driver_label">Driver</string>
+    <string name="driver_hint">Enter driver\'s name</string>
 
 
     <string-array name="state_codes">
