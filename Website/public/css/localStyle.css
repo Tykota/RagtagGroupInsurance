@@ -1,5 +1,3 @@
-
-
 #banner {
   text-align: center;
 }
@@ -29,10 +27,11 @@
 
 #contentPane{
     display: none;
-    position:fixed;
+    margin: auto;
+    /*position:fixed;*/
     height: auto;
-    /*background:#e0e0e0;*/
-    width:100%;
+    background:#e0e0e0;
+    width:70%;
     left:0px;
     /*margin-left: 350px;*/
     max-height: 90%;

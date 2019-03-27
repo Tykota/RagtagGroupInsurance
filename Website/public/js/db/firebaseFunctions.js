@@ -74,6 +74,16 @@ function searchApplications(type){
     })
 }
 
+function searchClaims(type){
+    clearCP();
+    let ref = db.collection("claims").where("claimStatus", "==", type).get().then((snapshot) => {
+        snapshot.docs.forEach(doc => {
+            buildClaimCard(doc.data(), type);
+        })
+    })
+}
+
+/*
 function grabApplication(appNumber, status){
     let ref = db.collection("clients").where("newAppNum", "==", appNumber).get().then((snapshot) => {
         snapshot.docs.forEach(doc => {
@@ -82,6 +92,7 @@ function grabApplication(appNumber, status){
         });
     })
 }
+*/
 
 function updateApplication(id, status){
     var appRef = db.collection("clients").doc(id);

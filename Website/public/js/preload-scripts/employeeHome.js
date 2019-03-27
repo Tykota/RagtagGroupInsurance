@@ -30,6 +30,9 @@ function load(form){
     if(getForm.id == "reviewForm"){
         showApplications();
     }
+    if(getForm.id == "claimForm"){
+        displayClaimsList();
+    }
     cp.appendChild(getForm);
     cp.style.display = "block";
     getForm.style.display = "block";
@@ -272,8 +275,7 @@ function buildApplicationCard(data, type){
     let name = "Name: " + data["name"];
     let dob = "DOB: " + data["dob"];
     let driverT = "Driver Type: " + data["drivertype"];
-    let appNumber = "Application Number: " + data["newAppNum"];
-
+    let appNumber = "Application Number: " + data["applicationNum"];
 
      // create card element
      let holder = document.createElement('div');
@@ -350,7 +352,7 @@ function displayApplication(data){
     let l7 = document.createElement('p');
     l7.innerText = ("Social Security Number: " + data["ssn"]);
     let l8 = document.createElement('p');
-    l8.innerText = ("Application Number: " + data["newAppNum"]);
+    l8.innerText = ("Application Number: " + data["applicationNumber"]);
     let l9 = document.createElement('p');
     l9.innerText = ("Application Status: " + data["appStatus"]);
 
@@ -392,24 +394,93 @@ function displayApplication(data){
         rejectBtn.appendChild(rejectTxt);
         cp.appendChild(rejectBtn);
     }
-
-
-    
-    
 }
 
 function openApplication(data) {
-    //var appRef = db.collection("clients").where("newAppNum", "==", data["newAppNum"]).doc();
-    grabApplication(data.newAppNum, "open");
+    //var appRef = db.collection("clients").where("applicationNumber", "==", data["applicationNumber"]).doc();
+    updateApplication(data.applicationNumber, "open");
 }
 
 function rejectApplication(data){
-    grabApplication(data.newAppNum, "closed");
+    updateApplication(data.applicationNumber, "closed");
 }
 
 function formatNewClient(data){
     console.log("Format new client data here")
 
+}
+
+function displayClaimsList(){
+    document.getElementById("claimsList").innerHTML = '';
+    searchClaims("submitted");
+}
+
+function buildClaimCard(data, type){
+    let name = "Name: " + data["name"];
+    let polnum = "Policy Number: " + data["policyNumber"];
+    let claimNum = "Claim Number: " + data["claimNumber"];
+    /*
+    if(typeof data["location"] == "object"){
+        var location = "Location: " + 
+        data["location"]["latitude"] + '\xB0' + " Latitude " +
+        data["location"]["longitude"] + '\xB0' + " Longitude";
+    }
+    else {
+        var location = "Location: " + data["location"];
+    }
+    */
+    //let location = "Location: " + data["location"];
+    
+
+    let date = "Date and Time: " + toDateTime(data["date"]["seconds"]);
+
+    let holder = document.createElement('div');
+    holder.setAttribute("class", "col s12");
+    let header = document.createElement('span');
+    let headerTxt = document.createTextNode(claimNum);
+    header.appendChild(headerTxt);
+    let card = document.createElement("div");
+    card.setAttribute("class", "card small blue-grey darken-1");
+    card.setAttribute("id", "result");
+    let stack = document.createElement("div");
+    stack.setAttribute("class", "card-stacked");
+    let content = document.createElement("div");
+    content.setAttribute("class", "card-content white-text");
+    let action = document.createElement("div");
+    action.setAttribute("class", "card-action");
+    let p = document.createElement("p");
+    let ptxt = document.createTextNode(name);
+    let p2 = document.createElement("p");
+    let p2txt = document.createTextNode(polnum);
+    let p3 = document.createElement("p");
+    let p3txt = document.createTextNode(date);
+
+    let viewBtn = document.createElement('btn');
+    let btnTxt = document.createTextNode("View Claim Details")
+    viewBtn.setAttribute("class", "wave-effect waves-light btn");
+    viewBtn.addEventListener("click", displayClaim.bind(null, data));
+    viewBtn.appendChild(btnTxt);
+
+    action.appendChild(viewBtn);
+    p.appendChild(ptxt);
+    p2.appendChild(p2txt);
+    p3.appendChild(p3txt);
+    
+    content.appendChild(header);
+    content.appendChild(p3);
+    content.appendChild(p2);
+    content.appendChild(p);
+    content.appendChild(action);
+    stack.appendChild(content);
+    card.appendChild(stack);
+    holder.appendChild(card);
+
+    document.getElementById("claimsList").appendChild(holder);
+}
+
+function displayClaim(data){
+    console.log("Displaying claim: ");
+    console.log(data);
 }
 
 // Clears content pane for loading new content
@@ -428,4 +499,9 @@ function checkClaims(){
     //collection called claims with policy number as key
 
     
+}
+function toDateTime(secs) {
+    var t = new Date(1970, 0, 1); // Epoch
+    t.setSeconds(secs);
+    return t;
 }
