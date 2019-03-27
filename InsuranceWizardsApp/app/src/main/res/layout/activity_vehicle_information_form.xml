@@ -45,18 +45,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="1"
-                    android:layout_marginEnd="30dp"
-                    android:text="@string/make_label"
-                    android:textSize="20sp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/driver_label"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
+
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginEnd="20dp"
+                android:text="@string/make_label"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginEnd="20dp"
                     android:text="@string/model_label"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -65,7 +75,7 @@
                     android:layout_column="3"
                     android:layout_marginEnd="20dp"
                     android:text="@string/year_label"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -73,18 +83,27 @@
                     android:layout_height="wrap_content"
                     android:layout_column="4"
                     android:text="@string/vin_label"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
             </TableRow>
 
             <TableRow>
                 <TextView
+                    android:id="@+id/car_driver"
+                    android:text=""
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:textSize="16sp"
+                    android:layout_column="1" />
+
+                <TextView
                     android:id="@+id/car_make"
                     android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:textSize="18sp"
+                    android:layout_marginEnd="20dp"
+                    android:textSize="16sp"
                     android:layout_column="1" />
 
                 <TextView
@@ -92,8 +111,8 @@
                     android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:textSize="18sp"
+                    android:layout_marginEnd="20dp"
+                    android:textSize="16sp"
                     android:layout_column="2" />
 
                 <TextView
@@ -102,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:layout_column="3" />
 
                 <TextView
@@ -110,7 +129,8 @@
                     android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMaxTextSize="16sp"
                     android:layout_column="4" />
             </TableRow>
 

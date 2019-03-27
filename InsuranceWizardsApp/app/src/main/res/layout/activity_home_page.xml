@@ -41,7 +41,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
+            android:layout_marginBottom="12dp"
             android:text="@string/manage_policies_btn"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/camera_btn"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="Camera"
             android:textColor="@android:color/white" />
 
     </LinearLayout>

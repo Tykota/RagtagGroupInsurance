@@ -1,7 +1,7 @@
 <resources>
-    <string name ="edit_car">Edit</string>
-    <string name ="add_car">Add a Car</string>
-    <string name = "remove_car">Delete</string>
+    <string name="edit_car">Edit</string>
+    <string name="add_car">Add a Car</string>
+    <string name="remove_car">Delete</string>
     <string name="app_name">Wizard Insurance</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
@@ -66,6 +66,9 @@
     <string name="email_hint">Email</string>
     <string name="phone_num_field">Phone Number</string>
     <string name="submit">Submit</string>
+    <string name="driver_label">Driver</string>
+    <string name="driver_hint">Enter driver\'s name</string>
+    <string name="take_picture_btn">Take Picture</string>
 
 
     <string-array name="state_codes">

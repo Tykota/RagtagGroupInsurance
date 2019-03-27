@@ -28,7 +28,7 @@ public class VehicleInformationForm extends AppCompatActivity {
 
     // Activity variables
     private TextView makeTV, modelTV, yearTV, vinTV, driverTV;
-    private String make, model, year, vin;
+    private String make, model, year, vin, driver;
     private boolean carAdded = false;
     private List<Object> vehicles;
 

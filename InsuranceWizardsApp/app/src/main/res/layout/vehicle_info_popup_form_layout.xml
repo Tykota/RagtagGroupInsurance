@@ -13,6 +13,25 @@
 
         <TextView
             android:gravity="end"
+            android:text="@string/driver_label"/>
+
+
+        <EditText
+            android:id="@+id/driver_input"
+            android:inputType="textPersonName"
+            android:text=""
+            android:hint="@string/driver_hint"
+            android:imeOptions="actionDone"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:gravity="end"
             android:text="@string/make_label" />
 
         <EditText
