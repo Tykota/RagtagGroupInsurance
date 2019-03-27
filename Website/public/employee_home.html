@@ -19,7 +19,7 @@
     <script src="js/preload-scripts/employeeHome.js"></script>
 </head>
 
-<body id="body" class ="contianer" style="background: lightblue;">
+<body id="body" class ="contianer" style="background: #abd7ff;">
 <nav class ="indigo" style="margin-bottom: 0px;">
     <div style="padding-left: 1%" class = "nav-wrapper">
         <ul >
@@ -27,6 +27,7 @@
            <li><a id="search" onclick="load('searchForm')" class="unselectable" ><span>Search Clients</span></a></li>
            <li><a id="review" onclick="load('reviewForm')" class="unselectable"><span>Review Applications</span></a></li>
            <li><a id="claims" onclick="load('claimForm')" class="unselectable"><span>Manage Claims</span></a></li>
+           <li></li>
         </ul>
 
         <div class="right-align" style="margin-right: 10px" id="signOut">
@@ -34,7 +35,8 @@
         </div>
     </div>
 </nav>
-    <h3 class="center-align">Client Management</h3>
+    
+    <h4 class="center-align">Client Management</h4>
     <div id="contentPane"></div>
     <div id="searchForm">
         <div class="row">
@@ -94,7 +96,7 @@
         <div class="row">
             <div class="col s12 left-align">
                 <span class="flow-text">Open Claims</span>
-            
+
         </div>
         <div class="row">
             <div class="divider"></div>
@@ -122,7 +124,7 @@
             </ul>
         </div>
         <div id="claimInfoTab" class="col s12"></div>
-        <div id="streetViewTab" style="text-align: center" class="col s12"> 
+        <div id="streetViewTab" style="text-align: center" class="col s12">
             <div style="height:100%; width:100%">
                 <div class="map" id="map-canvas"></div>
                 <div class="map" id="pano"></div>
@@ -130,7 +132,7 @@
         </div>
         <div id="photosTab" class="col s12"></div>
     </div>
-   
+
 </body>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMkNUYWxC3UipKFiNGDKX_8NuzN-0YZRk&callback=initMap"
     type="text/javascript"></script>

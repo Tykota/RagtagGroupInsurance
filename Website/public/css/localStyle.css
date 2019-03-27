@@ -1,3 +1,5 @@
+
+
 #banner {
   text-align: center;
 }
@@ -27,14 +29,13 @@
 
 #contentPane{
     display: none;
-    margin: auto;
-    /*position:fixed;*/
+    position:fixed;
     height: auto;
-    background:#e0e0e0;
-    width:70%;
-    left:0px;
-    /*margin-left: 350px;*/
-    max-height: 90%;
+    text-align: center;
+    /*background:#e0e0e0;*/
+    width:75%;
+    left: 15%;
+    max-height: 70%;
     overflow: auto;
     overflow-y: scroll;
 }
@@ -60,14 +61,6 @@
   }
 #clientTabs {
     display: none;
-}
-#claimTabs {
-    display: none;
-}
-#map-canvas, #pano {
-    margin: auto;
-    width: 600px;
-    height: 600px;
 }
 .divider{
     background-color: black;
