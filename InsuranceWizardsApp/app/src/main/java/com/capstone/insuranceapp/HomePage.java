@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class HomePage extends AppCompatActivity {
-    private Button manageBtn;
+    private Button manageBtn, cameraBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +26,14 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-
+        cameraBtn = findViewById(R.id.camera_btn);
+        cameraBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Camera.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
