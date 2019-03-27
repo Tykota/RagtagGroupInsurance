@@ -17,19 +17,12 @@
     <script src="js/db/firebaseIntializer.js"></script>
     <script src="js/db/firebaseFunctions.js"></script>
     <script src="js/preload-scripts/employeeHome.js"></script>
-    <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB47r-fWRUNN2WbyobuIObMPu2zbyn1AN0&callback=initMap"
-    type="text/javascript"></script>-->
-
 </head>
 
 <body id="body" class ="contianer" style="background: lightblue;">
-
 <nav class ="indigo" style="margin-bottom: 0px;">
     <div style="padding-left: 1%" class = "nav-wrapper">
-
-
         <ul >
-
            <li></li>
            <li><a id="search" onclick="load('searchForm')" class="unselectable" ><span>Search Clients</span></a></li>
            <li><a id="review" onclick="load('reviewForm')" class="unselectable"><span>Review Applications</span></a></li>
@@ -41,34 +34,8 @@
         </div>
     </div>
 </nav>
-
     <h3 class="center-align">Client Management</h3>
     <div id="contentPane"></div>
-  <!--    <ul style="width:800px; margin-top:10px; margin-left:10px" class="side-nav fixed">
-            <div class="row">
-                <li>
-                        <div id="search" class="col s5 left-align" onclick="load('searchForm')">
-                            <h5 >Search Clients</h5>
-                        </div>
-                </li>
-                <div id="divide1" class="col s11"></div>
-                <div id="contentPane"></div>
-                <li>
-                        <div id="review" class="col s5 left-align" onclick="load('reviewForm')">
-                            <h5 class="unselectable">Review Applications</h5>
-                        </div>
-                </li>
-                <div class="col s11"></div>
-                <li>
-                        <div class="row">
-                            <div id="claims" class="col s5 left-align" onclick="load('claimForm')">
-                                <h5 class="unselectable">Manage Claims</h5>
-                            </div>
-                        </div>
-                </li>
-            </div>
-        </ul> --->
-    </div>
     <div id="searchForm">
         <div class="row">
             <div class="col s5 right-align" style="margin-top: 15px;">
@@ -146,5 +113,25 @@
         <div id="vehicleTab" class="col s12"></div>
         <div id="insuranceTab" class="col s12"></div>
     </div>
+    <div id="claimTabs" class="row">
+        <div class="col s12">
+            <ul class="tabs blue-grey darken-1">
+            <li class="tab col s4"><a class="active white-text" href="#claimInfoTab">Claim Information</a></li>
+            <li class="tab col s4"><a class="white-text" href="#streetViewTab">Incidient Location</a></li>
+            <li class="tab col s4"><a class="white-text" href="#photosTab">Client Photos</a></li>
+            </ul>
+        </div>
+        <div id="claimInfoTab" class="col s12"></div>
+        <div id="streetViewTab" style="text-align: center" class="col s12"> 
+            <div style="height:100%; width:100%">
+                <div class="map" id="map-canvas"></div>
+                <div class="map" id="pano"></div>
+            </div>
+        </div>
+        <div id="photosTab" class="col s12"></div>
+    </div>
+   
 </body>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMkNUYWxC3UipKFiNGDKX_8NuzN-0YZRk&callback=initMap"
+    type="text/javascript"></script>
 </html>

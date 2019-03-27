@@ -20,7 +20,7 @@ $(document).ready(function(){
     });
     $('.modal').modal();
   });
-
+ 
 function load(form){
     let cp = document.getElementById("contentPane");
     let getForm = document.getElementById(form);
@@ -152,7 +152,11 @@ function createTabs(data){
     let l1 = document.createElement('p');
     l1.innerText = ("Name: " + data["home-info"].name)
     let l2 = document.createElement('p');
-    l2.innerText = ("Address: " +data["home-info"].address + " " + data["home-info"].city + " " + data["home-info"].state + " , " + data["home-info"].zip);
+    l2.innerText = ("Address: " 
+                    + data["home-info"].address + " " 
+                    + data["home-info"].city + " " 
+                    + data["home-info"].state 
+                    + " , " + data["home-info"].zip);
     let l3 = document.createElement('p');
     l3.innerText = ("Phone: " + data["home-info"]["home-phone"]);
     let l4 = document.createElement('p');
@@ -205,6 +209,7 @@ function createTabs(data){
     cp.appendChild(tabsEle);
     tabsEle.style.display = "block";
     
+    /*
     item1.appendChild(clientTab);
     item2.appendChild(vehicleTab);
     item3.appendChild(insuranceTab);
@@ -217,49 +222,17 @@ function createTabs(data){
     divTabs.appendChild(vehicleDiv);
     divTabs.appendChild(insuranceDiv);
     
-    /*contain.appendChild(clientDiv);
+    /*
+    contain.appendChild(clientDiv);
     contain.appendChild(vehicleDiv);
     contain.appendChild(insuranceDiv);
     divTabs.appendChild(contain);
     */
-    cp.appendChild(divTabs);
+    //cp.appendChild(divTabs);
 }
 
 function displayClient(data){
     createTabs(data);
-    /*
-    console.log(data);
-        //name
-        createItem("Name: " + data["home-info"].name);
-        //address
-        createItem("Address: " +data["home-info"].address + " " + data["home-info"].city + " " + data["home-info"].state + " , " + data["home-info"].zip);
-        //phone number
-        createItem("Phone: " + data["home-info"]["home-phone"]);
-        //dl num
-        createItem("Driver's License #: " + data["home-info"]["dl-number"]);
-        //dob
-        createItem("Date of birth: " + data["home-info"].dob);
-        //driver-type
-        createItem("License type: " + data["home-info"]["driver-type"])
-        //ssn
-        createItem("Social Security Number: " + data["home-info"].ssn)
-        
-        //list of cars
-        createItem("Vehicle Information");
-        for(i = 0; i < data["car-info"].length; i++){
-            createItem("Make : " + data["car-info"][i].make);
-            createItem("Model : " + data["car-info"][i].model);
-            createItem("VIN : " + data["car-info"][i].vin);
-        }
-        clearCP();
-        let propList = document.getElementById("propertyList");
-        
-        let div = document.createElement('div');
-        div.setAttribute("class", "row");
-        div.appendChild(propList);
-        propList.style.display = "block";
-        document.getElementById("contentPane").appendChild(div);
-        */
 }
 
 function showApplications(){
@@ -479,8 +452,82 @@ function buildClaimCard(data, type){
 }
 
 function displayClaim(data){
-    console.log("Displaying claim: ");
-    console.log(data);
+    let tabEle = document.getElementById("claimTabs");
+    let claimT = document.getElementById("claimInfoTab");
+    let streetT = document.getElementById("streetViewTab");
+    let photoT = document.getElementById("photosTab");
+    var cp = document.getElementById("contentPane");
+
+    // Claim info tab
+    let l1 = document.createElement('p');
+    l1.innerText = ("Claim Number: " + data["claimNumber"])
+    let l2 = document.createElement('p');
+    l2.innerText = ("Claim Status: " + data["claimStatus"]);
+    let l3 = document.createElement('p');
+    l3.innerText = ("Name: " + data["name"]);
+    let l4 = document.createElement('p');
+    l4.innerText = ("Date Submitted: " + toDateTime(data["date"]["seconds"]));
+    let l5 = document.createElement('p');
+    if(typeof data["location"] == "object"){
+        var location = "Location: " + 
+        data["location"]["latitude"] + '\xB0' + " Latitude " +
+        data["location"]["longitude"] + '\xB0' + " Longitude";
+    }
+    else {
+        var location = "Location: " + data["location"];
+    }
+    l5.innerText = (location);
+    let l6 = document.createElement('p');
+    l6.innerText = ("Description: " + data["description"]);
+    let l7 = document.createElement('p');
+    l7.innerText = ("Policy Number: " + data["policyNumber"]);
+
+    // Street View
+    if(typeof data["location"] == "object"){
+        var local = {lat: data["location"]["latitude"], lng: data["location"]["longitude"]};
+    }
+    else {
+        console.log("get lat/lng of street address")
+    }
+    claimT.innerHTML = '';
+    claimT.appendChild(l1);
+    claimT.appendChild(l2);
+    claimT.appendChild(l3);
+    claimT.appendChild(l4);
+    claimT.appendChild(l5);
+    claimT.appendChild(l6);
+    claimT.appendChild(l7);
+
+    let toggleBtn = document.createElement('btn');
+    let btnTxt = document.createTextNode("Toggle Map View")
+    toggleBtn.setAttribute("class", "wave-effect waves-light btn");
+    toggleBtn.style.marginTop = "15px";
+    toggleBtn.classList.add("span");
+    toggleBtn.addEventListener("click", toggleMapView.bind(null));
+    toggleBtn.appendChild(btnTxt);
+    streetT.appendChild(toggleBtn);
+
+    
+    // Display info
+    clearCP();
+    initializeMap(data["location"]);
+    let mapEle = document.getElementById("map-canvas");
+    let panoEle = document.getElementById("pano");
+    streetT.appendChild(mapEle);
+    streetT.appendChild(panoEle);
+    //streetT.appendChild(panoEle);
+    cp.appendChild(tabEle);
+    tabEle.style.display = "block";
+    mapEle.style.display = "block";
+    //panoEle.style.display = "block";
+    //panoEle.style.visibility = "hidden";
+    //google.maps.event.addDomListener(window, "load", initializeMap);
+    
+    //panoEle.style.display = "block";
+    //onsole.log("Displaying claim: ");
+    //console.log(data);
+    
+    
 }
 
 // Clears content pane for loading new content
@@ -492,14 +539,61 @@ function clearCP() {
         cp.removeChild(cp.firstElementChild);
         document.getElementById("body").appendChild(current);
     }
+    document.getElementById("map-canvas").style.display = "none";
+    document.getElementById("pano").style.display = "none";
 }
 
-//Check claims for the user
+//Check claims for the client
 function checkClaims(){
     
 }
+
+function toggleMapView(){
+    var tabEle = document.getElementById("streetViewTab");
+    var mapEle = document.getElementById("map-canvas");
+    var panoEle = document.getElementById("pano");
+    if(mapEle.style.display == "block"){
+        mapEle.style.display = "none";
+
+        panoEle.style.display = "block";
+        //panoEle.style.visibility = "visible";
+        
+        tabEle.appendChild(panoEle);
+    }
+    else {
+        panoEle.style.display = "none";
+        mapEle.style.display = "block";
+        tabEle.appendChild(mapEle);
+    }
+    
+}
+
 function toDateTime(secs) {
-    var t = new Date(1970, 0, 1); // Epoch
+    var t = new Date(1970, 0, 1);
     t.setSeconds(secs);
     return t;
+}
+
+function initMap(){
+    //console.log("google maps initialized");
+}
+
+function initializeMap(location){
+    var lat = location["latitude"];
+    var lng = location["longitude"];
+    var loca = { lat, lng }
+    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+        center: loca,
+        zoom: 18
+    });
+    var panorama = new google.maps.StreetViewPanorama(
+        document.getElementById('pano'), {
+            position: loca,
+            pov: {
+            heading: 34,
+            pitch: 10
+            },
+            visible: true
+        });
+    map.setStreetView(panorama);
 }

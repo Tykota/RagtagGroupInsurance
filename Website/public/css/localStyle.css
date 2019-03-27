@@ -61,6 +61,14 @@
 #clientTabs {
     display: none;
 }
+#claimTabs {
+    display: none;
+}
+#map-canvas, #pano {
+    margin: auto;
+    width: 600px;
+    height: 600px;
+}
 .divider{
     background-color: black;
 }
