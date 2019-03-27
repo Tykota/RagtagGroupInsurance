@@ -425,5 +425,7 @@ function clearCP() {
 
 //Check claims for the user
 function checkClaims(){
+    //collection called claims with policy number as key
+
     
 }
