@@ -1,37 +1,30 @@
 package com.capstone.insuranceapp;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraDevice;
-import android.hardware.camera2.CaptureRequest;
-import android.hardware.camera2.TotalCaptureResult;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class Camera extends AppCompatActivity {
+public class SubmitClaim extends AppCompatActivity {
 
     private Button takePicBtn;
     private ImageView imageView;
+    private TextView textView;
     private CameraDevice cameraDevice;
     private CameraCaptureSession cameraCaptureSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera);
-
-       // imageView = findViewById(R.id.image);
-
+        setContentView(R.layout.activity_submit_claim);
 
         takePicBtn = findViewById(R.id.btn_takepicture);
         takePicBtn.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +33,8 @@ public class Camera extends AppCompatActivity {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if(takePictureIntent.resolveActivity(getPackageManager())!=null)
                     startActivityForResult(takePictureIntent, 1);
+                Toast.makeText(SubmitClaim.this, "Picture saved", Toast.LENGTH_SHORT);
+
             }
         });
 
@@ -50,6 +45,9 @@ public class Camera extends AppCompatActivity {
         if(requestCode == 1 && resultCode == RESULT_OK){
             // save image here
             Log.d("returned", "hello darkness");
+            textView.setText("Picture saved!");
+            Toast.makeText(SubmitClaim.this, "Picture saved", Toast.LENGTH_SHORT);
+
         }
     }
 

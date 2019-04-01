@@ -69,6 +69,11 @@
     <string name="driver_label">Driver</string>
     <string name="driver_hint">Enter driver\'s name</string>
     <string name="take_picture_btn">Take Picture</string>
+    <string name="take_video_btn">Take Video</string>
+    <string name="date_of_accident">Date of Accident:</string>
+    <string name="time_of_accident">Time of accident:</string>
+    <string name="describe_accident">Use the space below to describe the accident.</string>
+    <string name="submit_claim_btn">Submit a Claim</string>
 
 
     <string-array name="state_codes">

@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Camera"></activity>
+        <activity android:name=".SubmitClaim"></activity>
         <activity android:name=".AddCar" />
         <activity android:name=".ApplicationStatus" />
         <activity android:name=".UserInfoForm" />
