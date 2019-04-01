@@ -4,6 +4,10 @@ public class Claim {
     private String claimNumber, claimStatus, date, description, name, policyNum;
     private String[] location;
 
+    public Claim(){
+
+    }
+
     public Claim(String claimNumber, String claimStatus, String date, String description, String name, String policyNum, String[] location) {
         this.claimNumber = claimNumber;
         this.claimStatus = claimStatus;
