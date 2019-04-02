@@ -1,11 +1,16 @@
 package com.capstone.insuranceapp;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraDevice;
+import android.location.Location;
+import android.location.LocationManager;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,7 +37,7 @@ public class SubmitClaim extends AppCompatActivity {
     private Button takePicBtn, submitBtn, takeVidBtn;
     private Claim claim;
     private EditText nameET, descriptET, dateOfAccidentET, timeOfAccidentET;
-    private String description, date, time, name;
+    private String description, date, time, name, location;
     private DatePickerDialog datePicker;
     private AlertDialog.Builder errorAlertBuilder;
     private AlertDialog errorAlert;
@@ -147,6 +152,8 @@ public class SubmitClaim extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(validateInput()){
+                    location = getLocation();
+                    Log.d("HELLLO ITS MEEEEEEEEEE", "onClick: location is " + location + ".");
                     // Update client object
                     claim.setName(name);
 
@@ -162,6 +169,19 @@ public class SubmitClaim extends AppCompatActivity {
             }
         });
 
+    }
+
+    public String getLocation(){
+        Log.d("YOOOOO", "getLocation: permission is " + checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION));
+        if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            Log.d("BROOOOO", "getLocation: in if");
+        LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        double longitude = location.getLongitude();
+        double latitude = location.getLatitude();
+        return latitude + " X " + longitude;
+        }
+        return "";
     }
 
     @Override

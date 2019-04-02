@@ -1,20 +1,27 @@
 package com.capstone.insuranceapp;
 
 public class Claim {
-    private String claimNumber, claimStatus, date, description, name, policyNum;
-    private String[] location;
+    private String claimNumber, claimStatus, date, description, name, policyNum, location;
 
     public Claim(){
 
     }
 
-    public Claim(String claimNumber, String claimStatus, String date, String description, String name, String policyNum, String[] location) {
+    public Claim(String claimNumber, String claimStatus, String date, String description, String name, String policyNum, String location) {
         this.claimNumber = claimNumber;
         this.claimStatus = claimStatus;
         this.date = date;
         this.description = description;
         this.name = name;
         this.policyNum = policyNum;
+        this.location = location;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
         this.location = location;
     }
 
@@ -66,11 +73,4 @@ public class Claim {
         this.policyNum = policyNum;
     }
 
-    public String[] getLocation() {
-        return location;
-    }
-
-    public void setLocation(String[] location) {
-        this.location = location;
-    }
 }
