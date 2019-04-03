@@ -74,6 +74,7 @@
     <string name="time_of_accident">Time of accident:</string>
     <string name="describe_accident">Use the space below to describe the accident.</string>
     <string name="submit_claim_btn">Submit a Claim</string>
+    <string name="enter_time_hint">Enter time</string>
 
 
     <string-array name="state_codes">
