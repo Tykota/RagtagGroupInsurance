@@ -1,10 +1,22 @@
 package com.capstone.insuranceapp;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Random;
+
 public class Claim {
     private String claimNumber, claimStatus, date, description, name, policyNum, location;
 
-    public Claim(){
-
+    public Claim() {
+        generatePolicyNum();
+        generateClaimNum();
     }
 
     public Claim(String claimNumber, String claimStatus, String date, String description, String name, String policyNum, String location) {
@@ -71,6 +83,58 @@ public class Claim {
 
     public void setPolicyNum(String policyNum) {
         this.policyNum = policyNum;
+    }
+
+    public void generatePolicyNum() {
+        Boolean newApp = false;
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        String genString = getNewAppNum();
+
+        Query result = database.collection("claims").whereEqualTo("policyNumber", genString);
+        result.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (!task.getResult().isEmpty()) {
+                        generatePolicyNum();
+                    }
+                }
+            }
+        });
+
+        this.policyNum = genString;
+    }
+
+    public void generateClaimNum() {
+        Boolean newApp = false;
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        String genString = getNewAppNum();
+
+        Query result = database.collection("claims").whereEqualTo("claimNumber", genString);
+        result.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (!task.getResult().isEmpty()) {
+                        generateClaimNum();
+                    }
+                }
+
+            }
+        });
+
+        this.claimNumber = genString;
+
+    }
+
+    protected String getNewAppNum() {
+        Random rnd = new Random();
+        char[] digits = new char[10];
+        digits[0] = (char) (rnd.nextInt(9) + '1');
+        for (int i = 1; i < digits.length; i++) {
+            digits[i] = (char) (rnd.nextInt(10) + '0');
+        }
+        return new String(digits);
     }
 
 }

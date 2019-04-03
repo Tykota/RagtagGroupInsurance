@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 
 public class SubmitClaim extends AppCompatActivity {
@@ -41,7 +42,6 @@ public class SubmitClaim extends AppCompatActivity {
     private DatePickerDialog datePicker;
     private AlertDialog.Builder errorAlertBuilder;
     private AlertDialog errorAlert;
-
 
 
     @Override
@@ -109,7 +109,7 @@ public class SubmitClaim extends AppCompatActivity {
                         time = hourOfDay + ":" + minute;
                         timeOfAccidentET.setText(time);
                     }
-                }, hour, min, true);
+                }, hour, min, false);
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
             }
@@ -117,9 +117,9 @@ public class SubmitClaim extends AppCompatActivity {
 
         dateOfAccidentET = findViewById(R.id.doa);
         dateOfAccidentET.setInputType(InputType.TYPE_NULL);
-        dateOfAccidentET.setOnClickListener(new View.OnClickListener(){
+        dateOfAccidentET.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 final Calendar cal = Calendar.getInstance();
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 int month = cal.get(Calendar.MONTH);
@@ -128,8 +128,8 @@ public class SubmitClaim extends AppCompatActivity {
                 datePicker = new DatePickerDialog(SubmitClaim.this, android.R.style.Theme_Holo_Dialog, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        dateOfAccidentET.setText(dayOfMonth + "/" +(month + 1) + "/" + year);
-                        date = (dayOfMonth + "/" +(month + 1) + "/" + year);
+                        dateOfAccidentET.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        date = (dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                 }, year, month, day);
                 datePicker.show();
@@ -142,7 +142,7 @@ public class SubmitClaim extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if(takePictureIntent.resolveActivity(getPackageManager())!=null)
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null)
                     startActivityForResult(takePictureIntent, 1);
             }
         });
@@ -151,11 +151,14 @@ public class SubmitClaim extends AppCompatActivity {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validateInput()){
+                if (validateInput()) {
                     location = getLocation();
-                    Log.d("HELLLO ITS MEEEEEEEEEE", "onClick: location is " + location + ".");
                     // Update client object
                     claim.setName(name);
+                    claim.setClaimStatus("submitted");
+                    claim.setDate(date + " at " + time);
+                    claim.setLocation(location);
+                    claim.setDescription(description);
 
                     /*
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -171,31 +174,30 @@ public class SubmitClaim extends AppCompatActivity {
 
     }
 
-    public String getLocation(){
-        Log.d("YOOOOO", "getLocation: permission is " + checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION));
-        if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            Log.d("BROOOOO", "getLocation: in if");
-        LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        double longitude = location.getLongitude();
-        double latitude = location.getLatitude();
-        return latitude + " X " + longitude;
+    public String getLocation() {
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            double longitude = location.getLongitude();
+            double latitude = location.getLatitude();
+            DecimalFormat decimalFormat = new DecimalFormat("##0.000000");
+            return decimalFormat.format(latitude) + " and " + decimalFormat.format(longitude);
         }
         return "";
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(requestCode == 1 && resultCode == RESULT_OK){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == RESULT_OK) {
             // save image here
 
         }
     }
 
 
-    public boolean validateInput(){
+    public boolean validateInput() {
         // validate name
-        if(name == null || name.equals("")){
+        if (name == null || name.equals("")) {
             errorAlertBuilder.setMessage("You need to enter a name.");
             errorAlert = errorAlertBuilder.create();
             errorAlert.show();
@@ -204,7 +206,7 @@ public class SubmitClaim extends AppCompatActivity {
         }
 
         // validate time of accident
-        else if(time == null || time.equals("")){
+        else if (time == null || time.equals("")) {
             errorAlertBuilder.setMessage("You need to enter a time of accident.");
             errorAlert = errorAlertBuilder.create();
             errorAlert.show();
@@ -213,7 +215,7 @@ public class SubmitClaim extends AppCompatActivity {
         }
 
         // validate date of accident
-        else if(date == null || date.equals("")){
+        else if (date == null || date.equals("")) {
             errorAlertBuilder.setMessage("You need to enter a date of accident.");
             errorAlert = errorAlertBuilder.create();
             errorAlert.show();
@@ -222,7 +224,7 @@ public class SubmitClaim extends AppCompatActivity {
         }
 
         // validate date of description
-        else if(description == null || description.equals("")){
+        else if (description == null || description.equals("")) {
             errorAlertBuilder.setMessage("You need to enter a description of accident.");
             errorAlert = errorAlertBuilder.create();
             errorAlert.show();
@@ -233,7 +235,7 @@ public class SubmitClaim extends AppCompatActivity {
         return true;
     }
 
-    public void resetErrorDialog(){
+    public void resetErrorDialog() {
         errorAlert = null;
         errorAlertBuilder = null;
         errorAlertBuilder = new AlertDialog.Builder(this);
