@@ -36,10 +36,10 @@ function searchByClient(){
     }
     else {
         if(searchWith == "name"){
-            search(searchValue, "home-info.name");
+            search(searchValue, "name");
         }
         else if(searchWith == "policy"){
-            search(searchValue, "policy-number");
+            search(searchValue, "newAppNum");
         }
     }
 }
@@ -94,13 +94,13 @@ function grabApplication(appNumber, status){
 }
 */
 
-function updateApplication(id, status){
+function updateApplicationStatus(id, status){
     var appRef = db.collection("clients").doc(id);
     return appRef.update({
         appStatus: status 
     })
     .then(function() {
-        console.log("Document successfully updated!");
+        //console.log("Document successfully updated!");
     })
     .catch(function(error) {
         // The document probably doesn't exist.
