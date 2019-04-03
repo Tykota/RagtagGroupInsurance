@@ -7,11 +7,15 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraDevice;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,7 +33,13 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 
@@ -38,10 +48,13 @@ public class SubmitClaim extends AppCompatActivity {
     private Button takePicBtn, submitBtn, takeVidBtn;
     private Claim claim;
     private EditText nameET, descriptET, dateOfAccidentET, timeOfAccidentET;
-    private String description, date, time, name, location;
+    private String description, date, time, name, location, currentPhotoPath;
     private DatePickerDialog datePicker;
     private AlertDialog.Builder errorAlertBuilder;
     private AlertDialog errorAlert;
+    private File photoFile = null;
+    private boolean imageSaved = false;
+    private Bitmap pic;
 
 
     @Override
@@ -141,9 +154,7 @@ public class SubmitClaim extends AppCompatActivity {
         takePicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null)
-                    startActivityForResult(takePictureIntent, 1);
+                takePhoto();
             }
         });
 
@@ -160,10 +171,14 @@ public class SubmitClaim extends AppCompatActivity {
                     claim.setLocation(location);
                     claim.setDescription(description);
 
-
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     DocumentReference docRef = db.collection("claims").document();
                     docRef.set(claim);
+
+                    // Add photo to storage
+                    if(imageSaved){
+                        uploadPhoto();
+                    }
 
                     // Start new activity
                     Intent intent = new Intent(getApplicationContext(), HomePage.class);
@@ -172,6 +187,54 @@ public class SubmitClaim extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void uploadPhoto(){
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReference();
+
+        String imageFileName = "claim";
+        if (claim.getClaimNumber() != null) {
+            imageFileName = imageFileName + claim.getClaimNumber() + ".jpg";
+        } else {
+            imageFileName = imageFileName + "Unknown.jpg";
+        }
+
+        StorageReference imageRef = storageReference.child(imageFileName);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        pic.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        imageRef.putBytes(data);
+    }
+
+    public void takePhoto(){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // error taking picture
+            }
+
+            if(photoFile != null){
+                startActivityForResult(takePictureIntent, 1);
+            }
+        }
+    }
+
+    public File createImageFile() throws IOException {
+        String imageFileName = "claim";
+        if (claim.getClaimNumber() != null) {
+            imageFileName = imageFileName + claim.getClaimNumber();
+        } else {
+            imageFileName = imageFileName + "Unknown";
+        }
+
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
     }
 
     public String getLocation() {
@@ -189,8 +252,9 @@ public class SubmitClaim extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            // save image here
-
+            imageSaved = true;
+            Bundle extras = data.getExtras();
+            pic = (Bitmap) extras.get("data");
         }
     }
 

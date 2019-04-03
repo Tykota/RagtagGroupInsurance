@@ -22,7 +22,7 @@
 </head>
 
 <body id="body" class ="contianer" style="background: #abd7ff;">
-<nav class ="indigo" style="margin-bottom: 0px;">
+<nav class="blue-grey darken-1" style="margin-bottom: 10px;">
     <div style="padding-left: 1%" class = "nav-wrapper">
         <ul >
            <li></li>
@@ -37,11 +37,14 @@
         </div>
     </div>
 </nav>
-    
-    <h4 class="center-align">Client Management</h4>
+    <div id="banner"><img src="mybanner3.jpg" width ="500px" height= "200px"></img></div>
+    <h2 class="center-align" style="margin-bottom: 80px;">Client Management</h2>
     <div id="contentPane"></div>
     <div id="searchForm">
         <div class="row">
+          <div class="col s12 center-align">
+              <span class="flow-text">Search Clients</span>
+          </div>
             <div class="col s5 right-align" style="margin-top: 15px;">
                 <span class="flow-text">Search by: </span>
             </div>
@@ -54,11 +57,12 @@
             </div>
         </div>
         <div class="row">
+
             <div class="col s5 right-align" style="margin-top: 15px;">
                 <span class="flow-text">Searching for:</span>
             </div>
             <div class ="input-field col s4">
-                <input placeholder="Client Name/Policy Number" id="searchCriteria" type="text" class="validate" >
+                <input  id="searchCriteria" type="text" class="validate" color="black">
             </div>
         </div>
         <div class="row">
@@ -74,21 +78,21 @@
     </div>
     <div id="reviewForm" >
         <div class="row">
-            <div class="col s12 left-align">
+            <div class="col s12 center-align">
                 <span class="flow-text">Open Applications</span>
             </div>
             <div id="openApps" class="col s12 left-align"></div>
         </div>
         <div class="row">
-            <div class="divider"></div>
-            <div class="col s12 left-align">
+
+            <div class="col s12 center-align">
                 <span class="flow-text">New Applications</span>
             </div>
             <div  id="newApps" class="col s12 left-align"></div>
         </div>
         <div class="row">
-            <div class="divider"></div>
-            <div class="col s12 left-align">
+
+            <div class="col s12 center-align">
                 <span class="flow-text">Closed Applications</span>
             </div>
             <div  id="closedApps" class="col s12 left-align"></div>
@@ -96,7 +100,7 @@
     </div>
     <div id="claimForm">
         <div class="row">
-            <div class="col s12 left-align">
+            <div class="col s12 center-align">
                 <span class="flow-text">Open Claims</span>
 
         </div>
