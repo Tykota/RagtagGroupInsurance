@@ -88,7 +88,7 @@ public class Claim {
     public void generatePolicyNum() {
         Boolean newApp = false;
         FirebaseFirestore database = FirebaseFirestore.getInstance();
-        String genString = getNewAppNum();
+        String genString = calcNum();
 
         Query result = database.collection("claims").whereEqualTo("policyNumber", genString);
         result.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -108,7 +108,7 @@ public class Claim {
     public void generateClaimNum() {
         Boolean newApp = false;
         FirebaseFirestore database = FirebaseFirestore.getInstance();
-        String genString = getNewAppNum();
+        String genString = calcNum();
 
         Query result = database.collection("claims").whereEqualTo("claimNumber", genString);
         result.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -127,7 +127,7 @@ public class Claim {
 
     }
 
-    protected String getNewAppNum() {
+    protected String calcNum() {
         Random rnd = new Random();
         char[] digits = new char[10];
         digits[0] = (char) (rnd.nextInt(9) + '1');

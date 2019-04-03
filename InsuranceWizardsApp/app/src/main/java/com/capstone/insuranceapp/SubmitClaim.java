@@ -160,11 +160,11 @@ public class SubmitClaim extends AppCompatActivity {
                     claim.setLocation(location);
                     claim.setDescription(description);
 
-                    /*
+
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     DocumentReference docRef = db.collection("claims").document();
                     docRef.set(claim);
-                    */
+
                     // Start new activity
                     Intent intent = new Intent(getApplicationContext(), HomePage.class);
                     startActivity(intent);
