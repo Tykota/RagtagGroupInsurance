@@ -300,6 +300,15 @@ function displayApplication(data){
         rejectBtn.appendChild(rejectTxt);
         cp.appendChild(rejectBtn);
     }
+    else if(status == "closed"){
+        let reOpenBtn = document.createElement('btn');
+        let btnTxt = document.createTextNode("Re-Open Application");
+        reOpenBtn.setAttribute("id", "reOpenApplicationBtn");
+        reOpenBtn.setAttribute("class", "center-align wave-effect waves-light btn");
+        reOpenBtn.addEventListener("click", openApplication.bind(null, data));
+        reOpenBtn.appendChild(btnTxt);
+        cp.appendChild(reOpenBtn);
+    }
 }
 function buildClaimCard(data, type){
     let name = "Name: " + data["name"];
@@ -406,7 +415,6 @@ function displayClaim(data){
         let coordX = Number(str1);
         let coordY = Number(str2);
         var local = {lat: coordX, lng: coordY};
-        console.log(str1 + " and " + str2);
     }
     claimT.innerHTML = '';
     claimT.appendChild(l1);
@@ -417,9 +425,18 @@ function displayClaim(data){
     claimT.appendChild(l6);
     claimT.appendChild(l7);
     
+    let imgDiv = document.createElement('div');
+    imgDiv.style.textAlign ="center";
+    let img = document.createElement('img');
+    img.setAttribute("id", "claimPhoto");
+    //img.src = getClaimPhotos();
+    imgDiv.appendChild(img);
+    photoT.appendChild(imgDiv);
+    getClaimPhotos(img);
+    
+
     // Display info
     clearCP();
-    console.log(local);
     initializeMap(local);
     let mapEle = document.getElementById("map-canvas");
     let panoEle = document.getElementById("pano");
@@ -435,7 +452,15 @@ function displayClaim(data){
     
     //panoEle.style.display = "block";
     //onsole.log("Displaying claim: ");
-    //console.log(data);   
+    //console.log(data); 
+    /*
+    let imgDiv = document.createElement('div');
+    imgDiv.style.alignContent ="center";
+    let img = document.createElement('img');
+    //img.src = getClaimPhotos();
+    imgDiv.appendChild(img);
+    photoT.appendChild(imgDiv);
+    */
 }
 
 function toggleMapView(){

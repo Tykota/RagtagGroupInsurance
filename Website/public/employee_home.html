@@ -23,7 +23,9 @@
 
 <body id="body" class ="contianer" style="background: #abd7ff;">
 <nav class="blue-grey darken-1" style="margin-bottom: 10px;">
+    
     <div style="padding-left: 1%" class = "nav-wrapper">
+        
         <ul >
            <li></li>
            <li><a id="search" onclick="load('searchForm')" class="unselectable" ><span>Search Clients</span></a></li>
@@ -31,14 +33,16 @@
            <li><a id="claims" onclick="load('claimForm')" class="unselectable"><span>Manage Claims</span></a></li>
            <li></li>
         </ul>
-
         <div class="right-align" style="margin-right: 10px" id="signOut">
             <a id="so" class="wave-effect wave=light btn" onclick="logout()">Sign Out</a>
         </div>
     </div>
 </nav>
-    <div id="banner"><img src="mybanner3.jpg" width ="500px" height= "200px"></img></div>
-    <h2 class="center-align" style="margin-bottom: 80px;">Client Management</h2>
+    <div id="banner">
+        <img src="mybanner3.jpg" width ="350px" height= "150px" style="margin-bottom: 0px;"></img>
+        <h4 class="center-align" style="margin-top: 0px; margin-bottom: 10px;">Client Management</h4>
+    </div>
+    
     <div id="contentPane"></div>
     <div id="searchForm">
         <div class="row">

@@ -128,6 +128,22 @@ function initializeMap(location){
     map.setStreetView(panorama);
 }
 
+function getClaimPhotos(imgElement){
+    // add functionality for searching photos in cloud storage
+    var storageRef = storage.ref();
+    var picRef = storageRef.child('test.jpg');
+    picRef.getDownloadURL().then(function(url){
+        document.getElementById('claimPhoto').src = url;
+        //imgElement.src = url;
+        picURL = url;
+        console.log(picURL);
+        return picURL;
+    }).catch(function(error){
+        console.log("error getting photos " + error);
+    });
+
+}
+
 function addMetaData(){
     var storageRef = storage.ref();
     var picRef = storageRef.child('22234153408_78d945f6b5_b-e1531854292278.jpg');
