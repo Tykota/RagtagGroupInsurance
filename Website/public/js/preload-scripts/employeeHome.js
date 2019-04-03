@@ -497,16 +497,6 @@ function displayClaim(data){
     claimT.appendChild(l5);
     claimT.appendChild(l6);
     claimT.appendChild(l7);
-
-    let toggleBtn = document.createElement('btn');
-    let btnTxt = document.createTextNode("Toggle Map View")
-    toggleBtn.setAttribute("class", "wave-effect waves-light btn");
-    toggleBtn.style.marginTop = "15px";
-    toggleBtn.classList.add("span");
-    toggleBtn.addEventListener("click", toggleMapView.bind(null));
-    toggleBtn.appendChild(btnTxt);
-    streetT.appendChild(toggleBtn);
-
     
     // Display info
     clearCP();
