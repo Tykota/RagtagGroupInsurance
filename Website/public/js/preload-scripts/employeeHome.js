@@ -1,4 +1,4 @@
-// Script for handling database/api calls
+// Script for initializing DOM elements and handling api calls
 // Initialize select boxes
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
@@ -70,20 +70,25 @@ function showApplications(){
     searchApplications("closed");
 }
 
-
-
 function openApplication(data) {
-    //var appRef = db.collection("clients").where("applicationNumber", "==", data["applicationNumber"]).doc();
-    updateApplication(data.applicationNumber, "open");
+    updateApplicationStatus(data.applicationNum, "open").then(function(){
+        load('reviewForm');
+        //showApplications();
+    });
+    //displayApplication(data);
 }
 
 function rejectApplication(data){
-    updateApplication(data.applicationNumber, "closed");
+    updateApplicationStatus(data.applicationNum, "closed").then(function(){
+        load('reviewForm');
+    });
+    //showApplications();
+    //displayApplication(data);
 }
 
 function formatNewClient(data){
-    console.log("Format new client data here")
-
+    updateApplicationStatus(data.applicationNum, "accepted");
+    displayClient(data);
 }
 
 function displayClaimsList(){
@@ -91,36 +96,9 @@ function displayClaimsList(){
     searchClaims("submitted");
 }
 
-
-
-// Clears content pane for loading new content
-
-
 //Check claims for the client
 function checkClaims(){
-    //collection called claims with policy number as key
-
-    
-}
-
-function toggleMapView(){
-    var tabEle = document.getElementById("streetViewTab");
-    var mapEle = document.getElementById("map-canvas");
-    var panoEle = document.getElementById("pano");
-    if(mapEle.style.display == "block"){
-        mapEle.style.display = "none";
-
-        panoEle.style.display = "block";
-        //panoEle.style.visibility = "visible";
-        
-        tabEle.appendChild(panoEle);
-    }
-    else {
-        panoEle.style.display = "none";
-        mapEle.style.display = "block";
-        tabEle.appendChild(mapEle);
-    }
-    
+    //collection called claims with policy number as key    
 }
 
 function toDateTime(secs) {
@@ -134,16 +112,13 @@ function initMap(){
 }
 
 function initializeMap(location){
-    var lat = location["latitude"];
-    var lng = location["longitude"];
-    var loca = { lat, lng }
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
-        center: loca,
+        center: location,
         zoom: 18
     });
     var panorama = new google.maps.StreetViewPanorama(
         document.getElementById('pano'), {
-            position: loca,
+            position: location,
             pov: {
             heading: 34,
             pitch: 10
@@ -151,4 +126,19 @@ function initializeMap(location){
             visible: true
         });
     map.setStreetView(panorama);
+}
+
+function addMetaData(){
+    var storageRef = storage.ref();
+    var picRef = storageRef.child('22234153408_78d945f6b5_b-e1531854292278.jpg');
+    var data = {
+        metadata: {
+            'policyNum': '1010101010'
+        }
+    }
+    picRef.updateMetadata(data).then(function(metadata){
+        console.log("New metadata added " + metadata);
+    }).catch(function(error){
+        console.log(error);
+    });
 }

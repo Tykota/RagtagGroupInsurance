@@ -1,15 +1,14 @@
-// Script for dynamically building 
-// html components
+// Script for dynamically building  html components
 
 function displaySearchResults(data){
-    let home = data["home-info"];
-    let polnum = data["policy-number"];
-    let title = "Name: " + home["name"];
+    //Change polnum
+    let polnum = data.newAppNum;
+    let title = "Name: " + data.name;
     let addr = "Address: " 
-            + home["address"] + " " 
-            + home["city"] + ", " 
-            + home["state"] + " " 
-            + home["zip"];
+            + data.address + " " 
+            + data.city + ", " 
+            + data.state + " " 
+            + data.zip;
     let poltxt = "Policy Number: " + polnum;
 
     // create card element
@@ -86,48 +85,59 @@ function createTabs(data){
    
     // Client Tab info
     let l1 = document.createElement('p');
-    l1.innerText = ("Name: " + data["home-info"].name)
+    l1.innerText = ("Name: " + data.name)
     let l2 = document.createElement('p');
     l2.innerText = ("Address: " 
-                    + data["home-info"].address + " " 
-                    + data["home-info"].city + " " 
-                    + data["home-info"].state 
-                    + " , " + data["home-info"].zip);
+                    + data.address + " " 
+                    + data.city + " " 
+                    + data.state 
+                    + " , " + data.zip);
     let l3 = document.createElement('p');
-    l3.innerText = ("Phone: " + data["home-info"]["home-phone"]);
+    l3.innerText = ("Phone: " + data.phone);
     let l4 = document.createElement('p');
-    l4.innerText = ("Driver's License #: " + data["home-info"]["dl-number"]);
+    l4.innerText = ("Driver's License #: " + data.dlnumber);
     let l5 = document.createElement('p');
-    l5.innerText = ("Date of birth: " + data["home-info"].dob);
+    l5.innerText = ("Date of birth: " + data.dob);
     let l6 = document.createElement('p');
-    l6.innerText = ("License type: " + data["home-info"]["driver-type"]);
+    l6.innerText = ("License type: " + data.drivertype);
     let l7 = document.createElement('p');
-    l7.innerText = ("Social Security Number: " + data["home-info"].ssn);
+    l7.innerText = ("Social Security Number: " + data.ssn);
 
     // Vehicle Tab Info
     vehicleT.innerHTML = '';
-    for(i = 0; i < data["car-info"].length; i++){
+    if(data.vehicles == undefined){
         let div = document.createElement('div');
         let header = document.createElement('h6');
-        header.innerText = "Vehicle " + (i+1) + ": ";
-        let l1 = document.createElement('p');
-        l1.innerText = ("Make: " + data["car-info"][i].make);
-        let l2 = document.createElement('p');
-        l2.innerText = ("Model: " + data["car-info"][i].model);
-        let l3 = document.createElement('p');
-        l3.innerText = ("VIN: " + data["car-info"][i].vin);
+        header.innerText = "No vehicle information provided.";
         vehicleT.appendChild(header);
-        vehicleT.appendChild(l1);
-        vehicleT.appendChild(l2);
-        vehicleT.appendChild(l3);
+    }
+    else {
+        for(i = 0; i < data["vehicles"].length; i++){
+            let div = document.createElement('div');
+            let header = document.createElement('h6');
+            header.innerText = "Vehicle " + (i+1) + ": ";
+            let l1 = document.createElement('p');
+            l1.innerText = ("Make: " + data["vehicles"][i].make);
+            let l2 = document.createElement('p');
+            l2.innerText = ("Model: " + data["vehicles"][i].model);
+            let l3 = document.createElement('p');
+            l3.innerText = ("Year: " + data["vehicles"][i].year);
+            let l4 = document.createElement('p');
+            l4.innerText = ("VIN: " + data["vehicles"][i].vin);
+            vehicleT.appendChild(header);
+            vehicleT.appendChild(l1);
+            vehicleT.appendChild(l2);
+            vehicleT.appendChild(l3);
+            vehicleT.appendChild(l4);
+        }
     }
 
     // Insurance Tab info
     insuranceT.innerHTML = '';
     let ins1 = document.createElement('p');
-    ins1.innerText = ("Previous insurance company: " + data["insurance-info"]["prior-insurance"]);
+    ins1.innerText = ("Previous insurance company: " + data.prevInssurance);
     let ins2 = document.createElement('p');
-    ins2.innerText = ("Vehicle incidents in the last five years: " + data["insurance-info"]["past-five-year-incidents"]);
+    ins2.innerText = ("Vehicle incidents in the last five years: " + data.prevAccident);
     insuranceT.appendChild(ins1);
     insuranceT.appendChild(ins2);
     // Display
@@ -226,6 +236,7 @@ function buildApplicationCard(data, type){
     }
 }
 function displayApplication(data){
+    console.log("displaying application")
     clearCP();
     let cp = document.getElementById("contentPane");
     let header = document.createElement('h5');
@@ -247,7 +258,7 @@ function displayApplication(data){
     let l7 = document.createElement('p');
     l7.innerText = ("Social Security Number: " + data["ssn"]);
     let l8 = document.createElement('p');
-    l8.innerText = ("Application Number: " + data["applicationNumber"]);
+    l8.innerText = ("Application Number: " + data["applicationNum"]);
     let l9 = document.createElement('p');
     l9.innerText = ("Application Status: " + data["appStatus"]);
 
@@ -292,7 +303,7 @@ function displayApplication(data){
 }
 function buildClaimCard(data, type){
     let name = "Name: " + data["name"];
-    let polnum = "Policy Number: " + data["policyNumber"];
+    let polnum = "Policy Number: " + data["policyNum"];
     let claimNum = "Claim Number: " + data["claimNumber"];
     /*
     if(typeof data["location"] == "object"){
@@ -307,7 +318,7 @@ function buildClaimCard(data, type){
     //let location = "Location: " + data["location"];
     
 
-    let date = "Date and Time: " + toDateTime(data["date"]["seconds"]);
+    let date = "Date and Time: " + data.date;
 
     let holder = document.createElement('div');
     holder.setAttribute("class", "col s12");
@@ -368,7 +379,7 @@ function displayClaim(data){
     let l3 = document.createElement('p');
     l3.innerText = ("Name: " + data["name"]);
     let l4 = document.createElement('p');
-    l4.innerText = ("Date Submitted: " + toDateTime(data["date"]["seconds"]));
+    l4.innerText = ("Date Submitted: " + data.date);
     let l5 = document.createElement('p');
     if(typeof data["location"] == "object"){
         var location = "Location: " + 
@@ -382,14 +393,20 @@ function displayClaim(data){
     let l6 = document.createElement('p');
     l6.innerText = ("Description: " + data["description"]);
     let l7 = document.createElement('p');
-    l7.innerText = ("Policy Number: " + data["policyNumber"]);
+    l7.innerText = ("Policy Number: " + data["policyNum"]);
 
     // Street View
     if(typeof data["location"] == "object"){
         var local = {lat: data["location"]["latitude"], lng: data["location"]["longitude"]};
     }
     else {
-        console.log("get lat/lng of street address")
+        var str = data.location;
+        str1 = str.split(" and ")[0];
+        str2 = str.split(" and ")[1];
+        let coordX = Number(str1);
+        let coordY = Number(str2);
+        var local = {lat: coordX, lng: coordY};
+        console.log(str1 + " and " + str2);
     }
     claimT.innerHTML = '';
     claimT.appendChild(l1);
@@ -402,7 +419,8 @@ function displayClaim(data){
     
     // Display info
     clearCP();
-    initializeMap(data["location"]);
+    console.log(local);
+    initializeMap(local);
     let mapEle = document.getElementById("map-canvas");
     let panoEle = document.getElementById("pano");
     streetT.appendChild(mapEle);
@@ -419,6 +437,24 @@ function displayClaim(data){
     //onsole.log("Displaying claim: ");
     //console.log(data);   
 }
+
+function toggleMapView(){
+    var tabEle = document.getElementById("streetViewTab");
+    var mapEle = document.getElementById("map-canvas");
+    var panoEle = document.getElementById("pano");
+    if(mapEle.style.display == "block"){
+        mapEle.style.display = "none";
+        panoEle.style.display = "block";
+        tabEle.appendChild(panoEle);
+    }
+    else {
+        panoEle.style.display = "none";
+        mapEle.style.display = "block";
+        tabEle.appendChild(mapEle);
+    }
+}
+
+// Clears content pane for loading new content
 function clearCP() {
     let cp = document.getElementById("contentPane");
     while(cp.firstElementChild){
@@ -433,8 +469,8 @@ function clearCP() {
 function showAlert(alertText){
     let p = document.createElement('p');
     let txt = document.createTextNode(alertText);
-    //p.setAttribute("class", "alert");
-    //p.style.textAlign = "center";
+    p.setAttribute("class", "alert");
+    p.style.textAlign = "center";
     p.appendChild(txt);
     document.getElementById("contentPane").appendChild(p);
 }
