@@ -78,6 +78,8 @@
     <string name="monitor_driving">Monitor Driving</string>
     <string name="begin_drive_btn">Begin Drive</string>
     <string name="end_drive_btn">End Drive</string>
+    <string name="startDriveMessage">To start monitoring your drive, click begin.</string>
+    <string name="drivingMonitorMessage">Your driving is being monitored.</string>
 
 
     <string-array name="state_codes">
