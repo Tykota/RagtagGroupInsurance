@@ -80,6 +80,7 @@
     <string name="end_drive_btn">End Drive</string>
     <string name="startDriveMessage">To start monitoring your drive, click begin.</string>
     <string name="drivingMonitorMessage">Your driving is being monitored.</string>
+    <string name="view_insurance_card">View Insurance Card</string>
 
 
     <string-array name="state_codes">

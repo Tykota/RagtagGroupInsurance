@@ -40,7 +40,6 @@
             android:id="@+id/policyHolder"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:autoText="false"
             android:text="Policy Holder:"
             android:textAlignment="center"
             android:textSize="18sp" />
