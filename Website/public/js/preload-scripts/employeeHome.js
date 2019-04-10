@@ -158,3 +158,11 @@ function addMetaData(){
         console.log(error);
     });
 }
+
+function nameAutofill(){
+    document.getElementById("searchCriteria").innerText = "George Mooney";
+}
+
+function numAutoFill(){
+    document.getElementById("searchCriteria").innerText = "9803418361";
+}
