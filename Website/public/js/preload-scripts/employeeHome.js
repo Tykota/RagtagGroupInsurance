@@ -158,3 +158,8 @@ function addMetaData(){
         console.log(error);
     });
 }
+
+function openClaimsMap(){
+    console.log("Open claims map here");
+    getClaimLocations();
+}

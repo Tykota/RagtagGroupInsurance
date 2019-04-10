@@ -83,6 +83,20 @@ function searchClaims(type){
     })
 }
 
+function getClaimLocations(){
+    let locations = []
+    let ref = db.collection("claims").get().then((snapshot) => {
+        snapshot.docs.forEach(doc => {
+            let lat = 
+        })
+        
+        console.log(ref);
+    })
+}
+    //console.log(ref);
+    //return ref;
+
+
 /*
 function grabApplication(appNumber, status){
     let ref = db.collection("clients").where("newAppNum", "==", appNumber).get().then((snapshot) => {
