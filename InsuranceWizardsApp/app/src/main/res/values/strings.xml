@@ -75,6 +75,9 @@
     <string name="describe_accident">Use the space below to describe the accident.</string>
     <string name="submit_claim_btn">Submit a Claim</string>
     <string name="enter_time_hint">Enter time</string>
+    <string name="monitor_driving">Monitor Driving</string>
+    <string name="begin_drive_btn">Begin Drive</string>
+    <string name="end_drive_btn">End Drive</string>
 
 
     <string-array name="state_codes">
