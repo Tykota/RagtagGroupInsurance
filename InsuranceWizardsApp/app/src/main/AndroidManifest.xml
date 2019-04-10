@@ -36,6 +36,7 @@
         <activity android:name=".VehicleInformationForm" />
         <activity android:name=".InsuranceHistoryForm" />
         <activity android:name=".managePolicy" />
+        <activity android:name=".showCard" />
         <activity
             android:name=".DriverHouseholdForm"
             android:windowSoftInputMode="stateHidden" />

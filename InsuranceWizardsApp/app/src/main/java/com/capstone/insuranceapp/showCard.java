@@ -10,6 +10,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class showCard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,46 +24,26 @@ public class showCard extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        TextView Policyholder = (TextView) findViewById(R.id.policyHolder);
-        TextView PolicyNumber = (TextView) findViewById(R.id.policyNumber);
-        TextView ExpDate = (TextView) findViewById(R.id.expDate);
-
-        String holderVal;
-        String policyNum;
-        String expiration;
-
+        final TextView policyHolder = (TextView) findViewById(R.id.policyHolder);
+        final TextView policyNumber = (TextView) findViewById(R.id.policyNumber);
+        final TextView expDate = (TextView) findViewById(R.id.expDate);
 
         //Throw the policyholder/number/expdate in from firestore
-        var clientsRef = db.collection("clients").doc();
-        clientsRef.get().then(function(doc) {
-            if (doc.exists) {
-                console.log("Document data:", doc.data());
-                holderVal = doc.data().name;
-                policyNum = doc.data().applicationNum;
-                //unsure where to pull this from
-                expiration = "4/25/2022";
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        DocumentReference docRef = database.collection("clients").document("ZJw3199HtxZeEAMOZdjY");
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Client client = documentSnapshot.toObject(Client.class);
+                String holder = policyHolder.getText() + client.getName();
+                policyHolder.setText(holder);
+                String num = policyNumber.getText() + client.getApplicationNum();
+                policyNumber.setText(num);
+                String date = expDate.getText() + "4/25/2022";
+                expDate.setText(date);
             }
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
         });
 
-
-
-        //Add in the holder name, policy number and Expiration date
-        Policyholder.setText(Policyholder.getText() + " " + holderVal);
-        PolicyNumber.setText(PolicyNumber.getText() + " " + policyNum);
-        ExpDate.setText(ExpDate.getText() + " " + expiration);
-
-
     }
-
-
-
-
-
-
 
 }

@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class HomePage extends AppCompatActivity {
-    private Button manageBtn, submitClaimBtn, startMonitorBtn;
+    private Button manageBtn, submitClaimBtn, startMonitorBtn, viewCardBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +30,15 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SubmitClaim.class);
+                startActivity(intent);
+            }
+        });
+
+        viewCardBtn = findViewById(R.id.view_card_btn);
+        viewCardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), showCard.class);
                 startActivity(intent);
             }
         });
