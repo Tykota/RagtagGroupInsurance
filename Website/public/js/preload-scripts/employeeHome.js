@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 $(document).ready(function(){
+    getClaimLocations();
     $('ul.tabs').tabs();
     $('#clientLink').click(function(){
         console.log("client tab");
@@ -160,9 +161,41 @@ function addMetaData(){
 }
 
 function openClaimsMap(){
-    console.log("Open claims map here");
-    getClaimLocations();
+    var locationArr = getLocations();
+    
+    clearCP();
+    var mapElement = document.getElementById('claims-map');
+    var contentPane = document.getElementById('contentPane');
+    mapElement.style.display = "block";
+    var map = new google.maps.Map(mapElement, {
+        center: new google.maps.LatLng(39.796749, -97.793539),
+        zoom: 4
+    });
+    console.log(locationArr);
+
+
+    var infoWindow = new google.maps.InfoWindow({});
+    var marker, i;
+    for(i=0; i<locationArr.length; i++){
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locationArr[i][1], locationArr[i][2]),
+            map: map
+        })
+        google.maps.event.addListener(
+            marker,
+            'click',
+            (function(marker,i){
+                return function() {
+                    infoWindow.setContent(locationArr[i][0]);
+                    infoWindow.open(map,marker);
+                }
+            }) (marker, i)
+        )
+    }
+    contentPane.appendChild(mapElement);
 }
+
+
 function nameAutofill(){
     document.getElementById("searchCriteria").innerText = "George Mooney";
 }

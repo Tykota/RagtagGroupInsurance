@@ -1,4 +1,5 @@
 // Firebase functions here
+var mapLocations = [];
 function login(){
     let username = document.getElementById("email").value;
     let password = document.getElementById("pass").value;
@@ -84,14 +85,32 @@ function searchClaims(type){
 }
 
 function getClaimLocations(){
-    let locations = []
+    let locations= [];
     let ref = db.collection("claims").get().then((snapshot) => {
         snapshot.docs.forEach(doc => {
-            let lat = 
+
+            let name = doc.data().name;
+            let claimNum = doc.data().claimNumber;
+            let description = doc.data().description;
+
+            let info = '<strong> Claim Number: ' + claimNum + '</strong><br>\r\
+                        Name: ' + name + '<br> Description: ' + description;
+            let location = doc.data().location;
+            let lat = location.split(" and ")[0];
+            let lng = location.split(" and ")[1];
+            let holder = [info, lat, lng];
+            addToMap(holder);
+            locations.push(holder);
         })
-        
-        console.log(ref);
-    })
+    });
+    return locations;
+}
+function addToMap(loca){
+    mapLocations.push(loca);
+}
+
+function getLocations(){
+    return mapLocations;
 }
     //console.log(ref);
     //return ref;
