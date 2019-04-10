@@ -23,8 +23,34 @@ public class showCard extends AppCompatActivity {
         TextView PolicyNumber = (TextView) findViewById(R.id.policyNumber);
         TextView ExpDate = (TextView) findViewById(R.id.expDate);
 
-        //Throw the policyholder/number/expdate in from firestore
+        String holderVal;
+        String policyNum;
+        String expiration;
 
+
+        //Throw the policyholder/number/expdate in from firestore
+        var clientsRef = db.collection("clients").doc();
+        clientsRef.get().then(function(doc) {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+                holderVal = doc.data().name;
+                policyNum = doc.data().applicationNum;
+                //unsure where to pull this from
+                expiration = "4/25/2022";
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
+
+
+
+        //Add in the holder name, policy number and Expiration date
+        Policyholder.setText(Policyholder.getText() + " " + holderVal);
+        PolicyNumber.setText(PolicyNumber.getText() + " " + policyNum);
+        ExpDate.setText(ExpDate.getText() + " " + expiration);
 
 
     }
