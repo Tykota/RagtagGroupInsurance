@@ -6,10 +6,10 @@ import android.hardware.SensorManager;
 
 @SuppressWarnings("deprecation")
 public class MovementListener implements SensorListener {
-    private static final int FORCE_THRESHOLD = 10000;
-    private static final int TIME_THRESHOLD = 75;
-    private static final int SHAKE_TIMEOUT = 500;
-    private static final int SHAKE_DURATION = 150;
+    private static final int FORCE_THRESHOLD = 1;
+    private static final int TIME_THRESHOLD = 50;
+    private static final int SHAKE_TIMEOUT = 50;
+    private static final int SHAKE_DURATION = 1;
     private static final int SHAKE_COUNT = 1;
 
     private SensorManager sensorManager;
@@ -70,6 +70,10 @@ public class MovementListener implements SensorListener {
             lastZ = values[SensorManager.DATA_Z];
         }
 
+    }
+
+    public void setOnMovementListenter(OnMovementListener listener){
+        onMovementListener = listener;
     }
 
     @Override

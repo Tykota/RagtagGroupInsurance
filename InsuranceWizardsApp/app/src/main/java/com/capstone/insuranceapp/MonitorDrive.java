@@ -1,5 +1,6 @@
 package com.capstone.insuranceapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +29,7 @@ public class MonitorDrive extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // start monitor service
+                startService(new Intent(getApplicationContext(), DetectAccident.class));
                 startBtn.setVisibility(View.INVISIBLE);
                 stopBtn.setVisibility(View.VISIBLE);
                 message.setText(R.string.drivingMonitorMessage);
@@ -38,6 +40,7 @@ public class MonitorDrive extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // stop monitor service
+                stopService(new Intent(getApplicationContext(), DetectAccident.class));
                 startBtn.setVisibility(View.VISIBLE);
                 stopBtn.setVisibility(View.INVISIBLE);
                 message.setText(R.string.startDriveMessage);
