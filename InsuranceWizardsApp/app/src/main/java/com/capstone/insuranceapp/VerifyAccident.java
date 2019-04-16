@@ -1,7 +1,12 @@
 package com.capstone.insuranceapp;
 
+import android.app.ActivityManager;
+import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -27,7 +32,9 @@ public class VerifyAccident extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // close activity
-                finish();
+                Intent intent = new Intent(getApplicationContext(), MonitorDrive.class);
+                intent.putExtra("resumeMonitor", true);
+                startActivity(intent);
             }
         });
     }
