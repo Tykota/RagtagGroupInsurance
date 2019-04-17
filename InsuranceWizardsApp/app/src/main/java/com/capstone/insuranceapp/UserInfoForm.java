@@ -18,8 +18,8 @@ import android.widget.Spinner;
 public class UserInfoForm extends AppCompatActivity {
 
     private Spinner stateSpinner;
-    private String stateSelected, zipCode, address, email, phoneNum;
-    private EditText zipCodeET, addressET, emailET, phoneNumET;
+    private String stateSelected, zipCode, address, email, phoneNum, city;
+    private EditText zipCodeET, addressET, emailET, phoneNumET, cityET;
     private Button continueBtn;
     private AlertDialog.Builder errorAlertBuilder;
     private AlertDialog errorAlert;
@@ -57,6 +57,24 @@ public class UserInfoForm extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 address = s.toString();
+            }
+        });
+
+        cityET = findViewById(R.id.city);
+        cityET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                city = s.toString();
             }
         });
 
@@ -139,6 +157,7 @@ public class UserInfoForm extends AppCompatActivity {
                     client.setZip(zipCode);
                     client.setEmail(email);
                     client.setPhone(phoneNum.substring(0, 3) + "-" + phoneNum.substring(3, 6) + "-" + phoneNum.substring(6));
+                    client.setCity(city);
 
                     // Start next activity
                     Intent intent = new Intent(getApplicationContext(), InsuranceHistoryForm.class);
@@ -153,6 +172,15 @@ public class UserInfoForm extends AppCompatActivity {
         // validate address
         if(address == null || address.equals("")){
             errorAlertBuilder.setMessage("You need to enter a address.");
+            errorAlert = errorAlertBuilder.create();
+            errorAlert.show();
+            resetErrorDialog();
+            return false;
+        }
+
+        // validate city
+        if(city == null || city.equals("")){
+            errorAlertBuilder.setMessage("You need to enter a city.");
             errorAlert = errorAlertBuilder.create();
             errorAlert.show();
             resetErrorDialog();

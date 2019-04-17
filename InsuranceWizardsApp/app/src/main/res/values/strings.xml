@@ -84,6 +84,8 @@
     <string name="help_btn">I need help!</string>
     <string name="fine_btn">I am fine</string>
     <string name="emergency_msg">We detected a sudden change in speed. Are you in need of emergency services?</string>
+    <string name="city_hint">City</string>
+    <string name="city">City:</string>
 
 
     <string-array name="state_codes">
