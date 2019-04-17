@@ -7,8 +7,9 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-feature android:name="android.hardware.sensor.accelerometer"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-feature android:name="android.hardware.sensor.accelerometer" />
 
     <application
         android:allowBackup="true"
@@ -17,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MonitorDrive"></activity>
+        <activity android:name=".VerifyAccident"></activity>
+        <activity android:name=".MonitorDrive" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -51,6 +53,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".DetectAccident"></service>
     </application>
 
 </manifest>

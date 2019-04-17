@@ -48,6 +48,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MonitorDrive.class);
+                intent.putExtra("resumeMonitor", false);
                 startActivity(intent);
             }
         });

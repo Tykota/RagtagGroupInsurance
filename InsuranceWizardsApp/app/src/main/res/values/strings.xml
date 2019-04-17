@@ -81,6 +81,9 @@
     <string name="startDriveMessage">To start monitoring your drive, click begin.</string>
     <string name="drivingMonitorMessage">Your driving is being monitored.</string>
     <string name="view_insurance_card">View Insurance Card</string>
+    <string name="help_btn">I need help!</string>
+    <string name="fine_btn">I am fine</string>
+    <string name="emergency_msg">We detected a sudden change in speed. Are you in need of emergency services?</string>
 
 
     <string-array name="state_codes">
