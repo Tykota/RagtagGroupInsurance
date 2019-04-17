@@ -1,4 +1,153 @@
 // Script for dynamically building  html components
+function showEdit(element, field, type){
+    let edit = document.createElement('button');
+    edit.innerText = "Edit Field";
+    edit.style.float = "right";
+    edit.style.margin = "0";
+    edit.setAttribute("data-target", "editModal");
+    edit.setAttribute("onclick", "showEditBox('" + element.innerText + "','" + field + "','" + type + "')");
+    edit.setAttribute("class", "edit");
+
+    
+    $(element).hover(function(){
+        $(this).addClass("yellow");
+        $(this).append(edit);
+    }, function(){
+        $(this).removeClass("yellow");
+        $(".edit").remove();
+    });
+}
+
+function createUpdate(field, collection){
+    var updateCol = "";
+    var key, keyField, updateValue;
+    if(collection == "app" || collection == "client"){
+        updateCol = "clients";
+        keyField = "applicationNum";
+        let getKey = document.getElementById("key").innerText;
+        key = getKey.split(': ')[1];
+        if(field == "address"){
+            updateValue = [
+                document.getElementById("streetField").value,
+                document.getElementById("cityField").value,
+                document.getElementById("stateField").value,
+                document.getElementById("zipField").value
+            ]
+            console.log(updateValue);
+        }
+        else {
+            updateValue = document.getElementById("changeField").value;
+        }
+    }
+    else {
+        updateCol = "claims";
+        keyField = "claimNumber";
+        let getKey = document.getElementById("key").innerText;
+        key = getKey.split(': ')[1];
+        updateValue = document.getElementById("changeField").value;
+    }
+    updateField(updateCol, key, keyField, field, updateValue);
+}
+
+function showEditBox(element, field, type, data){
+    let div = document.createElement('div');
+    div.setAttribute("class", "modal");
+    div.setAttribute("id", "editModal");
+    let content = document.createElement('div');
+    content.setAttribute("class", "modal-content");
+    let prev = document.createElement("p");
+    prev.innerText = "Previous Entry for " + element;
+    let input = document.createElement("div");
+    input.setAttribute("class", "input-field");
+    let confirm = document.createElement("button");
+    confirm.setAttribute("id", "confirm");
+    confirm.innerText = "Confirm";
+    confirm.style.display = "inline";
+    confirm.style.float = "center";
+    confirm.style.marginTop = "0";
+    confirm.style.marginBottom = "0";
+    confirm.style.marginLeft = "0";
+    confirm.style.marginRight = "0";
+    confirm.setAttribute("class", "modalBtn");
+    let cancel = document.createElement("button");
+    cancel.setAttribute("id", "cancel");
+    cancel.innerText = "Cancel";
+    cancel.style.display = "inline";
+    cancel.style.float = "center";
+    cancel.style.marginTop = "0";
+    cancel.style.marginBottom = "0";
+    cancel.style.marginLeft = "0";
+    cancel.style.marginRight = "0";
+    cancel.setAttribute("class", "modalBtn");
+
+    if(field == "address"){
+        let inputEle1 = document.createElement("input");
+        inputEle1.setAttribute("id", "streetField");
+        let streetLabel = document.createElement("label");
+        streetLabel.setAttribute("for", "streetField");
+        streetLabel.innerText = "New Street:";
+        let inputEle2 = document.createElement("input");
+        inputEle2.setAttribute("id", "cityField");
+        let cityLabel = document.createElement("label");
+        cityLabel.setAttribute("for", "cityField");
+        cityLabel.innerText = "New City:";
+        let inputEle3 = document.createElement("input");
+        inputEle3.setAttribute("id", "stateField");
+        let stateLabel = document.createElement("label");
+        stateLabel.setAttribute("for", "stateField");
+        stateLabel.innerText = "New State:";
+        let inputEle4 = document.createElement("input");
+        inputEle4.setAttribute("id", "zipField");
+        let zipLabel = document.createElement("label");
+        zipLabel.setAttribute("for", "zipField");
+        zipLabel.innerText = "New Zip:";
+        content.appendChild(prev);
+        content.appendChild(streetLabel);
+        content.appendChild(inputEle1);
+        content.appendChild(cityLabel);
+        content.appendChild(inputEle2);
+        content.appendChild(stateLabel);
+        content.appendChild(inputEle3);
+        content.appendChild(zipLabel);
+        content.appendChild(inputEle4);
+        content.appendChild(input);
+    }
+    else {
+        let inputEle = document.createElement("input");
+        inputEle.setAttribute("id", "changeField");
+        let label = document.createElement("label");
+        label.setAttribute("for", "changeField");
+        label.innerText = "New Entry:";
+        content.appendChild(prev);
+        input.appendChild(inputEle);
+        content.appendChild(label);
+        content.appendChild(input);
+    }
+    
+    content.appendChild(confirm);
+    content.appendChild(cancel);
+    div.appendChild(content);
+    document.getElementById("contentPane").appendChild(div);
+    var instance = M.Modal.init(div);
+    console.log(data);
+    instance.open();
+    $('#cancel').click(function() {
+        instance.close();
+    });
+    $('#confirm').click(function(){
+        createUpdate(field, type);
+        instance.close();
+        if(type == "app"){
+            displayApplication(data);
+        }
+        else if(type == "client"){
+            displayClient(data);
+        }
+        else {
+            displayClaim(data);
+        }
+    });
+}
 
 function displaySearchResults(data){
     //Change polnum
@@ -77,6 +226,7 @@ function createResultCard(title, address){
 }
 
 function createTabs(data){
+    var passData = data;
     let tabsEle = document.getElementById("clientTabs");
     let clientT = document.getElementById("clientTab");
     let vehicleT = document.getElementById("vehicleTab");
@@ -85,7 +235,10 @@ function createTabs(data){
    
     // Client Tab info
     let l1 = document.createElement('p');
-    l1.innerText = ("Name: " + data.name)
+    l1.innerText = ("Name: " + data.name);
+    let l9 = document.createElement('p');
+    l9.setAttribute("id", "key");
+    l9.innerText = ("Application Number: " + data.applicationNum);
     let l2 = document.createElement('p');
     l2.innerText = ("Address: " 
                     + data.address + " " 
@@ -102,6 +255,12 @@ function createTabs(data){
     l6.innerText = ("License type: " + data.drivertype);
     let l7 = document.createElement('p');
     l7.innerText = ("Social Security Number: " + data.ssn);
+
+    showEdit(l1, "name", "client", passData);
+    showEdit(l2, "address", "client", passData);
+    showEdit(l3, "phone", "client", passData);
+    showEdit(l4, "dob", "client", passData);
+    showEdit(l5, "drivertype", "client", passData);
 
     // Vehicle Tab Info
     vehicleT.innerHTML = '';
@@ -145,6 +304,7 @@ function createTabs(data){
     clientT.innerHTML = '';
 
     clientT.appendChild(l1);
+    clientT.appendChild(l9);
     clientT.appendChild(l2);
     clientT.appendChild(l3);
     clientT.appendChild(l4);
@@ -236,23 +396,6 @@ function buildApplicationCard(data, type){
     }
 }
 
-function showEdit(element){
-    let edit = document.createElement('button');
-    edit.innerText = "Edit Field";
-    edit.style.float = "right";
-    edit.style.margin = "0";
-    edit.setAttribute("class", "edit");
-
-    
-    $(element).hover(function(){
-        $(this).addClass("yellow");
-        $(this).append(edit);
-    }, function(){
-        $(this).removeClass("yellow");
-        $(".edit").remove();
-    });
-}
-
 function displayApplication(data){
     console.log("displaying application")
     clearCP();
@@ -277,16 +420,17 @@ function displayApplication(data){
     let l7 = document.createElement('p');
     l7.innerText = ("Social Security Number: " + data["ssn"]);
     let l8 = document.createElement('p');
+    l8.setAttribute("id", "key");
     l8.innerText = ("Application Number: " + data["applicationNum"]);
     let l9 = document.createElement('p');
     l9.innerText = ("Application Status: " + data["appStatus"]);
 
-    showEdit(l1);
-    showEdit(l2);
-    showEdit(l3);
-    showEdit(l4);
-    showEdit(l5);
-    showEdit(l6);
+    showEdit(l1, "name", "app", data);
+    showEdit(l2, "address", "app", data);
+    showEdit(l3, "phone", "app", data);
+    showEdit(l4, "dlnumber", "app", data);
+    showEdit(l5, "dob", "app", data);
+    showEdit(l6, "drivertype", "app", data);
 
     cp.appendChild(header);
     cp.appendChild(l8);
@@ -408,6 +552,7 @@ function displayClaim(data){
 
     // Claim info tab
     let l1 = document.createElement('p');
+    l1.setAttribute("id", "key");
     l1.innerText = ("Claim Number: " + data["claimNumber"])
     let l2 = document.createElement('p');
     l2.innerText = ("Claim Status: " + data["claimStatus"]);
@@ -442,11 +587,11 @@ function displayClaim(data){
         let coordY = Number(str2);
         var local = {lat: coordX, lng: coordY};
     }
-    showEdit(l3);
-    showEdit(l4);
-    showEdit(l5);
-    showEdit(l6);
-    
+    showEdit(l3, "name", "claim", data);
+    showEdit(l4, "date", "claim", data);
+    showEdit(l5, "location", "claim", data);
+    showEdit(l6, "description", "claim", data);
+
     claimT.innerHTML = '';
     claimT.appendChild(l1);
     claimT.appendChild(l2);

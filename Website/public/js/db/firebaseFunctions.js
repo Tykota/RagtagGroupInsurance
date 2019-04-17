@@ -47,14 +47,49 @@ function searchByClient(){
 
 //Update a certain field in the firebase
 //not finished
-function updateField(fieldName, value){
-    var key = db.collection("clients");
-    let ref = db.collection("clients").where(criteria, "==", query).get().then((snapshot))
+function updateField(collection, docKey, keyField, fieldName, value){
+    var doc, docID;
+    if(collection == "clients"){
+        doc = db.collection(collection).doc(docKey);
+        if(fieldName == "address"){
+            doc.update({
+                address: value[0],
+                city: value[1],
+                state: value[2],
+                zip: value[3]
+            }).catch(function(err){
+                console.log("Error updating: " + err);
+            })
+        }
+        else {
+            doc.update({
+                [fieldName]: value
+            }).catch(function(err){
+                console.log("Error updating: " + err);
+            })
+        }
+        
+    }
+    else{
+        var docRef = db.collection(collection).where(keyField, "==", docKey).get().then((snapshot)=> {
+            snapshot.docs.forEach(doc => {
+                docID = doc.id;
+                doc = db.collection(collection).doc(docID);
+                doc.update({
+                    [fieldName]: value
+                }).catch(function(err){
+                    console.log("Error updating: " + err);
+                })
+            })
+        });
+    }
 
+    /*
     var update = {};
-    update['/clients/' + key] = clientData;
+    update['/' + collection + '/' + key] = newData;
 
     return firebase.database().ref().update(update);
+    */
 }
 
 function search(query, criteria){

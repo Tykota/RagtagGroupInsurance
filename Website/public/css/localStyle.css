@@ -25,6 +25,10 @@
 #edit {
     margin: 0;
 }
+#modalBtn {
+    margin: 10;
+    float: right;
+}
 #searchCriteria{
     color:black;
 }
