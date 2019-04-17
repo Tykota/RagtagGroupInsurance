@@ -171,7 +171,6 @@ function openClaimsMap(){
         center: new google.maps.LatLng(39.796749, -97.793539),
         zoom: 4
     });
-    console.log(locationArr);
 
 
     var infoWindow = new google.maps.InfoWindow({});

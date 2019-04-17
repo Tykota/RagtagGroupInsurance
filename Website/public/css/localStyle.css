@@ -22,6 +22,9 @@
 #search:hover, #review:hover, #claims:hover {
 
 }
+#edit {
+    margin: 0;
+}
 #searchCriteria{
     color:black;
 }

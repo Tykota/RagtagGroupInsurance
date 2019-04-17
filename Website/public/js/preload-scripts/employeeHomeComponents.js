@@ -235,6 +235,24 @@ function buildApplicationCard(data, type){
         document.getElementById("closedApps").appendChild(holder);
     }
 }
+
+function showEdit(element){
+    let edit = document.createElement('button');
+    edit.innerText = "Edit Field";
+    edit.style.float = "right";
+    edit.style.margin = "0";
+    edit.setAttribute("class", "edit");
+
+    
+    $(element).hover(function(){
+        $(this).addClass("yellow");
+        $(this).append(edit);
+    }, function(){
+        $(this).removeClass("yellow");
+        $(".edit").remove();
+    });
+}
+
 function displayApplication(data){
     console.log("displaying application")
     clearCP();
@@ -244,7 +262,8 @@ function displayApplication(data){
     let headerTxt = document.createTextNode("Application Details: ");
     header.appendChild(headerTxt);
     let l1 = document.createElement('p');
-    l1.innerText = ("Name: " + data["name"])
+    l1.innerText = ("Name: " + data["name"]);
+
     let l2 = document.createElement('p');
     l2.innerText = ("Address: " + data["address"] + " " + data["city"] + " " + data["state"] + " , " + data["zip"]);
     let l3 = document.createElement('p');
@@ -261,6 +280,13 @@ function displayApplication(data){
     l8.innerText = ("Application Number: " + data["applicationNum"]);
     let l9 = document.createElement('p');
     l9.innerText = ("Application Status: " + data["appStatus"]);
+
+    showEdit(l1);
+    showEdit(l2);
+    showEdit(l3);
+    showEdit(l4);
+    showEdit(l5);
+    showEdit(l6);
 
     cp.appendChild(header);
     cp.appendChild(l8);
@@ -416,6 +442,11 @@ function displayClaim(data){
         let coordY = Number(str2);
         var local = {lat: coordX, lng: coordY};
     }
+    showEdit(l3);
+    showEdit(l4);
+    showEdit(l5);
+    showEdit(l6);
+    
     claimT.innerHTML = '';
     claimT.appendChild(l1);
     claimT.appendChild(l2);
