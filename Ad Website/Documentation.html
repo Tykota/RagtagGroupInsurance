@@ -1,10 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Parallax Template - Materialize</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
+<nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+        <ul class="right hide-on-med-and-down">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Download.html">Download</a></li>
+            <li><a href="Support.html">Support</a></li>
+            <li><a href="Documentation.html">Documentation</a></li>
+            <li><a href="About.html">About</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="sidenav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Download.html">Download</a></li>
+            <li><a href="Support.html">Support</a></li>
+            <li><a href="Documentation.html">Documentation</a></li>
+            <li><a href="About.html">About</a></li>
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+
+
+
+
+
+<div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <br><br>
+            <div class="row center">
+            </div>
+            <br><br>
+
+        </div>
+    </div>
+    <div class="parallax"><img src="mybanner3.jpg" alt="Unsplashed background img 1"></div>
+</div>
+
+<div class="container">
+    <div class="section">
+
+        <!--   Icon Section   -->
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text"><i class="material-icons">attachment</i></h2>
+                    <h5 class="center">Documentation</h5>
+
+                    <p class="light">Here are links to all of the paperwork used in this project (charts/dev plan/etc)</p>
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text"><i class="material-icons">insert_chart</i></h2>
+                    <h5 class="center">Diagrams and use cases</h5>
+                    <ul>
+                    <!-- Android APK gets linked in the a tag here for download -->
+                        <li><p class="light">Claim Use case: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase1/Claim%20Use%20Case.pdf">HERE</a></p></li>
+                        <li><p class="light">Policy Management Use case: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase1/Policy%20Management%20UseCase.docx">HERE</a></p></li>
+                        <li><p class="light">Search Use case: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase1/SearchUseCase.docx">HERE</a></p></li>
+                        <li><p class="light">Submit Application Use case: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase1/Submit%20an%20Insurance%20Application%20Use%20Case.pdf">HERE</a></p></li>
+                        <li><p class="light">Use case Diagram: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase1/Use%20Case%20Diagram.png">HERE</a></p></li>
+                        <li><p class="light">High Level Requirements: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase1/High-level%20Requirements.pdf">HERE</a></p></li>
+                        <li><p class="light">Claim Robustness Diagram: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase2/ClaimRobustnessDiagram.pdf">HERE</a></p></li>
+                        <li><p class="light">Claim Sequence Diagram: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase2/ClaimSequenceDiagram.pdf">HERE</a></p></li>
+                        <li><p class="light">Policy Management Robustness Diagram: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase2/Policy%20Management%20Robustness.png">HERE</a></p></li>
+                        <li><p class="light">Policy Management Sequence Diagram: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase2/Policy%20Management%20Sequence%20Diagram.png">HERE</a></p></li>
+                        <li><p class="light">Search Robustness Diagram: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase2/SearchRobustnessDiagram.pdf">HERE</a></p></li>
+                        <li><p class="light">Search Sequence Diagram: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase2/SearchSequenceDiagram.pdf">HERE</a></p></li>
+                        <li><p class="light">Submit Application Robustness Diagram: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase2/SubmitApplicationRobustnessDiagram.jpg">HERE</a></p></li>
+                        <li><p class="light">Submit Application Sequence Diagram: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase2/SubmitApplicationSequenceDiagram.jpg">HERE</a></p></li>
+                        <li><p class="light">Class Diagram: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase2/RagtagInsuranceClassDiagram.jpg">HERE</a></p></li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text"><i class="material-icons">insert_drive_file</i></h2>
+                    <h5 class="center">Miscellaneous other documents</h5>
+
+                    <p class="light">Project Glossary: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase1/Project%20Glossary.pdf">HERE</a></p>
+                    <p class="light">Domain Model: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase1/Domain%20Model.pdf">HERE</a></p>
+                    <p class="light">Gantt chart: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase3/Gantt%20Chart%20-%20Gantt%20Chart.pdf">HERE</a></p>
+                    <p class="light">Development Plan: <a href="https://github.com/Tykota/RagtagGroupInsurance/blob/master/phase3/Detailed%20Schedule%20(1).pdf">HERE</a></p>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+
+
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
 
 </body>
 </html>
