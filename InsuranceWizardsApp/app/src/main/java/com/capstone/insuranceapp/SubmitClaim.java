@@ -194,6 +194,7 @@ public class SubmitClaim extends AppCompatActivity {
         StorageReference storageReference = storage.getReference();
 
         String imageFileName = "claim";
+        
         if (claim.getClaimNumber() != null) {
             imageFileName = imageFileName + claim.getClaimNumber() + ".jpg";
         } else {
@@ -201,6 +202,24 @@ public class SubmitClaim extends AppCompatActivity {
         }
 
         StorageReference imageRef = storageReference.child(imageFileName);
+
+        // This should add custom metadata to the imageRef 
+        /*
+        StorageMetadata metadata = new StorageMetadata.Builder().setCustomMetadata('claimNo', claim.getClaimNumber()).build();
+        imageRef.updateMetadata(metadata).addOnSuccessListener(new addOnSuccessListener<StorageMetadata>(){
+            @Override
+            public void onSuccess(SotrageMetadata StorageMetadata){
+                // Metadata successfully added
+            }
+        })
+        .addOnFailureListener(new OnFailerListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception){
+                // error occured
+            }
+        })
+        */
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         pic.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();

@@ -148,13 +148,15 @@ function getClaimPhotos(imgElement){
 function addMetaData(){
     var storageRef = storage.ref();
     var picRef = storageRef.child('22234153408_78d945f6b5_b-e1531854292278.jpg');
+    
     var data = {
-        metadata: {
+        customMetadata: {
             'policyNum': '1010101010'
         }
     }
+    console.log(data);
     picRef.updateMetadata(data).then(function(metadata){
-        console.log("New metadata added " + metadata);
+        console.log("New metadata added ", metadata);
     }).catch(function(error){
         console.log(error);
     });
