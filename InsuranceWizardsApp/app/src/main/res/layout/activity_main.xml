@@ -26,15 +26,12 @@
         android:layout_marginRight="16dp"
         android:orientation="vertical">
 
-        <TextView
+        <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="48dp"
-            android:text="@string/wizard_insurance"
-            android:textAlignment="center"
-            android:textAppearance="@android:style/TextAppearance"
-            android:textColor="@color/colorPrimary"
-            android:textSize="48sp" />
+            android:layout_height="137dp"
+            android:layout_marginBottom="20dp"
+            app:srcCompat="@drawable/mybanner3" />
 
         <EditText
             android:id="@+id/username"
