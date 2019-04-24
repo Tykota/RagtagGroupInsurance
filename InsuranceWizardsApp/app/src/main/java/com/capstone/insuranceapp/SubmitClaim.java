@@ -45,7 +45,7 @@ import java.util.Calendar;
 
 public class SubmitClaim extends AppCompatActivity {
 
-    private Button takePicBtn, submitBtn, takeVidBtn;
+    private Button takePicBtn, submitBtn;
     private Claim claim;
     private EditText nameET, descriptET, dateOfAccidentET, timeOfAccidentET;
     private String description, date, time, name, location, currentPhotoPath;
