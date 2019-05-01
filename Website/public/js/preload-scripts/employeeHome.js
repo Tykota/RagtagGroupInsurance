@@ -73,18 +73,14 @@ function showApplications(){
 
 function openApplication(data) {
     updateApplicationStatus(data.applicationNum, "open").then(function(){
-        load('reviewForm');
-        //showApplications();
+        getApplication(data.applicationNum)
     });
-    //displayApplication(data);
 }
 
 function rejectApplication(data){
     updateApplicationStatus(data.applicationNum, "closed").then(function(){
-        load('reviewForm');
+        getApplication(data.applicationNum)
     });
-    //showApplications();
-    //displayApplication(data);
 }
 
 function formatNewClient(data){

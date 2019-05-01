@@ -162,6 +162,12 @@ function grabApplication(appNumber, status){
 }
 */
 
+function getApplication(id){
+    db.collection("clients").doc(id).get().then((doc) => {
+        displayApplication(doc.data())
+    });
+}
+
 function updateApplicationStatus(id, status){
     var appRef = db.collection("clients").doc(id);
     return appRef.update({

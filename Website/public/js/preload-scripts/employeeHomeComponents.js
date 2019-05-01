@@ -33,7 +33,6 @@ function createUpdate(field, collection){
                 document.getElementById("stateField").value,
                 document.getElementById("zipField").value
             ]
-            console.log(updateValue);
         }
         else {
             updateValue = document.getElementById("changeField").value;
@@ -129,7 +128,6 @@ function showEditBox(element, field, type, data){
     div.appendChild(content);
     document.getElementById("contentPane").appendChild(div);
     var instance = M.Modal.init(div);
-    console.log(data);
     instance.open();
     $('#cancel').click(function() {
         instance.close();
@@ -397,11 +395,11 @@ function buildApplicationCard(data, type){
 }
 
 function displayApplication(data){
-    console.log("displaying application")
     clearCP();
     let cp = document.getElementById("contentPane");
     let header = document.createElement('h5');
     header.classList.add("center-align");
+    header.style.backgroundColor = "white";
     let headerTxt = document.createTextNode("Application Details: ");
     header.appendChild(headerTxt);
     let l1 = document.createElement('p');
@@ -445,39 +443,65 @@ function displayApplication(data){
 
     let status = data["appStatus"];
     if(status == "submitted"){
+        let btnDiv = document.createElement('div');
+        btnDiv.classList.add('center-align');
+        btnDiv.style.textAlign = "center";
         let openBtn = document.createElement('btn');
         let btnTxt = document.createTextNode("Open Application");
         openBtn.setAttribute("id", "openApplicationBtn");
-        openBtn.setAttribute("class", "center-align wave-effect waves-light btn");
+        openBtn.style.width = "300px";
+        openBtn.setAttribute("class", "wave-effect waves-light btn");
         openBtn.addEventListener("click", openApplication.bind(null, data));
         openBtn.appendChild(btnTxt);
-        cp.appendChild(openBtn);
+        btnDiv.appendChild(openBtn);
+        cp.appendChild(btnDiv);
     }
     else if(status == "open"){
+        let acceptDiv = document.createElement('div');
+        acceptDiv.classList.add('center-align');
+        acceptDiv.style.textAlign = "center";
+
+        let rejectDiv = document.createElement('div');
+        rejectDiv.classList.add('center-align');
+        rejectDiv.style.textAlign = "center";
+
         let acceptBtn = document.createElement('btn');
         let btnTxt = document.createTextNode("Accept New Client");
         acceptBtn.setAttribute("id", "openApplicationBtn");
-        acceptBtn.setAttribute("class", "center-align wave-effect waves-light btn");
+        acceptBtn.style.width = "300px";
+        acceptBtn.setAttribute("class", "wave-effect waves-light btn");
         acceptBtn.addEventListener("click", formatNewClient.bind(null, data));
         acceptBtn.appendChild(btnTxt);
-        cp.appendChild(acceptBtn);
+        
 
         let rejectBtn = document.createElement('btn');
         let rejectTxt = document.createTextNode("Reject Application");
-        rejectBtn.setAttribute("id", "openApplicationBtn");
+        rejectBtn.setAttribute("id", "rejectApplicationBtn");
+        rejectBtn.style.width = "300px";
+        
         rejectBtn.setAttribute("class", "center-align wave-effect waves-light btn");
         rejectBtn.addEventListener("click", rejectApplication.bind(null, data));
         rejectBtn.appendChild(rejectTxt);
-        cp.appendChild(rejectBtn);
+
+        acceptDiv.appendChild(acceptBtn);
+        rejectDiv.appendChild(rejectBtn);
+        cp.appendChild(acceptDiv);
+        cp.appendChild(rejectDiv);
     }
     else if(status == "closed"){
+        let btnDiv = document.createElement('div');
+        btnDiv.classList.add('center-align');
+        btnDiv.style.textAlign = "center";
+
         let reOpenBtn = document.createElement('btn');
         let btnTxt = document.createTextNode("Re-Open Application");
         reOpenBtn.setAttribute("id", "reOpenApplicationBtn");
+        reOpenBtn.style.width = "300px";
         reOpenBtn.setAttribute("class", "center-align wave-effect waves-light btn");
         reOpenBtn.addEventListener("click", openApplication.bind(null, data));
         reOpenBtn.appendChild(btnTxt);
-        cp.appendChild(reOpenBtn);
+        btnDiv.appendChild(reOpenBtn);
+        cp.appendChild(btnDiv);
     }
 }
 function buildClaimCard(data, type){
